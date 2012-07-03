@@ -1,0 +1,166 @@
+var ADFMediaURLs='';
+var ADF_clickTag='http://track.adform.net/C/?bn=1027518;bsqno=1;li=1;cset=19|19|0|1350|650|24|9|15|0|3|7|0|0;js=1;unloadid=576460754814107828;pdmn=www.titulky.com;adfibeg=0;CREFURL=http%3a%2f%2fwww.titulky.com%2fAmelie-1-615.htm';
+var ADF_ClickEvent='http://track.adform.net/C/?bn=1027518;bsqno=1;li=1;cset=19|19|0|1350|650|24|9|15|0|3|7|0|0;js=1';
+var ADFtagID='1x';
+var ADFafbanID='1027518';
+var FlashObjectID='FlashID1x';
+var ADFDomain='http://track.adform.net/Banners/';
+var ADFDomainCDN='http://files.adform.net/Banners/';
+var ADFVideoCDN='rtmp://s1yx966tga68s8.cloudfront.net/cfx/st/';
+var ADFVideoCDNList=['rtmp://s1yx966tga68s8.cloudfront.net/cfx/st/'];
+var ADFBanVer='1';
+var ADFBanVerBak='0';
+var ADFbu=false;
+var ADFerrTimeout = 15*24*60*60*1000;
+var ADFTemplateVersion='0';
+var ADFClientSiteId='0';
+var ADFTemplateId='0';
+var ADFGroupId='0';
+var ADFbanID='1493851';
+var ADFmembID='228188';
+var ADFcmpgnID='83358';
+var ADFassetID='0';
+var ADFbanPlacID='423502';
+var ADFUnloadID='576460754814107828';
+var ADFGeoData='101735;25009;203';
+
+try{
+var i = window.Adform.ADFBannerUtils.getInstance()
+i.addBannerAttribute("1x", "bn", 1027518);
+i.addBannerAttribute("1x", "rotseqno", "1");
+i.addBannerAttribute("1x", "cookieID", "576460752370432692");
+i.addBannerAttribute("1x", "unloadID", "576460754814107828");
+i.addBannerAttribute("1x", "height", 100);
+i.addBannerAttribute("1x", "width", 745);
+i.addBannerAttribute("1x", "clickEvent", "http://track.adform.net/C/?bn=1027518;bsqno=1;li=1;cset=19|19|0|1350|650|24|9|15|0|3|7|0|0;js=1");
+i.addBannerAttribute("1x", "pm", "83358");
+i.addBannerAttribute("1x", "ms", "228188");
+i.addBannerAttribute("1x", "ban", "1493851");
+i.addBannerAttribute("1x", "stubFileURL", "");
+i.addBannerAttribute("1x", "bnpl", "423502");
+i.setBannerRegisteredStatus("1x");
+}catch(e){}
+
+
+
+
+<!--
+var ADFtagid1605584070 = (typeof(ADFafbanID)!="undefined") ? ADFafbanID : 0;
+var ADFclickTagString1605584070 = (typeof(ADF_clickTag)!="undefined") ? escape(ADF_clickTag) : escape('http://track.adform.net/C/?bn='+ADFtagid1605584070);
+var ADFclickTagParameters1605584070 = (typeof(ADF_clickTagPars)!="undefined") ? escape(ADF_clickTagPars) : '';
+var ADFclickEventString = (typeof(ADF_ClickEvent) != "undefined") ? escape(ADF_ClickEvent) : escape('http://track.adform.net/C/?bn='+ADFtagid1605584070+';bsqno=1;li=1;cset=');
+var FlashObjectID=(typeof(FlashObjectID)!="undefined") ? FlashObjectID : 'adftest';
+var ADFDomain=(typeof(ADFDomain)!="undefined") ? ADFDomain : '';
+var ADFDomainCDN=(typeof(ADFDomainCDN)!="undefined") ? ADFDomainCDN : '';
+var ADFVideoCDN=(typeof(ADFVideoCDN)!="undefined") ? ADFVideoCDN : '';
+var ADFClientSiteId=(typeof(ADFClientSiteId)!="undefined") ? ADFClientSiteId : '';
+var ADFTemplateVersion=(typeof(ADFTemplateVersion)!="undefined") ? ADFTemplateVersion : '1605584070';
+var ADFTemplateId=(typeof(ADFTemplateId)!="undefined") ? ADFTemplateId : '';
+var ADFGroupId=(typeof(ADFGroupId)!="undefined") ? ADFGroupId : '';
+var ADFGeoData=(typeof ADFGeoData != "undefined" || ADFGeoData != null) ? ADFGeoData : '0;0;0';
+var ADFBanVer=(typeof(ADFBanVer)!="undefined") ? ADFBanVer : '1605584070';
+var ADFBanVerBak=(typeof(ADFBanVerBak)!="undefined") ? ADFBanVerBak : '1605584070';
+var ADFtagID=(typeof(ADFtagID)!="undefined") ? ADFtagID : '1x';
+if (typeof(ADFbu)=="undefined") ADFbu=false;
+
+var ADFcmpgnID = (typeof(ADFcmpgnID) != "undefined") ? ADFcmpgnID : '0';
+var ADFmembID = (typeof(ADFmembID) != "undefined") ? ADFmembID : '0';
+var ADFbanID = (typeof(ADFbanID) != "undefined") ? ADFbanID : '0';
+var ADFbanPlacID = (typeof(ADFbanPlacID) != "undefined") ? ADFbanPlacID : '0';
+var ADFUnloadID = (typeof(ADFUnloadID) != "undefined") ? ADFUnloadID : '0';
+
+
+var ADFclickTagVariables1605584070 = 'clickthru='+ADFclickTagString1605584070+';C=1'+ADFclickTagParameters1605584070+'';
+if (ADFMediaURLs) ADFclickTagVariables1605584070 = ADFMediaURLs;
+
+
+
+if(typeof Adform == "undefined") {var Adform = {};};
+Adform.BannerData                    = {};
+Adform.Data                          = Adform.BannerData;
+Adform.RMBData                       = Adform.BannerData;
+Adform.RMBData.type                  = 'standard';
+Adform.RMBData.subtype               = 'flash';
+Adform.BannerData.timestamp          = '201206192329365084'; // std.flash 2012 04 24 rev. 1.138416
+Adform.BannerData.ADFFlash           =  ADFDomain +'1493851/1493851.swf?bv='+ADFBanVer;
+Adform.BannerData.ADFBuckupClickURL  =  ADF_clickTag+';C=0';
+Adform.BannerData.width              = "745";
+Adform.BannerData.height             = "100";
+Adform.BannerData.ADFid              = ADFtagID;
+Adform.BannerData.ADFban             = (typeof(ADFafbanID)!="undefined") ? ADFafbanID : 0;
+Adform.BannerData.fVer               = 6;
+Adform.BannerData.placeId            = "ADFDiv_1605584070";
+Adform.BannerData.wmode              = "opaque";
+Adform.RMBData.landingPageTarget     = "_blank";
+Adform.BannerData.quality            = "autohigh";
+Adform.BannerData.bannerAlign        = "";
+
+
+(function () {
+var string = ''
+		+'cid='+ADFClientSiteId
+		+'&geo='+ADFGeoData
+		+'&gid='+ADFGroupId
+		+'&tv='+ADFTemplateVersion
+		+'&tid='+ADFTemplateId
+		+'&domain='+ ADFDomain 
+		+'&bv='+ADFBanVer
+		+'&ADFid='+ADFtagID
+		+'&ADFcmpgnID='+ADFcmpgnID
+		+'&ADFmembID='+ADFmembID
+		+'&ADFbanID='+ADFbanID
+		+'&ADFbanPlacID='+ADFbanPlacID
+		+'&unloadID='+ADFUnloadID
+		+"&bn="+ADFtagid1605584070
+		+"&wmode=opaque"
+;
+
+var flashVars = {};
+var i = 0, parts, name, value;
+var list = string.split('&');
+for (;i < list.length; i++) if (list[i]) {
+	parts = list[i].split('=');
+	name = encodeURIComponent(parts.shift());
+	value = encodeURIComponent(parts.join('='));
+	flashVars[name] = value;
+}
+
+var data = Adform.BannerData;
+data.flashvars = data.clicktags = flashVars;
+flashVars.evtBaseLink = encodeURIComponent(unescape(ADFclickEventString));
+
+var i = 0, parts, name, value;
+
+
+var params = ADFclickTagParameters1605584070;
+var str = ADFclickTagString1605584070
+var params2 = unescape(params);
+var str2 = unescape(str);
+
+var list = ADFclickTagVariables1605584070.split('='+ str);
+for (; i < list.length - 1; i++) {
+	name = encodeURIComponent(i ? list[i].split('&').pop() : list[i]);
+	value = encodeURIComponent(str2 + list[i+1].split('&')[0].replace(params, params2));
+	flashVars[name] = value;
+}
+
+})();
+
+Adform.RMBData.css =  ADFDomainCDN +"scripts/assets/css/Adform.RMB.css?bv="+ADFBanVer;
+
+if (Adform.ADFIframe && !!~window.location.href.indexOf('ap=1')) {
+	document.write('<scr' + 'ipt type="text/javascript" src="'+ ADFDomain +'scripts/adplayer/adplayer.js?version='+ ADFBanVer +'"></scr' + 'ipt>');
+}
+
+Adform.BannerList = Adform.BannerList || [];
+Adform.BannerList.push(Adform.BannerData);
+
+if (!Adform.RMB || !Adform.RMB.AdConstructor) {
+	// Load constructor script
+	document.write('<scr' + 'ipt type="text/javascript" src="'+ ADFDomain +'scripts/rmb/Adform.RMB.js?version='+ ADFBanVer +'"></scr' + 'ipt>');
+} else {
+	// Run loaded constructor
+	Adform.RMB.AdConstructor.build();
+}
+//-->
+
