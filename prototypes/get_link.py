@@ -2,11 +2,19 @@
 # -*- coding: utf-8 -*-
 
 import re
+import os
+import sys
 import urllib.request 
+
+if sys.argv[1:]:
+    url = sys.argv[1:][0]
+else:
+    print('You must provide URL adress')
+    sys.exit(1)
 
 
 # Ziskame stranku
-fd = urllib.request.urlopen('http://www.titulky.com/Terminator-83734.htm')
+fd = urllib.request.urlopen(url)
 htmlSource = str(fd.read().decode('cp1250'))
 fd.close()
 
