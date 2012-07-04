@@ -14,10 +14,12 @@ def main():
     
     #options.add_option("--hel", action="callback", callback=hel, help='Show usage information.')
     options.add_option('-l', '--link', dest='link', action='store_true')
+    options.add_option('-e', '--encoding', dest='encoding', action='store')
 
     parser.add_option_group(options)
 
     (opt, args) = parser.parse_args()
+    print(args)
     if opt.link:
         print('link....')
 

@@ -50,7 +50,18 @@ def getLink(url, encoding):
 
         data = re.search(pattern, iframe, re.VERBOSE)
 
-        return (PAGE + data.group('addr'))
+        if data:
+            return (PAGE + data.group('addr'))
+        else:
+          #<img src="./captcha/captcha.php" />
+            pattern = r'<img[\s]+src="./captcha/captcha.php"[\s]+/>'
+            if re.search(pattern, iframe):
+                print('You exhausted your daily limit of downloads')
+            else:
+                print('Cannot find data on page')
+
+
+            sys.exit(1)
 
     else:
         print('Cannot find data on page')
@@ -73,9 +84,18 @@ def main():
     parser.add_option_group(options)
 
     (opt, args) = parser.parse_args()
+
+    if args[0:]:
+        # @todo Check the URL format
+        url = args[0]
+    else:
+        # @todo In the future will be possible to read from stdin,
+        #       Now it's an error
+        print('You have to provide an URL address!')
+        sys.exit(1)
+
     if opt.link:
-        url = 'http://titulky.com/'
-        print(getLink(url, opt.encoding))
+            print(getLink(url, opt.encoding))
 
 
 

@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W4C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="cs" lang="cs">
+  <head>
+   <meta http-equiv="Content-Type" content="text/html; charset=windows-1250" />
+   <meta http-equiv="Content-language" content="cs" />
+   <link rel="stylesheet" type="text/css" media="all"   href="./css/idown.css" />
+   <script type='text/javascript' src='downfnc.js'></script>
+  </head>
+                    <body onload="ClearInfo('Příprava stažení titulků')">
+          <h3>Zabezpečené stažení titulků</h3>
+          <b style="font-size:8pt">
+                        Byl překročen denní limit stažených titulků pro IP adresu, ze které se přihlašujete. Není vyloučené, že jste limit nevyčerpali vy, ale to bohužel není možné rozlišit. Nyní je tedy nutné, pro zabránění stahování roboty, opsat kód z obrázku do políčka a můžete zase pokračovat.<br />Pokud máte prémiový nebo překladatelský účet, můžete také stahovat na <a href="http://premium.titulky.com" target="premium.titulky">prémiovém serveru</a><br />
+             
+          </b>
+          <br />
+          <img src="./captcha/captcha.php" />
+          <form name="downform" method="POST" action="idown.php" onsubmit="if (document.downform.downkod.value==''){return false;}">
+          <input name="downkod" type="text" />
+          <input name="securedown" type="hidden" value="2" />
+          <input name="zip" type="hidden" value="" />
+          <input name="titulky" type="hidden" value="615" />
+          <input name="histstamp" type="hidden" value="" />
+          <input class="button-netusers" type="submit" value="Potvrdit" />
+          </form>
+          <br /><img src="./img/ico/lightbulb.gif" alt="TIP" width="16" height="16" />&nbsp;<span style="color:#d00">Prémiové účty mají denní limit <b>25</b> titulků bez ohledu na IP, která může být sdílená.<br /><div style="background:#ffffcc;border:1px solid #ffcc00;font-size:8pt;font-family:verdana;color:#111;padding:6px">Pokud chcete změnit svůj účet na prémiový, provedete to na <a href="http://www.netusers.cz/?origin=titulky" target="netusers">Netusers.cz</a></div>
+</span><br />      </body>
+  </html>
