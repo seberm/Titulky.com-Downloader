@@ -4,6 +4,7 @@
 import re
 import sys
 from urllib import request
+from urllib.parse import urlparse
 from optparse import OptionParser, OptionGroup
 
 # Globals
@@ -13,7 +14,7 @@ PAGE = 'http://www.titulky.com'
 
 def getLink(url, encoding):
 
-    fd = request.urlopen(url)
+    fd = request.urlopen(url.geturl())
     htmlSource = str(fd.read().decode(encoding))
     fd.close()
 
@@ -31,6 +32,7 @@ def getLink(url, encoding):
     links = re.findall(pattern, htmlSource, re.VERBOSE)
 
     if links:
+        # @todo Get links in threads
         for link in links:
             iframeURL = PAGE + '/' + link[0]
             name = link[1]
@@ -86,11 +88,8 @@ def main():
     (opt, args) = parser.parse_args()
 
     if args[0:]:
-        # @todo Check the URL format
-        url = args[0]
+        url = urlparse(args[0])
     else:
-        # @todo In the future will be possible to read from stdin,
-        #       Now it's an error
         print('You have to provide an URL address!')
         sys.exit(1)
 
