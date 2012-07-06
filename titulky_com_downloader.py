@@ -3,6 +3,7 @@
 
 import re
 import sys
+import threading
 from urllib import request
 from urllib.parse import urlparse
 from optparse import OptionParser, OptionGroup
@@ -10,6 +11,45 @@ from optparse import OptionParser, OptionGroup
 # Globals
 NAME = 'titulky_com_downloader'
 PAGE = 'http://www.titulky.com'
+ENCODING = 'cp1250'
+
+class IFrameParser(threading.Thread):
+
+    def __init__(self, url, name, encoding):
+        self._url = url
+        self._name = name
+        self._encoding = encoding
+
+        threading.Thread.__init__(self)
+
+    def run(self):
+
+        fd = request.urlopen(self._url)
+        iframe = str(fd.read().decode(self._encoding))
+        fd.close()
+
+        #pattern = r'<a[\s]+[^h]+href="(?P<addr>[^"]+)"[^>]*>'
+        pattern = r'''
+                    <a                          # Tag start
+                    [\s]+                       # Ignore white chars
+                    [^h]+                       # Ignore all other atributes like id, class, etc.
+                    href="(?P<addr>[^"]+)"      # Get address of titles
+                    [^>]*                       # Ignore other atributes
+                    >                           # Tag end
+                   '''
+
+        data = re.search(pattern, iframe, re.VERBOSE)
+
+        if data:
+            print(self._name, ':', PAGE + data.group('addr'))
+        else:
+          #<img src="./captcha/captcha.php" />
+            pattern = r'<img[\s]+src="./captcha/captcha.php"[\s]+/>'
+            if re.search(pattern, iframe):
+                print('You exhausted your daily limit of downloads')
+            else:
+                print('Cannot find data on page')
+
 
 
 def getLink(url, encoding):
@@ -32,38 +72,13 @@ def getLink(url, encoding):
     links = re.findall(pattern, htmlSource, re.VERBOSE)
 
     if links:
-        # @todo Get links in threads
         for link in links:
+
             iframeURL = PAGE + '/' + link[0]
             name = link[1]
 
-            fd = request.urlopen(iframeURL)
-            iframe = str(fd.read().decode(encoding))
-            fd.close()
-
-            #pattern = r'<a[\s]+[^h]+href="(?P<addr>[^"]+)"[^>]*>'
-            pattern = r'''
-                        <a                          # Tag start
-                        [\s]+                       # Ignore white chars
-                        [^h]+                       # Ignore all other atributes like id, class, etc.
-                        href="(?P<addr>[^"]+)"      # Get address of titles
-                        [^>]*                       # Ignore other atributes
-                        >                           # Tag end
-                       '''
-
-            data = re.search(pattern, iframe, re.VERBOSE)
-
-            if data:
-                print(PAGE + data.group('addr'))
-            else:
-              #<img src="./captcha/captcha.php" />
-                pattern = r'<img[\s]+src="./captcha/captcha.php"[\s]+/>'
-                if re.search(pattern, iframe):
-                    print('You exhausted your daily limit of downloads')
-                else:
-                    print('Cannot find data on page')
-
-                sys.exit(1)
+            # Start thread
+            IFrameParser(iframeURL, name, encoding).start()
 
     else:
         print('Cannot find data on page')
@@ -80,7 +95,7 @@ def main():
     options = OptionGroup(parser, "Program Options", "Options specific to titulky_com_downloader.")
     
     options.add_option('-l', '--link', dest='link', action='store_true', help='Prints download link on stdout')
-    options.add_option('-e', '--encoding', dest='encoding', action='store', metavar='<encoding>', default='cp1250', help='Sets webpage encoding default [cp1250]')
+    options.add_option('-e', '--encoding', dest='encoding', action='store', metavar='<encoding>', default=ENCODING, help='Sets webpage encoding default [cp1250]')
     #options.add_option('-d', '--download', action='callback', callback=downloadTitles, help='Download subtitles')
 
     parser.add_option_group(options)
