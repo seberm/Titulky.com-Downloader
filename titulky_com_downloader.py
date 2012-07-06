@@ -13,19 +13,23 @@ NAME = 'titulky_com_downloader'
 PAGE = 'http://www.titulky.com'
 ENCODING = 'cp1250'
 
+def log(fmtstr):
+    print(fmtstr)
+
+
 class IFrameParser(threading.Thread):
 
     def __init__(self, url, name, encoding):
-        self._url = url
-        self._name = name
-        self._encoding = encoding
+        self.__url = url
+        self.__name = name
+        self.__encoding = encoding
 
         threading.Thread.__init__(self)
 
     def run(self):
 
-        fd = request.urlopen(self._url)
-        iframe = str(fd.read().decode(self._encoding))
+        fd = request.urlopen(self.__url)
+        iframe = str(fd.read().decode(self.__encoding))
         fd.close()
 
         #pattern = r'<a[\s]+[^h]+href="(?P<addr>[^"]+)"[^>]*>'
@@ -41,18 +45,19 @@ class IFrameParser(threading.Thread):
         data = re.search(pattern, iframe, re.VERBOSE)
 
         if data:
-            print(self._name, ':', PAGE + data.group('addr'))
+            log('%s: %s' % self.__name % PAGE + data.group('addr'))
+            #print(self._name, ':', PAGE + data.group('addr'))
         else:
           #<img src="./captcha/captcha.php" />
             pattern = r'<img[\s]+src="./captcha/captcha.php"[\s]+/>'
             if re.search(pattern, iframe):
-                print('You exhausted your daily limit of downloads')
+                log('%s: You exhausted your daily limit of downloads' % self.__name)
             else:
-                print('Cannot find data on page')
+                log('%s: Cannot find data on page' % self.__name)
 
 
 
-def getLink(url, encoding):
+def getLinks(url, encoding):
 
     fd = request.urlopen(url.geturl())
     htmlSource = str(fd.read().decode(encoding))
@@ -81,7 +86,7 @@ def getLink(url, encoding):
             IFrameParser(iframeURL, name, encoding).start()
 
     else:
-        print('Cannot find data on page')
+        log('Cannot find data on page')
         sys.exit(1)
 
 
@@ -105,12 +110,11 @@ def main():
     if args[0:]:
         url = urlparse(args[0])
     else:
-        print('You have to provide an URL address!')
+        log('You have to provide an URL address!')
         sys.exit(1)
 
     if opt.link:
-            print(getLink(url, opt.encoding))
-
+            getLinks(url, opt.encoding)
 
 
 
