@@ -28,40 +28,40 @@ def getLink(url, encoding):
             </a>                             # Tag end
            '''
 
-    data = re.search(pattern, htmlSource, re.VERBOSE)
+    links = re.findall(pattern, htmlSource, re.VERBOSE)
 
-    if data:
-        link = PAGE + '/' + data.group('addr')
-        name = data.group('name')
+    if links:
+        for link in links:
+            iframeURL = PAGE + '/' + link[0]
+            name = link[1]
 
-        fd = request.urlopen(link)
-        iframe = str(fd.read().decode(encoding))
-        fd.close()
+            fd = request.urlopen(iframeURL)
+            iframe = str(fd.read().decode(encoding))
+            fd.close()
 
-        #pattern = r'<a[\s]+[^h]+href="(?P<addr>[^"]+)"[^>]*>'
-        pattern = r'''
-                    <a                          # Tag start
-                    [\s]+                       # Ignore white chars
-                    [^h]+                       # Ignore all other atributes like id, class, etc.
-                    href="(?P<addr>[^"]+)"      # Get address of titles
-                    [^>]*                       # Ignore other atributes
-                    >                           # Tag end
-                   '''
+            #pattern = r'<a[\s]+[^h]+href="(?P<addr>[^"]+)"[^>]*>'
+            pattern = r'''
+                        <a                          # Tag start
+                        [\s]+                       # Ignore white chars
+                        [^h]+                       # Ignore all other atributes like id, class, etc.
+                        href="(?P<addr>[^"]+)"      # Get address of titles
+                        [^>]*                       # Ignore other atributes
+                        >                           # Tag end
+                       '''
 
-        data = re.search(pattern, iframe, re.VERBOSE)
+            data = re.search(pattern, iframe, re.VERBOSE)
 
-        if data:
-            return (PAGE + data.group('addr'))
-        else:
-          #<img src="./captcha/captcha.php" />
-            pattern = r'<img[\s]+src="./captcha/captcha.php"[\s]+/>'
-            if re.search(pattern, iframe):
-                print('You exhausted your daily limit of downloads')
+            if data:
+                print(PAGE + data.group('addr'))
             else:
-                print('Cannot find data on page')
+              #<img src="./captcha/captcha.php" />
+                pattern = r'<img[\s]+src="./captcha/captcha.php"[\s]+/>'
+                if re.search(pattern, iframe):
+                    print('You exhausted your daily limit of downloads')
+                else:
+                    print('Cannot find data on page')
 
-
-            sys.exit(1)
+                sys.exit(1)
 
     else:
         print('Cannot find data on page')
