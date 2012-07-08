@@ -45,8 +45,8 @@ class IFrameParser(threading.Thread):
         data = re.search(pattern, iframe, re.VERBOSE)
 
         if data:
-            log('%s: %s' % self.__name % PAGE + data.group('addr'))
-            #print(self._name, ':', PAGE + data.group('addr'))
+#log('%s: %s' % self.__name % PAGE + data.group('addr'))
+            print(self.__name, ':', PAGE + data.group('addr'))
         else:
           #<img src="./captcha/captcha.php" />
             pattern = r'<img[\s]+src="./captcha/captcha.php"[\s]+/>'
