@@ -27,7 +27,7 @@ class IFrameParser(threading.Thread):
         threading.Thread.__init__(self)
 
     def run(self):
-
+         
         fd = request.urlopen(self.__url)
         iframe = str(fd.read().decode(self.__encoding))
         fd.close()
@@ -45,8 +45,7 @@ class IFrameParser(threading.Thread):
         data = re.search(pattern, iframe, re.VERBOSE)
 
         if data:
-#log('%s: %s' % self.__name % PAGE + data.group('addr'))
-            print(self.__name, ':', PAGE + data.group('addr'))
+            log('%s: %s' % (self.__name, PAGE + data.group('addr')))
         else:
           #<img src="./captcha/captcha.php" />
             pattern = r'<img[\s]+src="./captcha/captcha.php"[\s]+/>'
@@ -64,14 +63,14 @@ def getLinks(url, encoding):
     fd.close()
 
     pattern = r'''
-            <a                               # Tag start
-            [\s]+                            # Ignore white chars
-            class="titulkydownloadajax"      # Find right html tag
+            <a                                           # Tag start
+            [\s]+                                        # Ignore white chars
+            class="titulkydownloadajax[^"]*"      # Find right html tag
             [\s]+
-            href="(?P<addr>[^"]+)"[^>]*      # Find address in href (addr)
+            href="(?P<addr>[^"]+)"[^>]*                  # Find address in href (addr)
             >
-            (?P<name>[^<]*)                  # Find name of movie (name)
-            </a>                             # Tag end
+            (?P<name>[^<]*)                              # Find name of movie (name)
+            </a>                                         # Tag end
            '''
 
     links = re.findall(pattern, htmlSource, re.VERBOSE)
