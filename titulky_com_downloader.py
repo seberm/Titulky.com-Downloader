@@ -13,18 +13,21 @@ NAME = 'titulky_com_downloader'
 PAGE = 'http://www.titulky.com'
 ENCODING = 'cp1250'
 
+titlesLinks = []
+
 def log(fmtstr):
     print(fmtstr)
 
 
-class IFrameParser(threading.Thread):
+#class IFrameParser(threading.Thread):
+class IFrameParser():
 
     def __init__(self, url, name, encoding):
         self.__url = url
         self.__name = name
         self.__encoding = encoding
 
-        threading.Thread.__init__(self)
+        #threading.Thread.__init__(self)
 
     def run(self):
          
@@ -45,7 +48,8 @@ class IFrameParser(threading.Thread):
         data = re.search(pattern, iframe, re.VERBOSE)
 
         if data:
-            log('%s: %s' % (self.__name, PAGE + data.group('addr')))
+            #log('%s: %s' % (self.__name, PAGE + data.group('addr')))
+            titlesLinks.append((self.__name, PAGE + data.group('addr')))
         else:
           #<img src="./captcha/captcha.php" />
             pattern = r'<img[\s]+src="./captcha/captcha.php"[\s]+/>'
@@ -82,11 +86,17 @@ def getLinks(url, encoding):
             name = link[1]
 
             # Start thread
-            IFrameParser(iframeURL, name, encoding).start()
+            #IFrameParser(iframeURL, name, encoding).start()
+            IFrameParser(iframeURL, name, encoding).run()
 
+        return titlesLinks
     else:
         log('Cannot find data on page')
         sys.exit(1)
+
+
+def downloadFiles(links = []):
+    print('This option is not supported for now. Please implement me!')
 
 
 def main():
@@ -96,24 +106,35 @@ def main():
                           usage = '%prog [options]',
                           epilog = 'Support: Otto Sabart (www.seberm.com / seberm@gmail.com)')
 
-    options = OptionGroup(parser, "Program Options", "Options specific to titulky_com_downloader.")
+    options = OptionGroup(parser, 'Program Options', 'Options specific to titulky_com_downloader.')
     
-    options.add_option('-l', '--link', dest='link', action='store_true', help='Prints download link on stdout')
+    options.add_option('-l', '--link', dest='link', action='store_true', help='Prints download link on stdout (default behaviour)')
     options.add_option('-e', '--encoding', dest='encoding', action='store', metavar='<encoding>', default=ENCODING, help='Sets webpage encoding default [cp1250]')
-    #options.add_option('-d', '--download', action='callback', callback=downloadTitles, help='Download subtitles')
+    options.add_option('-n', '--with-name', dest='withName', action='store_true', help='Prints download links with their name')
+    options.add_option('-d', '--download', dest='download', action='store_true', help='Download subtitles')
 
     parser.add_option_group(options)
 
     (opt, args) = parser.parse_args()
 
-    if args[0:]:
-        url = urlparse(args[0])
-    else:
+    if not args[0:]:
         log('You have to provide an URL address!')
         sys.exit(1)
 
-    if opt.link:
-            getLinks(url, opt.encoding)
+    for arg in args:
+        url = urlparse(arg)
+
+        links = getLinks(url, opt.encoding)
+
+        if opt.download:
+            downloadFiles(links)
+
+        if opt.withName:
+            for l in links:
+                log('%s: %s' % (l[0], l[1]))
+        else:
+            for l in links:
+                log(l[1])
 
 
 
