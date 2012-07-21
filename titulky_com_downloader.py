@@ -4,30 +4,35 @@
 import re
 import sys
 import threading
+import time
 from urllib import request
 from urllib.parse import urlparse
 from optparse import OptionParser, OptionGroup
+
 
 # Globals
 NAME = 'titulky_com_downloader'
 PAGE = 'http://www.titulky.com'
 ENCODING = 'cp1250'
+CHECK_TIME = 0.05 #s
 
+# Global variable only for now (in future it will be part of some class)
 titlesLinks = []
+
 
 def log(fmtstr):
     print(fmtstr)
 
 
-#class IFrameParser(threading.Thread):
-class IFrameParser():
+class IFrameParser(threading.Thread):
 
     def __init__(self, url, name, encoding):
         self.__url = url
         self.__name = name
         self.__encoding = encoding
 
-        #threading.Thread.__init__(self)
+        threading.Thread.__init__(self)
+
 
     def run(self):
          
@@ -69,7 +74,7 @@ def getLinks(url, encoding):
     pattern = r'''
             <a                                           # Tag start
             [\s]+                                        # Ignore white chars
-            class="titulkydownloadajax[^"]*"      # Find right html tag
+            class="titulkydownloadajax[^"]*"             # Find right html tag
             [\s]+
             href="(?P<addr>[^"]+)"[^>]*                  # Find address in href (addr)
             >
@@ -86,8 +91,12 @@ def getLinks(url, encoding):
             name = link[1]
 
             # Start thread
-            #IFrameParser(iframeURL, name, encoding).start()
-            IFrameParser(iframeURL, name, encoding).run()
+            IFrameParser(iframeURL, name, encoding).start()
+
+        # We're active waiting for end of all threads
+        # @todo Completely rewrite this
+        while threading.active_count() != 1:
+            time.sleep(CHECK_TIME)
 
         return titlesLinks
     else:
@@ -96,7 +105,13 @@ def getLinks(url, encoding):
 
 
 def downloadFiles(links = []):
-    print('This option is not supported for now. Please implement me!')
+
+    # @todo It's neccessary to use urllib2! But it's not working for me
+    for name, url in links:
+        fd = request.urlopen(url)
+        titles = open(name, 'wb')
+        titles.write(fd.read())
+        titles.close()
 
 
 def main():
