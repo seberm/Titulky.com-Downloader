@@ -106,7 +106,6 @@ def getLinks(url, encoding):
 
 def downloadFiles(links = []):
 
-    # @todo It's neccessary to use urllib2! But it's not working for me
     for name, url in links:
         fd = request.urlopen(url)
         titles = open(name, 'wb')
