@@ -1,0 +1,6 @@
+Adform=window.Adform||{};
+Adform.host="http://track.adform.net";
+Adform.ADFBannerData={URL:"http://track.adform.net/adfserve/?bn=1027518",CREFURL:"",BN:"1027518"};
+if(!Adform.ADFBannerParams)Adform.ADFBannerParams=[];
+Adform.ADFBannerParams.push(Adform.ADFBannerData);
+typeof Adform.ADFUtilInstance=="undefined"?document.write('<scr'+'ipt type="text/javascript" src="http://track.adform.net/banners/scripts/bootstrap/Adform.Bootstrap.js?v=1"></scr'+'ipt>'):new Adform.ADFBanner();
