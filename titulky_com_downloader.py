@@ -13,7 +13,8 @@ from optparse import OptionParser, OptionGroup
 # Globals
 NAME = 'titulky_com_downloader'
 PAGE = 'http://www.titulky.com'
-ENCODING = 'cp1250'
+PAGE_ENCODING = 'cp1250'
+TITLES_ENCODING = 'cp1250'
 CHECK_TIME = 0.05 #s
 
 # Global variable only for now (in future it will be part of some class)
@@ -54,7 +55,7 @@ class IFrameParser(threading.Thread):
 
         if data:
             #log('%s: %s' % (self.__name, PAGE + data.group('addr')))
-            titlesLinks.append((self.__name, PAGE + data.group('addr')))
+            titlesLinks.append((self.__name, PAGE + '/' + data.group('addr')))
         else:
           #<img src="./captcha/captcha.php" />
             pattern = r'<img[\s]+src="./captcha/captcha.php"[\s]+/>'
@@ -104,13 +105,13 @@ def getLinks(url, encoding):
         sys.exit(1)
 
 
-def downloadFiles(links = []):
+def downloadFiles(links = [], enc=TITLES_ENCODING):
 
     for name, url in links:
         fd = request.urlopen(url)
-        titles = open(name, 'wb')
-        titles.write(fd.read())
-        titles.close()
+
+        with open(name, mode='w', encoding=enc) as titles:
+            titles.write(fd.read())
 
 
 def main():
@@ -123,7 +124,8 @@ def main():
     options = OptionGroup(parser, 'Program Options', 'Options specific to titulky_com_downloader.')
     
     options.add_option('-l', '--link', dest='link', action='store_true', help='Prints download link on stdout (default behaviour)')
-    options.add_option('-e', '--encoding', dest='encoding', action='store', metavar='<encoding>', default=ENCODING, help='Sets webpage encoding default [cp1250]')
+    options.add_option('-p', '--page-encoding', dest='pageEncoding', action='store', metavar='<encoding>', default=PAGE_ENCODING, help='Sets webpage encoding default [cp1250]')
+    options.add_option('-e', '--titles-encoding', dest='titlesEncoding', action='store', metavar='<encoding>', default=TITLES_ENCODING, help='Save subtitles file in given encoding - default [cp1250]')
     options.add_option('-n', '--with-name', dest='withName', action='store_true', help='Prints download links with their name')
     options.add_option('-d', '--download', dest='download', action='store_true', help='Download subtitles')
 
@@ -138,10 +140,10 @@ def main():
     for arg in args:
         url = urlparse(arg)
 
-        links = getLinks(url, opt.encoding)
+        links = getLinks(url, opt.pageEncoding)
 
         if opt.download:
-            downloadFiles(links)
+            downloadFiles(links, opt.titlesEncoding)
 
         if opt.withName:
             for l in links:
