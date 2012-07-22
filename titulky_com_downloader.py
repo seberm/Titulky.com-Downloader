@@ -151,7 +151,7 @@ def main():
         if opt.withName:
             for l in links:
                 log('%s: %s' % (l[0], l[1]))
-        else:
+        elif not opt.download:
             for l in links:
                 log(l[1])
 
