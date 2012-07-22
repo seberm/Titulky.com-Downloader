@@ -12,7 +12,11 @@ from optparse import OptionParser, OptionGroup
 
 # Globals
 NAME = 'titulky_com_downloader'
+
 PAGE = 'http://www.titulky.com'
+# For debugging
+#PAGE = 'http://localhost/downloader-titulky_com'
+
 PAGE_ENCODING = 'cp1250'
 CHECK_TIME = 0.05 #s
 
@@ -110,7 +114,7 @@ def downloadFiles(links = []):
     for name, url in links:
         fd = request.urlopen(url)
 
-        with open(name, mode='wb') as titles:
+        with open(name + '.srt', mode='wb') as titles:
             titles.write(fd.read())
 
 
@@ -124,7 +128,7 @@ def main():
     options = OptionGroup(parser, 'Program Options', 'Options specific to titulky_com_downloader.')
     
     options.add_option('-l', '--link', dest='link', action='store_true', help='Prints download link on stdout (default behaviour)')
-    options.add_option('-p', '--page-encoding', dest='pageEncoding', action='store', metavar='<encoding>', default=PAGE_ENCODING, help='Sets webpage encoding default [cp1250]')
+    options.add_option('-e', '--page-encoding', dest='pageEncoding', action='store', metavar='<encoding>', default=PAGE_ENCODING, help='Sets webpage encoding default [cp1250]')
     options.add_option('-n', '--with-name', dest='withName', action='store_true', help='Prints download links with their name')
     options.add_option('-d', '--download', dest='download', action='store_true', help='Download subtitles')
 
