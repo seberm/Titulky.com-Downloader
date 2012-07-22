@@ -14,7 +14,6 @@ from optparse import OptionParser, OptionGroup
 NAME = 'titulky_com_downloader'
 PAGE = 'http://www.titulky.com'
 PAGE_ENCODING = 'cp1250'
-TITLES_ENCODING = 'cp1250'
 CHECK_TIME = 0.05 #s
 
 # Global variable only for now (in future it will be part of some class)
@@ -77,8 +76,9 @@ def getLinks(url, encoding):
             [\s]+                                        # Ignore white chars
             class="titulkydownloadajax[^"]*"             # Find right html tag
             [\s]+
-            href="(?P<addr>[^"]+)"[^>]*                  # Find address in href (addr)
-            >
+            href="(?P<addr>[^"]+)"                       # Find address in href (addr)
+            [\s]*
+            [^>]*>
             (?P<name>[^<]*)                              # Find name of movie (name)
             </a>                                         # Tag end
            '''
@@ -105,12 +105,12 @@ def getLinks(url, encoding):
         sys.exit(1)
 
 
-def downloadFiles(links = [], enc=TITLES_ENCODING):
+def downloadFiles(links = []):
 
     for name, url in links:
         fd = request.urlopen(url)
 
-        with open(name, mode='w', encoding=enc) as titles:
+        with open(name, mode='wb') as titles:
             titles.write(fd.read())
 
 
@@ -125,7 +125,6 @@ def main():
     
     options.add_option('-l', '--link', dest='link', action='store_true', help='Prints download link on stdout (default behaviour)')
     options.add_option('-p', '--page-encoding', dest='pageEncoding', action='store', metavar='<encoding>', default=PAGE_ENCODING, help='Sets webpage encoding default [cp1250]')
-    options.add_option('-e', '--titles-encoding', dest='titlesEncoding', action='store', metavar='<encoding>', default=TITLES_ENCODING, help='Save subtitles file in given encoding - default [cp1250]')
     options.add_option('-n', '--with-name', dest='withName', action='store_true', help='Prints download links with their name')
     options.add_option('-d', '--download', dest='download', action='store_true', help='Download subtitles')
 
@@ -143,7 +142,7 @@ def main():
         links = getLinks(url, opt.pageEncoding)
 
         if opt.download:
-            downloadFiles(links, opt.titlesEncoding)
+            downloadFiles(links)
 
         if opt.withName:
             for l in links:
