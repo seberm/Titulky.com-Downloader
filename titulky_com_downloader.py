@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 import re
@@ -110,6 +110,8 @@ def getLinks(url, encoding):
 
 
 def downloadFiles(links = []):
+    # Small todo - download sometimes is not working
+    print('This function is not fully implemented. Please! Implement me..')
 
     for name, url in links:
         fd = request.urlopen(url)
