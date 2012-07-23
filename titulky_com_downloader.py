@@ -58,7 +58,7 @@ class IFrameParser(threading.Thread):
 
         if data:
             #log('%s: %s' % (self.__name, PAGE + data.group('addr')))
-            titlesLinks.append((self.__name, PAGE + '/' + data.group('addr')))
+            titlesLinks.append((self.__name, PAGE + data.group('addr')))
         else:
           #<img src="./captcha/captcha.php" />
             pattern = r'<img[\s]+src="./captcha/captcha.php"[\s]+/>'
@@ -118,6 +118,8 @@ def downloadFiles(links = []):
 
         with open(name + '.srt', mode='wb') as titles:
             titles.write(fd.read())
+
+        fd.close()
 
 
 def main():
