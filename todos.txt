@@ -1,1 +1,2 @@
-- In future will be possible download titles after exhaustion of daily limit - but will be necessary to provide login
+- In future will be possible download titles after exhaustion of daily limit - but will be necessary to rewrite captcha code
+- It will be possible to download titles which are on the server less then 2 weeks - but it will be necessary to login
