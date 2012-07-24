@@ -4,35 +4,44 @@
 import sys
 from PyQt4 import QtGui, QtCore, QtNetwork
 
+from PyQt4.QtCore import SLOT, SIGNAL
+
 class CaptchaDialog(QtGui.QDialog):
 
     def __init__(self, parent = None, flags = 0):
         super(CaptchaDialog, self).__init__(parent)
 
-        layout = QtGui.QGridLayout()
+        self.layout = QtGui.QGridLayout()
 
         #btn = QtGui.QPushButton('ahoj')
         #layout.addWidget(btn)
-        lblCaptcha = QtGui.QLabel('a', self)
+        self.lblCaptcha = QtGui.QLabel('a', self)
 
-        self.setLayout(layout)
+        self.setLayout(self.layout)
 
 
         manager = QtNetwork.QNetworkAccessManager(self)
-        #QObject.connect(manager, SIGNAL("finished(reply)"
+        self.connect(manager, SIGNAL("finished(reply)"), self, SLOT('managerFinished(self, reply)'))
+
+        #url = QtNetwork.QUrl('http://www.titulky.com/captcha/captcha.php')
+        url = QtCore.QUrl('http://www.titulky.com/captcha/captcha.php')
+        request = QtNetwork.QNetworkRequest(url)
+
+        manager.get(request)
 
 
 
+    def managerFinished(self, reply):
 
+        if reply.error() != QtNetwork.QNetworkReply.NoError:
+            print('nastala chyba')
+            print(reply.errorString())
 
+        data = reply.readAll()
+        pixmap = QtCore.QPixmap()
+        pixmap.loadFromData(data)
 
-
-
-
-
-
-
-
+        self.lblCaptcha.setPixmap(pixmap)
 
 
 
