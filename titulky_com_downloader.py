@@ -114,6 +114,11 @@ def downloadFiles(links = []):
     print('This function is not fully implemented. Please! Implement me..')
 
     for name, url in links:
+        
+        # I don't know why but it's necessary to slow down next downlad of titles
+        # @todo Some better solution?
+        time.sleep(1.0)
+
         fd = request.urlopen(url)
 
         with open(name + '.srt', mode='wb') as titles:
