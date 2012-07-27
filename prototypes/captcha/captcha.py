@@ -13,11 +13,9 @@ class CaptchaDialog(QtGui.QDialog):
 
         self.layout = QtGui.QGridLayout()
 
-        #btn = QtGui.QPushButton('ahoj')
         #layout.addWidget(btn)
         self.lblCaptcha = QtGui.QLabel('a', self)
 
-        self.setLayout(self.layout)
 
 
         manager = QtNetwork.QNetworkAccessManager(self)
@@ -32,6 +30,7 @@ class CaptchaDialog(QtGui.QDialog):
 
 
     def managerFinished(self, reply):
+        print('ahoj')
 
         if reply.error() != QtNetwork.QNetworkReply.NoError:
             print('nastala chyba')
