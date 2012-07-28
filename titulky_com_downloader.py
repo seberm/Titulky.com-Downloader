@@ -110,13 +110,11 @@ def getLinks(url, encoding):
 
 
 def downloadFiles(links = []):
-    # Small todo - download sometimes is not working
-    print('This function is not fully implemented. Please! Implement me..')
 
     for name, url in links:
         
         # I don't know why but it's necessary to slow down next downlad of titles
-        # @todo Some better solution?
+        # @todo Some better solution or workaround?
         time.sleep(1.0)
 
         fd = request.urlopen(url)
