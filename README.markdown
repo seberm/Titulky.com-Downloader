@@ -15,4 +15,18 @@
 
 > For other linux distributions just run file 'run.sh'
 
+## Usage
+> For program options run:
+> $ run.sh --help
+
+### Downloading titles
+> For download of titles it's necessary to provide their link(s).
+> $ run.sh --download http://www.titulky.com/Batman-99294.htm
+
+> If you just want to get download link, run:
+> $ run.sh --link http://www.titulky.com/The-Animatrix-144275.htm
+
+> In the future will be possible to download titles with direct link:
+> $ run.sh --direct-link http://www.titulky.com/idown.php?R=1343462842&titulky=0000144275&zip=&histstamp=
+
 #### Copyright © 2012 Sabart Otto <seberm[at]gmail[dot]com>
