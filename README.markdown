@@ -22,6 +22,9 @@
 ### Downloading titles
 > For download of titles it's necessary to provide their link(s).
 > $ run.sh --download http://www.titulky.com/Batman-99294.htm
+> Sometimes download option is not working and program downloads file which contents text '<h2>Odkaz jetì není funkèní</h2>Pokraèujte tudy na <a href="http://www.titulky.com">titulky</a>'.
+So, maybe is better to use following command for now.
+> $ wget `./run.sh --link http://www.titulky.com/Batman-99294.htm`
 
 > If you just want to get download link, run:
 > $ run.sh --link http://www.titulky.com/The-Animatrix-144275.htm
