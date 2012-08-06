@@ -142,10 +142,11 @@ def main():
     options.add_option('-n', '--with-name', dest='withName', action='store_true', help='Print download links with movie name')
 
     # @todo Will be possible to specific the download dir
-    options.add_option('-d', '--download', dest='download', action='store_true', help='Download subtitles to current folder')
+    # @todo Remove warning message in following option
+    options.add_option('-d', '--download', dest='download', action='store_true', help='Download subtitles to current folder (sometimes does not work - use option -l in combination with wget - just take a look to README)')
 
     # @todo it will be possible to add prefix to downloaded files
-    #options.add_option('-d', '--download', dest='download', action='store_true', help='Download subtitles to current folder')
+    #options.add_option('-p', '--prefix', dest='prefix', action='store_true', help='Set prefix to downloaded files')
 
     parser.add_option_group(options)
 
