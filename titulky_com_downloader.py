@@ -78,6 +78,12 @@ def getLinks(url, encoding):
     fd.close()
 
     pattern = r'''
+            <td                                         # TD before hyperlink (it's because program downloaded all titles including titles from history box
+            [\s]+
+            class="detailv"
+            [\s]*
+            >
+            [\s]*
             <a                                           # Tag start
             [\s]+                                        # Ignore white chars
             class="titulkydownloadajax[^"]*"             # Find right html tag
