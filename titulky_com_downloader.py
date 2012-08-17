@@ -3,6 +3,7 @@
 
 import re
 import sys
+import os
 import threading
 import time
 from urllib import request
@@ -138,9 +139,10 @@ def main():
     
     options.add_option('-l', '--link', dest='link', action='store_true', help='Print download link(s) on stdout (default behaviour)')
     #options.add_option('--direct-link', dest='directLink', action='store_true', help='Download or print download links from direct link. Direct link is an url address of hyperlink which is situated in box called TITULKY >MOVIE NAME< KE STAŽENÍ.')
-    options.add_option('-e', '--page-encoding', dest='pageEncoding', action='store', metavar='<encoding>', default=PAGE_ENCODING, help='Sets webpage encoding default [cp1250]')
+    options.add_option('-e', '--page-encoding', dest='pageEncoding', action='store', metavar='<encoding>', default=PAGE_ENCODING, help='Sets webpage encoding - default [cp1250]')
     options.add_option('-n', '--with-name', dest='withName', action='store_true', help='Print download links with movie name')
 
+    options.add_option('-p', '--dir', dest='dir', action='store', help='Change program directory')
     # @todo Will be possible to specific the download dir
     # @todo Remove warning message in following option
     options.add_option('-d', '--download', dest='download', action='store_true', help='Download subtitles to current folder (sometimes does not work - use option -l in combination with wget - just take a look to README)')
@@ -160,6 +162,9 @@ def main():
         url = urlparse(arg)
 
         links = getLinks(url, opt.pageEncoding)
+
+        if opt.dir:
+            os.chdir(opt.dir)
 
         if opt.download:
             downloadFiles(links)
