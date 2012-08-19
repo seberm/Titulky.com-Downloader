@@ -7,7 +7,8 @@ import os
 import threading
 import time
 from urllib import request
-from urllib.parse import urlparse
+from urllib.parse import urlparse, urlencode
+from http import cookiejar
 from optparse import OptionParser, OptionGroup
 
 
@@ -33,7 +34,9 @@ def log(fmtstr):
 
 class IFrameParser(threading.Thread):
 
-    def __init__(self, url, name, encoding):
+    def __init__(self, opener, url, name, encoding):
+
+        self.__opener = opener
         self.__url = url
         self.__name = name
         self.__encoding = encoding
@@ -43,9 +46,9 @@ class IFrameParser(threading.Thread):
 
     def run(self):
          
-        fd = request.urlopen(self.__url)
+        fd = self.__opener.open(self.__url)
         iframe = str(fd.read().decode(self.__encoding))
-        fd.close()
+#fd.close()?
 
         #pattern = r'<a[\s]+[^h]+href="(?P<addr>[^"]+)"[^>]*>'
         pattern = r'''
@@ -72,11 +75,20 @@ class IFrameParser(threading.Thread):
 
 
 
-def getLinks(url, encoding):
+def getLinks(url, encoding, login, password):
 
-    fd = request.urlopen(url.geturl())
+    cj = cookiejar.CookieJar()
+    opener = request.build_opener(request.HTTPCookieProcessor(cj))
+    
+    loginData = urlencode({'Login' : login, 'Password' : password, 'foreverlog' : 1})
+
+    # We send POST data to login
+    if login and password:
+        opener.open('http://www.titulky.com/index.php', loginData.encode(encoding))
+
+    fd = opener.open(url.geturl())
     htmlSource = str(fd.read().decode(encoding))
-    fd.close()
+#fd.close()?
 
     pattern = r'''
             <td                                         # TD before hyperlink (it's because program downloaded all titles including titles from history box
@@ -105,7 +117,7 @@ def getLinks(url, encoding):
             name = link[1]
 
             # Start thread
-            IFrameParser(iframeURL, name, encoding).start()
+            IFrameParser(opener, iframeURL, name, encoding).start()
 
         # We're active waiting for end of all threads
         # @todo Completely rewrite this
@@ -151,6 +163,9 @@ def main():
 
     options.add_option('-p', '--dir', dest='dir', action='store', help='Change program directory')
 
+    options.add_option('--login', dest='login', action='store', default='', help='Login name to netusers.cz (titulky.com)')
+    options.add_option('--password', dest='password', action='store', default='', help='Password to netusers.cz (titulky.com)')
+
     # @todo Remove warning message in following option
     options.add_option('-d', '--download', dest='download', action='store_true', help='Download subtitles to current folder (sometimes does not work - use option -l in combination with wget - just take a look to README)')
 
@@ -168,7 +183,7 @@ def main():
     for arg in args:
         url = urlparse(arg)
 
-        links = getLinks(url, opt.pageEncoding)
+        links = getLinks(url, opt.pageEncoding, opt.login, opt.password)
 
         if opt.dir:
             os.chdir(opt.dir)
