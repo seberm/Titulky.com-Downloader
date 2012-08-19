@@ -1,0 +1,13 @@
+LoginLogin - username
+LogonId - some integer number (user id?)
+CRC - hash
+
+Cookies are all the time the same in current login session
+
+
+After removal of CRC cookie i'm unlogged
+
+
+When I login again - my CRC hash and LogonId are the same again! - WTF? .... ok
+
+When I click logout, all of these cookies are removed
