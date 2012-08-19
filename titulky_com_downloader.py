@@ -50,7 +50,6 @@ class IFrameParser(threading.Thread):
         iframe = str(fd.read().decode(self.__encoding))
 #fd.close()?
 
-        #pattern = r'<a[\s]+[^h]+href="(?P<addr>[^"]+)"[^>]*>'
         pattern = r'''
                     <a                          # Tag start
                     [\s]+                       # Ignore white chars
@@ -63,10 +62,8 @@ class IFrameParser(threading.Thread):
         data = re.search(pattern, iframe, re.VERBOSE)
 
         if data:
-            #log('%s: %s' % (self.__name, PAGE + data.group('addr')))
             titlesLinks.append((self.__name, PAGE + data.group('addr')))
         else:
-          #<img src="./captcha/captcha.php" />
             pattern = r'<img[\s]+src="./captcha/captcha.php"[\s]+/>'
             if re.search(pattern, iframe):
                 log('%s: You exhausted your daily limit of downloads' % self.__name)
@@ -157,12 +154,9 @@ def main():
     options = OptionGroup(parser, 'Program Options', 'Options specific to titulky_com_downloader.')
     
     options.add_option('-l', '--link', dest='link', action='store_true', help='Print download link(s) on stdout (default behaviour)')
-    #options.add_option('--direct-link', dest='directLink', action='store_true', help='Download or print download links from direct link. Direct link is an url address of hyperlink which is situated in box called TITULKY >MOVIE NAME< KE STAŽENÍ.')
     options.add_option('-e', '--page-encoding', dest='pageEncoding', action='store', metavar='<encoding>', default=PAGE_ENCODING, help='Sets webpage encoding - default [cp1250]')
     options.add_option('-n', '--with-name', dest='withName', action='store_true', help='Print download links with movie name')
-
     options.add_option('-p', '--dir', dest='dir', action='store', help='Change program directory')
-
     options.add_option('--login', dest='login', action='store', default='', help='Login name to netusers.cz (titulky.com)')
     options.add_option('--password', dest='password', action='store', default='', help='Password to netusers.cz (titulky.com)')
 
