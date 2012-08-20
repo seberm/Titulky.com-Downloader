@@ -83,10 +83,6 @@ class CaptchaDialog(QtGui.QDialog):
 
 
 
-def main():
+if __name__ == '__main__':
     app = QtGui.QApplication(sys.argv)
     sys.exit(CaptchaDialog().exec_())
-
-
-if __name__ == '__main__':
-    main()

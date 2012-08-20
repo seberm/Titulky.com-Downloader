@@ -81,3 +81,9 @@ class CaptchaDialog(QtGui.QDialog):
         self.codeRead.emit()
         #self.close()
 
+
+
+if __name__ == '__main__':
+    app = QtGui.QApplication(sys.argv)
+    sys.exit(CaptchaDialog().exec_())
+
