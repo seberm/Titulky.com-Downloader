@@ -81,12 +81,3 @@ class CaptchaDialog(QtGui.QDialog):
         self.codeRead.emit()
         #self.close()
 
-
-
-def main():
-    app = QtGui.QApplication(sys.argv)
-    sys.exit(CaptchaDialog().exec_())
-
-
-if __name__ == '__main__':
-    main()

@@ -66,7 +66,7 @@ class IFrameParser(threading.Thread):
         else:
             pattern = r'<img[\s]+src="./captcha/captcha.php"[\s]+/>'
             if re.search(pattern, iframe):
-                log('%s: You exhausted your daily limit of downloads' % self.__name)
+                log('%s: You exhausted your free daily limit of downloads - it\'s necessary to re-type captcha code' % self.__name)
             else:
                 log('%s: Cannot find data on page' % self.__name)
 
