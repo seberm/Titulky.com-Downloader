@@ -4,9 +4,15 @@ from PyQt4 import QtGui, QtCore, QtNetwork
 from PyQt4.QtCore import SLOT, SIGNAL
 
 CAPTCHA_URL = 'http://www.titulky.com/captcha/captcha.php'
+MAX_CAPTCHA_LEN = 8
 
 
 class CaptchaDialog(QtGui.QDialog):
+
+
+    # Signal is emmited if captcha code is sucessfuly re-typed
+    codeRead = QtCore.pyqtSignal()
+
 
     def __init__(self, parent = None, flags = 0):
         super(CaptchaDialog, self).__init__(parent)
@@ -21,10 +27,16 @@ class CaptchaDialog(QtGui.QDialog):
         self.btnReload = QtGui.QPushButton('Reload', self)
         self.connect(self.btnReload, SIGNAL("clicked()"), self.reloadCaptcha)
         self.btnSend = QtGui.QPushButton('Send', self)
+        self.connect(self.btnSend, SIGNAL("clicked()"), self.sendCode)
+
+        self.leCode = QtGui.QLineEdit(self)
+        self.leCode.setFocus()
+        self.leCode.setMaxLength(MAX_CAPTCHA_LEN)
 
         layout = QtGui.QGridLayout()
         layout.addWidget(self.lblCaptcha)
         layout.addWidget(self.btnReload)
+        layout.addWidget(self.leCode)
         layout.addWidget(self.btnSend)
 
         self.setLayout(layout)
@@ -43,6 +55,7 @@ class CaptchaDialog(QtGui.QDialog):
         if reply.error() != QtNetwork.QNetworkReply.NoError:
             print('Error in loading captcha...')
             print(reply.errorString())
+            return
 
         data = reply.readAll()
         pixmap = QtGui.QPixmap()
@@ -57,6 +70,15 @@ class CaptchaDialog(QtGui.QDialog):
         request = QtNetwork.QNetworkRequest(url)
 
         self.manager.get(request)
+
+
+    def sendCode(self):
+
+        self.leCode.setDisabled(True)
+        self.captchaCode = self.leCode.text()
+
+        # We just emit a signal
+        self.codeRead.emit()
 
 
 
