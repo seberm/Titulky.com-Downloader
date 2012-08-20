@@ -21,7 +21,7 @@ class CaptchaDialog(QtGui.QDialog):
         self.setWindowTitle('Re-type captcha')
 
         # Widgets
-        self.lblCaptcha = QtGui.QLabel('No captcha loaded', self)
+        self.lblCaptcha = QtGui.QLabel('Loading captcha image ...', self)
         self.lblCaptcha.setFixedSize(200, 70)
 
         self.btnReload = QtGui.QPushButton('Reload', self)
@@ -53,7 +53,7 @@ class CaptchaDialog(QtGui.QDialog):
     def managerFinished(self, reply):
 
         if reply.error() != QtNetwork.QNetworkReply.NoError:
-            print('Error in loading captcha...')
+            self.lblCaptcha.setText('Error in loading captcha image')
             print(reply.errorString())
             return
 
@@ -79,7 +79,7 @@ class CaptchaDialog(QtGui.QDialog):
 
         # We just emit a signal
         self.codeRead.emit()
-
+        #self.close()
 
 
 
