@@ -147,7 +147,7 @@ def main():
 
     # Parsing Options & Args
     parser = OptionParser(description = '%prog Download subtitles from titulky.com',
-                          usage = '%prog [options]',
+                          usage = '%prog [OPTION]... [URL]...',
                           epilog = 'Support: Otto Sabart (www.seberm.com / seberm@gmail.com)',
                           version = '%prog ' + VERSION)
 
