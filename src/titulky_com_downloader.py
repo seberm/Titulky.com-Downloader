@@ -117,6 +117,7 @@ def getLinks(url, encoding, login, password):
             IFrameParser(opener, iframeURL, name, encoding).start()
 
         # We're active waiting for end of all threads
+        # @todo Some better solution or workaround?
         # @todo Completely rewrite this
         while threading.active_count() != 1:
             time.sleep(CHECK_TIME)
@@ -130,10 +131,6 @@ def getLinks(url, encoding, login, password):
 def downloadFiles(links = []):
 
     for name, url in links:
-        
-        # I don't know why but it's necessary to slow down next downlad of titles
-        # @todo Some better solution or workaround?
-        time.sleep(1.0)
 
         fd = request.urlopen(url)
 
