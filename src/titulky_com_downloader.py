@@ -5,6 +5,7 @@ import re
 import sys
 import os
 import threading
+import logging
 import time
 import urllib
 from urllib import request
@@ -18,6 +19,9 @@ NAME = 'titulky_com_downloader'
 VERSION = '1.0.0-beta'
 
 PAGE = 'http://www.titulky.com'
+
+DEFAULT_LOGGING_LEVEL = 'INFO' #logging.INFO
+DEFAULT_LOGGING_FORMAT = '%(levelname)s: %(message)s'
 
 # For debugging
 #PAGE = 'http://localhost/downloader-titulky_com'
@@ -46,14 +50,16 @@ class IFrameParser(threading.Thread):
 
 
     def run(self):
+
+        logging.debug('[%s]: Running new IFrameParser thread (%s)' % (self.__name, self.__url))
          
         try:
             fd = self.__opener.open(self.__url)
             iframe = str(fd.read().decode(self.__encoding))
         except urllib.error.URLError as e:
-            log('URL error: %s' % e.reason)
+            logging.error('[%s]: URL error: %s' % (self.__name, e.reason))
         except IOError:
-            log('IO Error - thread exiting')
+            logging.error('[%s]: IO Error - thread exiting' % self.__name)
             fd.close()
             sys.exit(1)
 
@@ -66,16 +72,20 @@ class IFrameParser(threading.Thread):
                     >                           # Tag end
                    '''
 
+        logging.debug('[%s]: Parsing iframe ...' % self.__name)
+
         data = re.search(pattern, iframe, re.VERBOSE)
 
         if data:
+            logging.debug('[%s]: Found link: %s' % (self.__name, PAGE + data.group('addr')))
             titlesLinks.append((self.__name, PAGE + data.group('addr')))
         else:
+            logging.debug('[%s]: No links found' % self.__name)
             pattern = r'<img[\s]+src="./captcha/captcha.php"[\s]+/>'
             if re.search(pattern, iframe):
-                log('%s: You exhausted your free daily limit of downloads - it\'s necessary to re-type captcha code' % self.__name)
+                logging.warning('[%s]: You exhausted your free daily limit of downloads - it\'s necessary to re-type captcha code' % self.__name)
             else:
-                log('%s: Cannot find data on page' % self.__name)
+                logging.info('[%s]: Cannot find data on page' % self.__name)
 
 
 
@@ -91,10 +101,10 @@ def getLinks(url, encoding, login, password):
     try:
         # We send POST data to login
         if login and password:
+            logging.debug('Posting login credentials [user: %s]' % login)
             opener.open('http://www.titulky.com/index.php', loginData.encode(encoding))
 
         fd = opener.open(url.geturl())
-
 
         htmlSource = str(fd.read().decode(encoding))
 
@@ -102,13 +112,13 @@ def getLinks(url, encoding, login, password):
         log('HTTP Connection error (%d): %s' % (e.code, e.reason))
         sys.exit(1)
     except urllib.error.URLError as e:
-        log('URL error: %s' % e.reason)
+        logging.error('URL error: %s' % e.reason)
         sys.exit(1)
     except IOError:
-        log('Cannot read page data - %s' % url)
+        logging.error('Cannot read page data - %s' % url)
         sys.exit(1)
     except ValueError:
-        log('URL value error: Unknown URL type')
+        logging.error('URL value error: Unknown URL type')
         sys.exit(1)
 
     pattern = r'''
@@ -129,9 +139,12 @@ def getLinks(url, encoding, login, password):
             </a>                                         # Tag end
            '''
 
+    logging.debug('Looking for subtitles links on %s' % url.geturl())
+
     links = re.findall(pattern, htmlSource, re.VERBOSE)
 
     if links:
+        logging.debug('Links found: %d' % len(links))
         for link in links:
 
             iframeURL = PAGE + '/' + link[0]
@@ -141,7 +154,7 @@ def getLinks(url, encoding, login, password):
                 # Start thread
                 IFrameParser(opener, iframeURL, name, encoding).start()
             except RuntimeError as e:
-                log('Runtime error: %s' % e)
+                logging.exception('Runtime error: %s' % e)
                 sys.exit(1)
 
         # We're active waiting for end of all threads
@@ -152,15 +165,18 @@ def getLinks(url, encoding, login, password):
 
         return titlesLinks
     else:
-        log('Cannot find data on page')
+        logging.info('Cannot find data on page')
         sys.exit(1)
 
 
 def downloadFiles(links = []):
 
+    logging.debug('Downloading links: %d' % len(links))
+
     for name, url in links:
 
         try:
+            logging.debug('[%s]: Downloading from: %s' % (name, url))
             fd = request.urlopen(url)
 
             with open(name + '.srt', mode='wb') as titles:
@@ -168,10 +184,10 @@ def downloadFiles(links = []):
 
             fd.close()
         except urllib.error.URLError as e:
-            log('Cannot get subtitles (%s): %s' % (name, e.reason))
+            logging.error('[%s]: Cannot get subtitles: %s' % (name, e.reason))
             sys.exit(1)
         except IOError:
-            log('Cannot open file: %s' % name)
+            logging.error('[%s]: Cannot open file: %s.srt' % (name, name))
             sys.exit(1)
 
 
@@ -191,6 +207,7 @@ def main():
     options.add_option('-p', '--dir', dest='dir', action='store', help='Change program directory')
     options.add_option('--login', dest='login', action='store', default='', help='Login name to netusers.cz (titulky.com)')
     options.add_option('--password', dest='password', action='store', default='', help='Password to netusers.cz (titulky.com)')
+    options.add_option('--log', dest='logLevel', action='store', default=DEFAULT_LOGGING_LEVEL, help='Set logging level (debug, info, warning, error, critical)')
 
     # @todo Remove warning message in following option
     options.add_option('-d', '--download', dest='download', action='store_true', help='Download subtitles to current folder (sometimes does not work - use option -l in combination with wget - just take a look to README)')
@@ -202,27 +219,38 @@ def main():
 
     (opt, args) = parser.parse_args()
 
+    level = DEFAULT_LOGGING_LEVEL
+    if opt.logLevel:
+        level = opt.logLevel
+
+    try:
+        logging.basicConfig(format=DEFAULT_LOGGING_FORMAT, level=level.upper())
+    except ValueError:
+        logging.basicConfig(format=DEFAULT_LOGGING_FORMAT, level=DEFAULT_LOGGING_LEVEL)
+        logging.warning('It is not possible to set logging level to %s' % level)
+        logging.warning('Using default setting logging level: INFO')
+
+    if opt.dir:
+        logging.debug('Changing default program directory to %s' % opt.dir)
+        os.chdir(opt.dir)
+
     if not args[0:]:
-        log('You have to provide an URL address!')
+        logging.error('You have to provide an URL address!')
         sys.exit(1)
 
     for arg in args:
         url = urlparse(arg)
-
         links = getLinks(url, opt.pageEncoding, opt.login, opt.password)
-
-        if opt.dir:
-            os.chdir(opt.dir)
 
         if opt.download:
             downloadFiles(links)
 
         if opt.withName:
             for l in links:
-                log('%s: %s' % (l[0], l[1]))
+                print('%s: %s' % (l[0], l[1]))
         elif not opt.download:
             for l in links:
-                log(l[1])
+                print(l[1])
 
 
 
@@ -230,5 +258,5 @@ if __name__ == '__main__':
     try:
         main()
     except KeyboardInterrupt: # Catch ^C interrupt
-        log('Program interrupted')
+        logging.info('Program interrupted')
         sys.exit(1)
