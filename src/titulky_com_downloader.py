@@ -5,6 +5,7 @@ import re
 import sys
 import os
 import threading
+from datetime import datetime
 import logging
 import time
 import urllib
@@ -78,7 +79,7 @@ class IFrameParser(threading.Thread):
 
         if data:
             logging.debug('[%s]: Found link: %s' % (self.__name, PAGE + data.group('addr')))
-            titlesLinks.append((self.__name, PAGE + data.group('addr')))
+            titlesLinks.append((self.__name, PAGE + data.group('addr'), datetime.now().hour))
         else:
             logging.debug('[%s]: No links found' % self.__name)
             pattern = r'<img[\s]+src="./captcha/captcha.php"[\s]+/>'
@@ -169,11 +170,21 @@ def getLinks(url, encoding, login, password):
         sys.exit(1)
 
 
-def downloadFiles(links = []):
+def downloadFiles(links = [], userVIP=False):
 
     logging.debug('Downloading links: %d' % len(links))
 
-    for name, url in links:
+    for name, url, wait in links:
+
+        if not userVIP:
+            # +1 because we should make sure that we can download
+            waitTime = wait + 1
+
+            logging.debug('[%s][%d secs] - %s' % (name, waitTime, url))
+            logging.debug('[%s]: Waiting for download ...' % name)
+
+            # Waiting for download
+            time.sleep(float(waitTime))
 
         try:
             logging.debug('[%s]: Downloading from: %s' % (name, url))
@@ -203,11 +214,12 @@ def main():
     
     options.add_option('-l', '--link', dest='link', action='store_true', help='Print download link(s) on stdout (default behaviour)')
     options.add_option('-e', '--page-encoding', dest='pageEncoding', action='store', metavar='<encoding>', default=PAGE_ENCODING, help='Sets webpage encoding - default [cp1250]')
-    options.add_option('-n', '--with-name', dest='withName', action='store_true', help='Print download links with movie name')
+    options.add_option('-n', '--with-info', dest='withInfo', action='store_true', help='Print download links with movie name and number of secs to link activation')
     options.add_option('-p', '--dir', dest='dir', action='store', help='Change program directory')
     options.add_option('--login', dest='login', action='store', default='', help='Login name to netusers.cz (titulky.com)')
     options.add_option('--password', dest='password', action='store', default='', help='Password to netusers.cz (titulky.com)')
     options.add_option('--log', dest='logLevel', action='store', default=DEFAULT_LOGGING_LEVEL, help='Set logging level (debug, info, warning, error, critical)')
+    options.add_option('-i', '--vip', dest='vip', action='store_true', help='Set up a VIP user download')
 
     # @todo Remove warning message in following option
     options.add_option('-d', '--download', dest='download', action='store_true', help='Download subtitles to current folder (sometimes does not work - use option -l in combination with wget - just take a look to README)')
@@ -243,11 +255,11 @@ def main():
         links = getLinks(url, opt.pageEncoding, opt.login, opt.password)
 
         if opt.download:
-            downloadFiles(links)
+            downloadFiles(links, opt.vip)
 
-        if opt.withName:
+        if opt.withInfo:
             for l in links:
-                print('%s: %s' % (l[0], l[1]))
+                print('[%s][after %d secs]: %s' % (l[0], l[2], l[1]))
         elif not opt.download:
             for l in links:
                 print(l[1])
