@@ -6,6 +6,7 @@ import sys
 import os
 import threading
 import time
+import urllib
 from urllib import request
 from urllib.parse import urlparse, urlencode
 from http import cookiejar
@@ -46,9 +47,15 @@ class IFrameParser(threading.Thread):
 
     def run(self):
          
-        fd = self.__opener.open(self.__url)
-        iframe = str(fd.read().decode(self.__encoding))
-#fd.close()?
+        try:
+            fd = self.__opener.open(self.__url)
+            iframe = str(fd.read().decode(self.__encoding))
+        except urllib.error.URLError as e:
+            log('URL error: %s' % e.reason)
+        except IOError:
+            log('IO Error - thread exiting')
+            fd.close()
+            sys.exit(1)
 
         pattern = r'''
                     <a                          # Tag start
@@ -79,13 +86,30 @@ def getLinks(url, encoding, login, password):
     
     loginData = urlencode({'Login' : login, 'Password' : password, 'foreverlog' : 1})
 
-    # We send POST data to login
-    if login and password:
-        opener.open('http://www.titulky.com/index.php', loginData.encode(encoding))
+    htmlSource = ''
 
-    fd = opener.open(url.geturl())
-    htmlSource = str(fd.read().decode(encoding))
-#fd.close()?
+    try:
+        # We send POST data to login
+        if login and password:
+            opener.open('http://www.titulky.com/index.php', loginData.encode(encoding))
+
+        fd = opener.open(url.geturl())
+
+
+        htmlSource = str(fd.read().decode(encoding))
+
+    except urllib.error.HTTPError as e:
+        log('HTTP Connection error (%d): %s' % (e.code, e.reason))
+        sys.exit(1)
+    except urllib.error.URLError as e:
+        log('URL error: %s' % e.reason)
+        sys.exit(1)
+    except IOError:
+        log('Cannot read page data - %s' % url)
+        sys.exit(1)
+    except ValueError:
+        log('URL value error: Unknown URL type')
+        sys.exit(1)
 
     pattern = r'''
             <td                                         # TD before hyperlink (it's because program downloaded all titles including titles from history box
@@ -113,8 +137,12 @@ def getLinks(url, encoding, login, password):
             iframeURL = PAGE + '/' + link[0]
             name = link[1]
 
-            # Start thread
-            IFrameParser(opener, iframeURL, name, encoding).start()
+            try:
+                # Start thread
+                IFrameParser(opener, iframeURL, name, encoding).start()
+            except RuntimeError as e:
+                log('Runtime error: %s' % e)
+                sys.exit(1)
 
         # We're active waiting for end of all threads
         # @todo Some better solution or workaround?
@@ -132,12 +160,19 @@ def downloadFiles(links = []):
 
     for name, url in links:
 
-        fd = request.urlopen(url)
+        try:
+            fd = request.urlopen(url)
 
-        with open(name + '.srt', mode='wb') as titles:
-            titles.write(fd.read())
+            with open(name + '.srt', mode='wb') as titles:
+                titles.write(fd.read())
 
-        fd.close()
+            fd.close()
+        except urllib.error.URLError as e:
+            log('Cannot get subtitles (%s): %s' % (name, e.reason))
+            sys.exit(1)
+        except IOError:
+            log('Cannot open file: %s' % name)
+            sys.exit(1)
 
 
 def main():
@@ -192,4 +227,8 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    try:
+        main()
+    except KeyboardInterrupt: # Catch ^C interrupt
+        log('Program interrupted')
+        sys.exit(1)
