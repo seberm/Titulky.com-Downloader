@@ -9,7 +9,7 @@ titlesLinks = []
 class Foo (threading.Thread):
     def __init__(self,x):
         self.__x = x
-        self.__end = false
+        self.__end = False
         threading.Thread.__init__(self)
 
     def run (self):

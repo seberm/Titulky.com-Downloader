@@ -1,0 +1,615 @@
+<!--
+********************************************************
+ Created by Martin Kroulík (c) 2003-2011 Martevax s.r.o.
+********************************************************
+  Company:  Martevax s.r.o.
+  Web Site: www.martevax.cz
+  Email:    martevax[zavinac]martevax.cz
+-->
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="cs" lang="cs">
+<head>
+ <meta http-equiv="x-xrds-location" content="http://www.titulky.com/xrds.xml" />
+ <meta http-equiv="Content-Type" content="text/html; charset=windows-1250" />
+ <meta http-equiv="Content-language" content="cs" />
+ <meta http-equiv="Cache-Control" content="must-revalidate, post-check=0, pre-check=0" />
+ <meta http-equiv="Cache-Control" content="no-cache" />
+ <meta http-equiv="Pragma"        content="no-cache" />
+ <meta http-equiv="Expires"       content="-1" />
+ <meta name="copyright" content="2004-2012 Martevax s.r.o" />
+ <meta name="author" content="Martin Kroulík" />
+ <meta name="keywords" content="titulky k filmům,titulky k filmum,DivX,XviD,DVD, film,movie,subtitle,subtitles,bigweb.cz,titulky.cz" />
+ <meta name="description" content="Titulky.com - titulky k filmům ke stažení - největší a nejaktuálnější databáze CS/SK a bonusové dárky zdarma" />
+ <link rel="shortcut icon" href="favicon-tecko.ico" />
+ <link rel="alternate" type="application/rss+xml" title="www.titulky.com - nové titulky - RSS" href="/rss/titulky_rss.xml" />
+ <link rel="alternate" type="application/rss+xml" title="www.titulky.com - diskuze - RSS" href="/rss/diskuze_rss.xml" />
+ <link rel="image_src" href="http://www.titulky.com/css/logo.png" />
+ <link rel="stylesheet" type="text/css" href="css/jquery.autocomplete.css" />
+ <script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+ <script type='text/javascript' src='js/jquery.autocomplete.js'></script>
+ <script type="text/javascript" src="/swfobject.js"></script> 
+
+ <link rel="stylesheet" type="text/css" media="all"   href="/css/zaklad.css" />
+
+
+
+ <!--[if gte IE 5]>
+
+ <style type="text/css">
+  #menu li {
+    padding-bottom: 0px; 
+    list-style-type: none;
+    margin: 7px 0px 0px;
+    padding-left: 10px; 
+    padding-right: 10px; 
+    background: url('css/menu-predel.jpg') no-repeat left center; 
+    float: left; 
+    height: 40px; 
+    overflow: hidden; 
+    padding-top: 4px;
+  }
+  #pagewrap{
+    width: 1151px;
+  }  
+  div.ibox {
+   height:220px;
+  }
+  .iboxtitle{
+    height:40px;
+  }
+  #stat_bok_h{
+    height:40px;  
+  }
+  .tlacitkoform{
+    width: 100px; 
+  }
+  </style>
+<![endif]-->
+
+<![if !IE]>
+ <style type="text/css">
+   #menu li {
+  	float: left;
+  	height: 37px;
+  	overflow: hidden;
+  	list-style: none;
+    XXXXwidth: 96px;
+  	margin: 1px 0px 0px 0px;
+  	padding: 6px 8px 0px 8px;
+  	background: url('css/menu-predel.jpg') no-repeat left center;
+  }
+   #pagewrap{
+    width: 1150px;
+  }
+  div.ibox {
+   height:auto;
+   min-height:210px
+  }   
+  .iboxtitle{
+    height:22px;
+  }
+  #div_nahled{ 
+     position:absolute;
+  } 
+  #stat_bok_h{
+    height:30px; 
+  }
+  .tlacitkoform{
+      width:auto !important; 
+  }      
+ </style>
+<![endif]>
+
+<title>titulky.com - Titulky k DivX filmům</title>
+<script type='text/javascript' src='/localfnc.js'></script>
+<script type='text/javascript'>
+function UD(k){
+document.location='index.php?UserDetail='+k;
+}
+</script>
+</head>
+
+<body>
+<div XXstyle="background:#5da8e9 url(/css/pozadi.png)" id="bodywrap">
+  <!-- bodyhead /-->
+ <div id="bodycont" style="text-align:center;">
+    
+          
+ <div id="head"> 
+   <div id="head_a">
+     <div id="head_a1">
+      <a href="/"><img src="css/logo.png" alt="České a slovenské titulky" /></a>
+     </div>
+     <div id="head_a2">
+       
+           
+                      
+       <!-- Pozice: go.cz.bbelements.com AdActive_CC(15371) / cely web(1) / leadeboard 750x100(2) / PRčlánek(7) -->
+        <script type='text/javascript' charset='windows-1250'>
+        /* <![CDATA[ */
+        var bbs=screen,bbn=navigator,bbh;bbh='&ubl='+bbn.browserLanguage+'&ucc='+bbn.cpuClass+'&ucd='+bbs.colorDepth+'&uce='+bbn.cookieEnabled+'&udx='+bbs.deviceXDPI+'&udy='+bbs.deviceYDPI+'&usl='+bbn.systemLanguage+'&uje='+bbn.javaEnabled()+'&uah='+bbs.availHeight+'&uaw='+bbs.availWidth+'&ubd='+bbs.bufferDepth+'&uhe='+bbs.height+'&ulx='+bbs.logicalXDPI+'&uly='+bbs.logicalYDPI+'&use='+bbs.fontSmoothingEnabled+'&uto='+(new Date()).getTimezoneOffset()+'&uti='+(new Date()).getTime()+'&uui='+bbs.updateInterval+'&uul='+bbn.userLanguage+'&uwi='+bbs.width;
+        if(typeof(bburlparam)=='string') { bbh+='&'+bburlparam; }
+        if(typeof(bbkeywords)=='string') { bbh+='&keywords='+escape(bbkeywords); }
+        document.write("<scr"+"ipt type='text/javascript' charset='windows-1250' src='http://go.cz.bbelements.com/please/showit/15371/1/2/7/?typkodu=js"+bbh+"&alttext=0&border=0&bust="+Math.random()+"&target=_blank'><"+"\/scr"+"ipt>");
+        /* ]]> */
+        </script>
+        <noscript>
+        <a href="http://go.cz.bbelements.com/please/redirect/15371/1/2/7/" target="_blank"><img src="http://go.cz.bbelements.com/please/showit/15371/1/2/7/?typkodu=img" border='0' alt='' /></a>
+        </noscript>
+
+      
+       
+       
+    </div>     
+    </div> 
+     <div id="head_b">
+      <!-- menu /-->
+      <div id="menu">
+      <ul>
+        <li>
+          <a href="index.php?Forum=1" >Fórum</a></li>
+        <li>
+          <a href="http://premium.titulky.com/?LGLogin=&LGId=&LGCRC=&Goto=Nahrat%3D1" target="premium" >Nahrát titulky</a></li>
+        <li>
+          <a href="index.php?Napoveda=2">Pravidla</a></li>
+        <li>
+          <a href="index.php?Napoveda=3">FAQ</a></li>
+        <li>
+          <a title="Požadavky titulků" href="index.php?Stat=6">Požadavky</a></li>
+        <li>
+          <a title="Rozpracované titulky" href="index.php?Stat=5">Rozpracované</a></li>
+        <li>
+          <a href="index.php?Bonus=1">Odměny</a></li>
+        <li>
+                    <a target="reklama-titulky" href="/internetova-reklama/">Reklama</a></li>
+        <li>
+          <a href="index.php?Web=1">Zajímavé weby</a></li>
+        <li>
+          <a href="index.php?Napoveda=7">O serveru</a></li> 
+          
+          <li style="padding:0px 2px 0px 2px"><a href="http://www.facebook.com/titulkycom"><img style="padding-top:-0px" src="css/facebook.jpg" alt="oficiální stránka na facebooku" /></a></li> 
+          <li style="padding:0px 2px 0px 2px"><a href="index.php?Napoveda=5"><img style="margin-top:-4px" src="css/rss.jpg" alt="RSS kanál" /></a></li> 
+          <li style="padding:0px 2px 0px 2px"><a href="javascript:bookmarksite('Titulky k filmům - titulky.com', 'http://www.titulky.com')"><img style="margin-top:-4px" src="css/favorite.jpg" alt="přidat k oblíbeným" /></a></li> 
+        
+        </ul>
+      </div>     
+     </div>
+
+ </div>
+
+ 
+ <div id="pagewrap">
+ <div id="pagewrap1">
+ <div id="pagewrap2">
+
+  <div id="pagecont">
+  <div id="pagecont2">
+   <div id="side1wrap">
+    
+
+       
+    
+        
+    
+<!-- main -->
+   <div id="contcont">
+        <br />
+    
+    
+    
+
+
+<div>
+
+		<script type="text/javascript" src="/js/atooltip.min.jquery.js"></script>    
+    <script type="text/javascript">
+    $(function(){
+    	$("a.fixedTip").aToolTip({
+        xOffset: 8,
+        yOffset: 5,
+    		fixed: true
+    	}); 	
+    });
+    </script>
+     
+  <link href="/css/easySlider.css" rel="stylesheet" type="text/css" media="screen" /
+	<script type="text/javascript" src="/js/jquery-1.4.2.min.js"></script>
+	<script type="text/javascript" src="/js/easySlider1.7.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){	
+			$("#slider").easySlider({
+				auto: true, 
+				continuous: true,
+				numeric: true,
+        vertical: false,
+        speed: 350,
+        pause: 5000			
+			});
+		});	
+	</script>
+    <div class="iboxcover">
+  <table cellspacing="1" class="statbox soupis">
+  <tr>
+  <th style="background:url(/css/nejnovejsi.gif)"><a href="index.php?orderby=3&OrderDate=2">Nejnovější titulky</a></th>
+  </tr><tr class="r1"><td><a href="The-Best-Exotic-Marigold-Hotel-202741.htm"><div class="hid" style="width:168px;" title="The Best Exotic Marigold Hotel">The Best Exotic Marigold Hotel</div></a></td></tr><tr class="r0"><td><a href="Nicholas-Nickleby-202092.htm">Nicholas Nickleby</a></td></tr><tr class="r1"><td><a href="Suits-S02E07-202096.htm">Suits S02E07</a></td></tr><tr class="r0"><td><a href="Haunting-of-Winchester-House-202076.htm">Haunting of Winchester House</a></td></tr><tr class="r1"><td><a href="Noce-blanche-202075.htm">Noce blanche</a></td></tr><tr class="r0"><td><a href="Whose-Line-Is-It-Anyway-S01E19-202089.htm"><div class="hid" style="width:168px;" title="Whose Line Is It Anyway? S01E19">Whose Line Is It Anyway? S01E19</div></a></td></tr><tr class="r1"><td><a href="Pretty-Little-Liars-S02E01-202738.htm">Pretty Little Liars S02E01</a></td></tr><tr class="r0"><td><a href="Pretty-Little-Liars-S02E02-202739.htm">Pretty Little Liars S02E02</a></td></tr><tr class="r1"><td><a href="Criminal-Justice-S01E05-202733.htm">Criminal Justice S01E05</a></td></tr><tr class="r0"><td><a href="Brave-202718.htm">Brave</a></td></tr></table><div style="margin-top:7px" class="statbox">
+             <div id="slider">
+             <ul><li><div class="slidestat oblouk"><div><br><img src="/img/9let.gif" alt="zdravice" width="215" /><br><span class="zvyrazneni">Již devátým rokem s vámi</span><br></div></div></li><li><div class="slidestat oblouk">
+               <table border="0" class="soupis">
+               <tr valign="middle">
+               <td width="51">
+                   <div style="width:50px"><img src="img/avatar/1309990403.jpg" alt="" /></div></td><td><img alt="" title="3 místo v oblíbenosti mezi překladateli za minulý měsíc" src="./img/ico/medaile3.png"><a class="zvyrazneni" href="javascript:void(0)" onclick="UD(602417);return false;">Clearka</a><br><img src="./img/stars/3.gif" alt="" title="uložil 94 titulků" /><div><span class="zvyrazneni">12.202</span> stažení mých nových titulků v měsíci</div> 
+                         </td>
+                         </tr>
+                         <tr>
+                         <td colspan="2"><div>Připravuji: Nic - <a style="text-decoration:underline" href="index.php?PozadavekTitulku=1">navrhněte film</a></div>
+                          </td>
+                          </tr>
+                          <tr><td colspan="2">Moje nejúspěšnější titulky</td></tr><tr class="r1"><td colspan="2" ><a style="float:left" href="Suits-S02E07-202054.htm">Suits S02E07</a>&nbsp;<span class="micro">(1892)</span></td></tr><tr class="r0"><td colspan="2" ><a style="float:left" href="Suits-S02E08-202383.htm">Suits S02E08</a>&nbsp;<span class="micro">(1461)</span></td></tr><tr class="r1"><td colspan="2" ><a style="float:left" href="Suits-S02E06-201653.htm">Suits S02E06</a>&nbsp;<span class="micro">(1166)</span></td></tr><tr class="r0"><td colspan="2" ><a style="float:left" href="Suits-S02E05-201537.htm">Suits S02E05</a>&nbsp;<span class="micro">(961)</span></td></tr><tr class="r1"><td colspan="2" ><a style="float:left" href="Suits-S02E04-201077.htm">Suits S02E04</a>&nbsp;<span class="micro">(757)</span></td></tr><tr><td colspan="2"><b><a href="index.php?FindUser=602417&orderby=3">a další ... »</a></b></td></tr></table></div></li><li><div class="slidestat oblouk">
+               <table border="0" class="soupis">
+               <tr valign="middle">
+               <td width="51">
+                   <div style="width:50px"><img src="img/avatar/1319474431.jpg" alt="" /></div></td><td><a class="zvyrazneni" href="javascript:void(0)" onclick="UD(404334);return false;">sagittario</a><br><img src="./img/stars/3.gif" alt="" title="uložil 100 titulků" /><div><span class="zvyrazneni">11.202</span> stažení mých nových titulků v měsíci</div> 
+                         </td>
+                         </tr>
+                         <tr>
+                         <td colspan="2"><div>Připravuji: <img src="/css/movie.png" height=""/> <a class="fixedTip" title="<img width='100' src='/img/poster/1217209.jpg'/>" href="/?Stat=5&item=8011">Brave</a></div>
+                          </td>
+                          </tr>
+                          <tr><td colspan="2">Moje nejúspěšnější titulky</td></tr><tr class="r0"><td colspan="2" ><a style="float:left" href="Battleship-202079.htm">Battleship</a>&nbsp;<span class="micro">(5159)</span></td></tr><tr class="r1"><td colspan="2" ><a style="float:left" href="Battleship-202078.htm">Battleship</a>&nbsp;<span class="micro">(2485)</span></td></tr><tr class="r0"><td colspan="2" ><a style="float:left" href="Battleship-199264.htm">Battleship</a>&nbsp;<span class="micro">(2412)</span></td></tr><tr class="r1"><td colspan="2" ><a style="float:left" href="Battleship-202080.htm">Battleship</a>&nbsp;<span class="micro">(2142)</span></td></tr><tr class="r0"><td colspan="2" ><a style="float:left" href="Battleship-198625.htm">Battleship</a>&nbsp;<span class="micro">(1023)</span></td></tr><tr><td colspan="2"><b><a href="index.php?FindUser=404334&orderby=3">a další ... »</a></b></td></tr></table></div></li><li><div class="slidestat oblouk">
+               <table border="0" class="soupis">
+               <tr valign="middle">
+               <td width="51">
+                   <div style="width:50px"><img src="img/avatar/1278540478.jpg" alt="" /></div></td><td><a class="zvyrazneni" href="javascript:void(0)" onclick="UD(659876);return false;">channina</a><br><img src="./img/stars/5.gif" alt="" title="uložil 503 titulků" /><div><span class="zvyrazneni">8.902</span> stažení mých nových titulků v měsíci</div> 
+                         </td>
+                         </tr>
+                         <tr>
+                         <td colspan="2"><div>Připravuji: Nic - <a style="text-decoration:underline" href="index.php?PozadavekTitulku=1">navrhněte film</a></div>
+                          </td>
+                          </tr>
+                          <tr><td colspan="2">Moje nejúspěšnější titulky</td></tr><tr class="r1"><td colspan="2" ><a style="float:left" href="Pretty-Little-Liars-S03E08-201869.htm">Pretty Little Liars S03E08</a>&nbsp;<span class="micro">(2261)</span></td></tr><tr class="r0"><td colspan="2" ><a style="float:left" href="Pretty-Little-Liars-S03E09-202268.htm">Pretty Little Liars S03E09</a>&nbsp;<span class="micro">(2021)</span></td></tr><tr class="r1"><td colspan="2" ><a style="float:left" href="Pretty-Little-Liars-S03E10-202575.htm">Pretty Little Liars S03E10</a>&nbsp;<span class="micro">(1460)</span></td></tr><tr class="r0"><td colspan="2" ><a style="float:left" href="Pretty-Little-Liars-S03E07-201557.htm">Pretty Little Liars S03E07</a>&nbsp;<span class="micro">(581)</span></td></tr><tr class="r1"><td colspan="2" ><a style="float:left" href="Pretty-Little-Liars-S03E06-201237.htm">Pretty Little Liars S03E06</a>&nbsp;<span class="micro">(399)</span></td></tr><tr><td colspan="2"><b><a href="index.php?FindUser=659876&orderby=3">a další ... »</a></b></td></tr></table></div></li><li><div class="slidestat oblouk">
+               <table border="0" class="soupis">
+               <tr valign="middle">
+               <td width="51">
+                   <div style="width:50px"><img src="img/avatar/1331712967.jpg" alt="" /></div></td><td><a class="zvyrazneni" href="javascript:void(0)" onclick="UD(59898);return false;">Ferry</a><br><img src="./img/stars/5.gif" alt="" title="uložil 915 titulků" /><div><span class="zvyrazneni">8.835</span> stažení mých nových titulků v měsíci</div> 
+                         </td>
+                         </tr>
+                         <tr>
+                         <td colspan="2"><div>Připravuji: Nic - <a style="text-decoration:underline" href="index.php?PozadavekTitulku=1">navrhněte film</a></div>
+                          </td>
+                          </tr>
+                          <tr><td colspan="2">Moje nejúspěšnější titulky</td></tr><tr class="r0"><td colspan="2" ><a style="float:left" href="The-Hunger-Games-202071.htm">The Hunger Games</a>&nbsp;<span class="micro">(7121)</span></td></tr><tr class="r1"><td colspan="2" ><a style="float:left" href="The-Hunger-Games-195722.htm">The Hunger Games</a>&nbsp;<span class="micro">(2588)</span></td></tr><tr class="r0"><td colspan="2" ><a style="float:left" href="The-Hunger-Games-202103.htm">The Hunger Games</a>&nbsp;<span class="micro">(1714)</span></td></tr><tr class="r1"><td colspan="2" ><a style="float:left" href="The-Hunger-Games-195721.htm">The Hunger Games</a>&nbsp;<span class="micro">(1165)</span></td></tr><tr class="r0"><td colspan="2" ><a style="float:left" href="The-Dark-Knight-118762.htm">The Dark Knight</a>&nbsp;<span class="micro">(633)</span></td></tr><tr><td colspan="2"><b><a href="index.php?FindUser=59898&orderby=3">a další ... »</a></b></td></tr></table></div></li><li><div class="slidestat oblouk">
+               <table border="0" class="soupis">
+               <tr valign="middle">
+               <td width="51">
+                   <div style="width:50px"><img src="img/avatar/1309375909.jpg" alt="" /></div></td><td><a class="zvyrazneni" href="javascript:void(0)" onclick="UD(50562);return false;">fceli medvidek</a><br><img src="./img/stars/4.gif" alt="" title="uložil 195 titulků" /><div><span class="zvyrazneni">6.651</span> stažení mých nových titulků v měsíci</div> 
+                         </td>
+                         </tr>
+                         <tr>
+                         <td colspan="2"><div>Připravuji: Nic - <a style="text-decoration:underline" href="index.php?PozadavekTitulku=1">navrhněte film</a></div>
+                          </td>
+                          </tr>
+                          <tr><td colspan="2">Moje nejúspěšnější titulky</td></tr><tr class="r1"><td colspan="2" ><a style="float:left" href="The-Avengers-202723.htm">The Avengers</a>&nbsp;<span class="micro">(1793)</span></td></tr><tr class="r0"><td colspan="2" ><a style="float:left" href="The-Avengers-199913.htm">The Avengers</a>&nbsp;<span class="micro">(1617)</span></td></tr><tr class="r1"><td colspan="2" ><a style="float:left" href="Lockout-200451.htm">Lockout</a>&nbsp;<span class="micro">(1276)</span></td></tr><tr class="r0"><td colspan="2" ><a style="float:left" href="Total-Recall-202344.htm">Total Recall</a>&nbsp;<span class="micro">(1132)</span></td></tr><tr class="r1"><td colspan="2" ><a style="float:left" href="Iron-Sky-199059.htm">Iron Sky</a>&nbsp;<span class="micro">(890)</span></td></tr><tr><td colspan="2"><b><a href="index.php?FindUser=50562&orderby=3">a další ... »</a></b></td></tr></table></div></li><li><div class="slidestat oblouk">
+               <table border="0" class="soupis">
+               <tr valign="middle">
+               <td width="51">
+                   <div style="width:50px"><img src="img/avatar/anonym.gif" alt="bez fotografie" /></div></td><td><a class="zvyrazneni" href="javascript:void(0)" onclick="UD(35843);return false;">petkaKOV</a><br><img src="./img/stars/5.gif" alt="" title="uložil 611 titulků" /><div><span class="zvyrazneni">6.609</span> stažení mých nových titulků v měsíci</div> 
+                         </td>
+                         </tr>
+                         <tr>
+                         <td colspan="2"><div>Připravuji: <img src="/css/movie.png" height=""/> <a class="fixedTip" title="<img width='100' src='/img/poster/2085930.jpg'/>" href="/?Stat=5&item=8001">Starship Troopers: Invasion</a></div>
+                          </td>
+                          </tr>
+                          <tr><td colspan="2">Moje nejúspěšnější titulky</td></tr><tr class="r0"><td colspan="2" ><a style="float:left" href="The-Cabin-in-the-Woods-202544.htm">The Cabin in the Woods</a>&nbsp;<span class="micro">(1573)</span></td></tr><tr class="r1"><td colspan="2" ><a style="float:left" href="The-Cabin-in-the-Woods-202545.htm">The Cabin in the Woods</a>&nbsp;<span class="micro">(1218)</span></td></tr><tr class="r0"><td colspan="2" ><a style="float:left" href="The-Cabin-in-the-Woods-202650.htm">The Cabin in the Woods</a>&nbsp;<span class="micro">(887)</span></td></tr><tr class="r1"><td colspan="2" ><a style="float:left" href="The-Raid-Redemption-201780.htm">The Raid: Redemption</a>&nbsp;<span class="micro">(875)</span></td></tr><tr class="r0"><td colspan="2" ><a style="float:left" href="The-Raid-Redemption-201661.htm">The Raid: Redemption</a>&nbsp;<span class="micro">(774)</span></td></tr><tr><td colspan="2"><b><a href="index.php?FindUser=35843&orderby=3">a další ... »</a></b></td></tr></table></div></li><li><div class="slidestat oblouk">
+               <table border="0" class="soupis">
+               <tr valign="middle">
+               <td width="51">
+                   <div style="width:50px"><img src="img/avatar/1281960824.jpg" alt="" /></div></td><td><img alt="" title="1 místo v oblíbenosti mezi překladateli za minulý měsíc" src="./img/ico/medaile1.png"><a class="zvyrazneni" href="javascript:void(0)" onclick="UD(366781);return false;">Miki226</a><br><img src="./img/stars/5.gif" alt="" title="uložil 341 titulků" /><div><span class="zvyrazneni">6.219</span> stažení mých nových titulků v měsíci</div> 
+                         </td>
+                         </tr>
+                         <tr>
+                         <td colspan="2"><div>Připravuji: Nic - <a style="text-decoration:underline" href="index.php?PozadavekTitulku=1">navrhněte film</a></div>
+                          </td>
+                          </tr>
+                          <tr><td colspan="2">Moje nejúspěšnější titulky</td></tr><tr class="r1"><td colspan="2" ><a style="float:left" href="Falling-Skies-S02E08-202113.htm">Falling Skies S02E08</a>&nbsp;<span class="micro">(1064)</span></td></tr><tr class="r0"><td colspan="2" ><a style="float:left" href="True-Blood-S05E07-201470.htm">True Blood S05E07</a>&nbsp;<span class="micro">(712)</span></td></tr><tr class="r1"><td colspan="2" ><a style="float:left" href="Warehouse-13-S04E02-201854.htm">Warehouse 13 S04E02</a>&nbsp;<span class="micro">(537)</span></td></tr><tr class="r0"><td colspan="2" ><a style="float:left" href="Warehouse-13-S04E03-202296.htm">Warehouse 13 S04E03</a>&nbsp;<span class="micro">(399)</span></td></tr><tr class="r1"><td colspan="2" ><a style="float:left" href="Falling-Skies-S02E09-202462.htm">Falling Skies S02E09</a>&nbsp;<span class="micro">(393)</span></td></tr><tr><td colspan="2"><b><a href="index.php?FindUser=366781&orderby=3">a další ... »</a></b></td></tr></table></div></li><li><div class="slidestat oblouk">
+               <table border="0" class="soupis">
+               <tr valign="middle">
+               <td width="51">
+                   <div style="width:50px"><img src="img/avatar/anonymM.gif" alt="bez fotografie" /></div></td><td><a class="zvyrazneni" href="javascript:void(0)" onclick="UD(7247);return false;">pfiala</a><br><img src="./img/stars/1.gif" alt="" title="uložil 4 titulky" /><div><span class="zvyrazneni">5.642</span> stažení mých nových titulků v měsíci</div> 
+                         </td>
+                         </tr>
+                         <tr>
+                         <td colspan="2"><div>Připravuji: Nic - <a style="text-decoration:underline" href="index.php?PozadavekTitulku=1">navrhněte film</a></div>
+                          </td>
+                          </tr>
+                          <tr><td colspan="2">Moje nejúspěšnější titulky</td></tr><tr class="r0"><td colspan="2" ><a style="float:left" href="The-Dictator-202241.htm">The Dictator</a>&nbsp;<span class="micro">(5642)</span></td></tr><tr class="r1"><td colspan="2" ><a style="float:left" href="Paths-Of-Glory-39952.htm">Paths Of Glory</a>&nbsp;<span class="micro">(5)</span></td></tr><tr class="r0"><td colspan="2" ><a style="float:left" href="Bigger-Stronger-Faster-114644.htm">Bigger Stronger Faster</a>&nbsp;<span class="micro">(4)</span></td></tr><tr class="r1"><td colspan="2" ><a style="float:left" href="Band-of-Brothers-We-Stand-Alone-Together-39667.htm"><div class="hid" style="width:162px;" title="Band of Brothers - We Stand Alone Together">Band of Brothers - We Stand Alone Together</div></a>&nbsp;<span class="micro">(1)</span></td></tr><tr><td colspan="2"><b><a href="index.php?FindUser=7247&orderby=3">a další ... »</a></b></td></tr></table></div></li><li><div class="slidestat oblouk">
+               <table border="0" class="soupis">
+               <tr valign="middle">
+               <td width="51">
+                   <div style="width:50px"><img src="img/avatar/anonymM.gif" alt="bez fotografie" /></div></td><td><a class="zvyrazneni" href="javascript:void(0)" onclick="UD(243725);return false;">badboy.majkl</a><br><img src="./img/stars/5.gif" alt="" title="uložil 504 titulků" /><div><span class="zvyrazneni">5.235</span> stažení mých nových titulků v měsíci</div> 
+                         </td>
+                         </tr>
+                         <tr>
+                         <td colspan="2"><div>Připravuji: Nic - <a style="text-decoration:underline" href="index.php?PozadavekTitulku=1">navrhněte film</a></div>
+                          </td>
+                          </tr>
+                          <tr><td colspan="2">Moje nejúspěšnější titulky</td></tr><tr class="r0"><td colspan="2" ><a style="float:left" href="Falling-Skies-S02E08-202125.htm">Falling Skies S02E08</a>&nbsp;<span class="micro">(387)</span></td></tr><tr class="r1"><td colspan="2" ><a style="float:left" href="Falling-Skies-S02E08-202170.htm">Falling Skies S02E08</a>&nbsp;<span class="micro">(196)</span></td></tr><tr class="r0"><td colspan="2" ><a style="float:left" href="Suits-S01E01-200059.htm">Suits S01E01</a>&nbsp;<span class="micro">(175)</span></td></tr><tr class="r1"><td colspan="2" ><a style="float:left" href="Suits-S01E07-200066.htm">Suits S01E07</a>&nbsp;<span class="micro">(143)</span></td></tr><tr class="r0"><td colspan="2" ><a style="float:left" href="Suits-S01E08-200067.htm">Suits S01E08</a>&nbsp;<span class="micro">(142)</span></td></tr><tr><td colspan="2"><b><a href="index.php?FindUser=243725&orderby=3">a další ... »</a></b></td></tr></table></div></li><li><div class="slidestat oblouk">
+               <table border="0" class="soupis">
+               <tr valign="middle">
+               <td width="51">
+                   <div style="width:50px"><img src="img/avatar/1316956383.jpg" alt="" /></div></td><td><a class="zvyrazneni" href="javascript:void(0)" onclick="UD(355973);return false;">iHyik</a><br><img src="./img/stars/2.gif" alt="" title="uložil 43 titulků" /><div><span class="zvyrazneni">4.387</span> stažení mých nových titulků v měsíci</div> 
+                         </td>
+                         </tr>
+                         <tr>
+                         <td colspan="2"><div>Připravuji: Nic - <a style="text-decoration:underline" href="index.php?PozadavekTitulku=1">navrhněte film</a></div>
+                          </td>
+                          </tr>
+                          <tr><td colspan="2">Moje nejúspěšnější titulky</td></tr><tr class="r1"><td colspan="2" ><a style="float:left" href="True-Blood-S05E09-Everybody-Wants-to-Rule-the-World-202131.htm"><div class="hid" style="width:162px;" title="True Blood S05E09 - Everybody Wants to Rule the World">True Blood S05E09 - Everybody Wants to Rule the World</div></a>&nbsp;<span class="micro">(1470)</span></td></tr><tr class="r0"><td colspan="2" ><a style="float:left" href="True-Blood-S05E08-Somebody-That-I-Used-to-Know-201768.htm"><div class="hid" style="width:162px;" title="True Blood S05E08 - Somebody That I Used to Know">True Blood S05E08 - Somebody That I Used to Know</div></a>&nbsp;<span class="micro">(1155)</span></td></tr><tr class="r1"><td colspan="2" ><a style="float:left" href="True-Blood-S05E10-Gone-Gone-Gone-202479.htm"><div class="hid" style="width:162px;" title="True Blood S05E10 - Gone, Gone, Gone">True Blood S05E10 - Gone, Gone, Gone</div></a>&nbsp;<span class="micro">(1087)</span></td></tr><tr class="r0"><td colspan="2" ><a style="float:left" href="True-Blood-S05E06-Hopeless-201145.htm"><div class="hid" style="width:162px;" title="True Blood S05E06 - Hopeless">True Blood S05E06 - Hopeless</div></a>&nbsp;<span class="micro">(369)</span></td></tr><tr class="r1"><td colspan="2" ><a style="float:left" href="True-Blood-S05E05-Let-s-Boot-and-Rally-200856.htm"><div class="hid" style="width:162px;" title="True Blood S05E05 - Let's Boot and Rally">True Blood S05E05 - Let's Boot and Rally</div></a>&nbsp;<span class="micro">(306)</span></td></tr><tr><td colspan="2"><b><a href="index.php?FindUser=355973&orderby=3">a další ... »</a></b></td></tr></table></div></li></ul></div></div><script type="text/javascript">setTimeout('document.getElementById("slider").style.visibility="visible"',980)</script><table cellspacing="1" class="statbox soupis">
+  <tr>
+  <th style="background:url(/css/nejstahovanejsi-mesic.gif)"><a href="index.php?orderby=-10&OrderDate=3">Nejstahovanější titulky měsíce</a></th>
+  </tr><tr class="r0"><td><a href="The-Hunger-Games-202071.htm">The Hunger Games</a></td></tr><tr class="r1"><td><a href="The-Dictator-202241.htm">The Dictator</a></td></tr><tr class="r0"><td><a href="Battleship-202079.htm">Battleship</a></td></tr><tr class="r1"><td><a href="Ted-201503.htm">Ted</a></td></tr><tr class="r0"><td><a href="The-Dictator-199402.htm">The Dictator</a></td></tr><tr class="r1"><td><a href="The-Dictator-199517.htm">The Dictator</a></td></tr><tr class="r0"><td><a href="The-Dictator-202265.htm">The Dictator</a></td></tr><tr class="r1"><td><a href="The-Hunger-Games-195722.htm">The Hunger Games</a></td></tr><tr class="r0"><td><a href="Battleship-202078.htm">Battleship</a></td></tr><tr class="r1"><td><a href="Battleship-199264.htm">Battleship</a></td></tr></table></div><div class="iboxcover">
+  <table style="width:668px" cellspacing="1" class="statbox soupis">
+  <tr>
+  <th colspan="3" style="background:url(/css/posledni-komentare.gif)">Poslední komentáře</th>
+  </tr><tr class="r0"><td><a href="Detention-202534.htm?diskuze=1"><div class="hid" style="width:300px;" title="Díky za info:) snad se vám moje první titule budou líbit:)))">Díky za info:) snad se vám moje první titule budou líbit:)))</div></a></td><td class="usrcom">Monotheia</td><td><a href="Detention-202534.htm">Detention</a></td></tr><tr class="r1"><td><a href="Tangled-173907.htm?diskuze=1"><div class="hid" style="width:300px;" title="sedi i na 'Tangled.2010.Bluray.720p.DTS.x264-CHD' thx!">sedi i na "Tangled.2010.Bluray.720p.DTS.x264-CHD" thx!</div></a></td><td class="usrcom">Necron</td><td><a href="Tangled-173907.htm">Tangled</a></td></tr><tr class="r0"><td><a href="Criminal-Justice-S01E05-202733.htm?diskuze=1"><div class="hid" style="width:300px;" title="Zatím ne, překladám teď Wire in the Blood a to má celkem dost dílů, takže kdyžtak potom;-).">Zatím ne, překladám teď Wire in the Blood a to má celkem dost dílů, takže kdyžtak potom;-).</div></a></td><td class="usrcom">tanicka.laz</td><td><a href="Criminal-Justice-S01E05-202733.htm">Criminal Justice S01E05</a></td></tr><tr class="r1"><td><a href="Brave-202718.htm?diskuze=1">V origináli - lokál s mäkkým i.</a></td><td class="usrcom">matus alem</td><td><a href="Brave-202718.htm">Brave</a></td></tr><tr class="r0"><td><a href="Criminal-Justice-S01E05-202733.htm?diskuze=1"><div class="hid" style="width:300px;" title="Moc děkuji za titulky k celé sérii. Budeš pokračovat i s druhou serií?">Moc děkuji za titulky k celé sérii. Budeš pokračovat i s druhou serií?</div></a></td><td class="usrcom">charlottaval</td><td><a href="Criminal-Justice-S01E05-202733.htm">Criminal Justice S01E05</a></td></tr><tr class="r1"><td><a href="Eureka-S04E04-The-Story-of-O2-159172.htm?diskuze=1"><div class="hid" style="width:300px;" title="na můj film the story of O vůbec titulky nesedí :-( .kde prosím Vás všechny,seženu link na verzi Eur">na můj film the story of O vůbec titulky nesedí :-( .kde prosím Vás všechny,seženu link na verzi Eur</div></a></td><td class="usrcom">hoanzo</td><td><a href="Eureka-S04E04-The-Story-of-O2-159172.htm"><div class="hid" style="width:168px;" title="Eureka S04E04 The Story of O2">Eureka S04E04 The Story of O2</div></a></td></tr><tr class="r0"><td><a href="The-Avengers-202723.htm?diskuze=1"><div class="hid" style="width:300px;" title="chyba moje, na tuhle verzi sedí titulky jako na maxspeed, já jsem myslel jen, že je koukatelná kvali">chyba moje, na tuhle verzi sedí titulky jako na maxspeed, já jsem myslel jen, že je koukatelná kvali</div></a></td><td class="usrcom">koraktor23</td><td><a href="The-Avengers-202723.htm">The Avengers</a></td></tr><tr class="r1"><td><a href="The-Avengers-202731.htm?diskuze=1">mkv je jinak než avi</a></td><td class="usrcom">koraktor23</td><td><a href="The-Avengers-202731.htm">The Avengers</a></td></tr><tr class="r0"><td><a href="The-Cabin-in-the-Woods-202688.htm?diskuze=1">Díky moc ,sedí skvěle. Na - HDEX </a></td><td class="usrcom">cmelak1</td><td><a href="The-Cabin-in-the-Woods-202688.htm">The Cabin in the Woods</a></td></tr><tr class="r1"><td><a href="The-Avengers-202731.htm?diskuze=1"><div class="hid" style="width:300px;" title="přesně tak, porovnával jsem to a proto jsem to napsal k této verzi">přesně tak, porovnával jsem to a proto jsem to napsal k této verzi</div></a></td><td class="usrcom">koraktor23</td><td><a href="The-Avengers-202731.htm">The Avengers</a></td></tr></table></div><div class="iboxcover">
+  <table cellspacing="1" class="statbox soupis">
+  <tr>
+  <th style="background:url(/css/uzivatel-nejvice-bodu.gif)">Uživatelé s nejvíce body</th>
+  </tr><tr class="r0"><td><a href="javascript:void(0)" onclick="UD(72968);return false;">kolcak</a></td></tr><tr class="r1"><td><a href="javascript:void(0)" onclick="UD(133776);return false;">hlawoun</a></td></tr><tr class="r0"><td><a href="javascript:void(0)" onclick="UD(19655);return false;">mrazikDC</a></td></tr><tr class="r1"><td><a href="javascript:void(0)" onclick="UD(107809);return false;">Hedl Tom</a></td></tr><tr class="r0"><td><a href="javascript:void(0)" onclick="UD(21403);return false;">Elfkam111</a></td></tr><tr class="r1"><td><a href="javascript:void(0)" onclick="UD(86189);return false;">kikina</a></td></tr><tr class="r0"><td><a href="javascript:void(0)" onclick="UD(24898);return false;">Jingspiral</a></td></tr><tr class="r1"><td><a href="javascript:void(0)" onclick="UD(35843);return false;">petkaKOV</a></td></tr><tr class="r0"><td><a href="javascript:void(0)" onclick="UD(4924);return false;">DjRiki</a></td></tr><tr class="r1"><td><a href="javascript:void(0)" onclick="UD(659876);return false;">channina</a></td></tr></table><div class="statbox">
+      <!-- Kontextová reklama Sklik -->
+    <div id="sklikReklama_8382"></div>
+    <script type="text/javascript">
+        var sklikData = { elm: "sklikReklama_8382", zoneId: 8382, w: 200, h: 300 };
+    </script>
+    <script type="text/javascript" src="http://out.sklik.cz/js/script.js"></script>
+  </div><table cellspacing="1" class="statbox soupis">
+  <tr>
+  <th style="background:url(/css/preklad-mesice.gif)">Nejoblíbenější překl. měsíce</th>
+  </tr><tr class="r0"><td><a href="javascript:void(0)" onclick="UD(602417);return false;">Clearka</a></td></tr><tr class="r1"><td><a href="javascript:void(0)" onclick="UD(659876);return false;">channina</a></td></tr><tr class="r0"><td><a href="javascript:void(0)" onclick="UD(366781);return false;">Miki226</a></td></tr><tr class="r1"><td><a href="javascript:void(0)" onclick="UD(23638);return false;">haroska</a></td></tr><tr class="r0"><td><a href="javascript:void(0)" onclick="UD(35843);return false;">petkaKOV</a></td></tr><tr class="r1"><td><a href="javascript:void(0)" onclick="UD(50562);return false;">fceli medvidek</a></td></tr><tr class="r0"><td><a href="javascript:void(0)" onclick="UD(669037);return false;">Umpalumpa3</a></td></tr><tr class="r1"><td><a href="javascript:void(0)" onclick="UD(404334);return false;">sagittario</a></td></tr><tr class="r0"><td><a href="javascript:void(0)" onclick="UD(284722);return false;">phoebess</a></td></tr><tr class="r1"><td><a href="javascript:void(0)" onclick="UD(647417);return false;">KevSpa</a></td></tr></table></div><div id='zavstat'>aktualizováno: 19.08.2012 15:50:34<br />&nbsp;<a class='tlacitko' href='index.php?Adv=1'><img src='./img/ico/statistics.png'  alt='detailní statistiky' />Detailní statistiky</a></div></div>
+
+
+
+
+    
+   </div><!-- contcont /-->
+   <!-- main*-->
+   </div><!-- side1wrap /-->
+   <div id="side2wrap">
+
+
+        <div id="bannery300x300" style="border:0px solid #666;">        
+         <div id="bannery300x300" class="banner" style="overflow:hidden;width:300px;height:300px"><!-- Pozice: go.cz.bbelements.com AdActive_DD(15416) / Celý web(1) / 300x300(10) / PRčlánek(7) -->
+<script type='text/javascript' charset='utf-8'>
+/* <![CDATA[ */
+var bbs=screen,bbn=navigator,bbh;bbh='&ubl='+1*bbn.browserLanguage+'&ucc='+1*bbn.cpuClass+'&ucd='+1*bbs.colorDepth+'&udx='+1*bbs.deviceXDPI+'&udy='+1*bbs.deviceYDPI+'&usl='+1*bbn.systemLanguage+'&uje='+1*bbn.javaEnabled()+'&uah='+1*bbs.availHeight+'&uaw='+1*bbs.availWidth+'&ubd='+1*bbs.bufferDepth+'&uhe='+1*bbs.height+'&ulx='+1*bbs.logicalXDPI+'&uly='+1*bbs.logicalYDPI+'&use='+1*bbs.fontSmoothingEnabled+'&uto='+(new Date()).getTimezoneOffset()+'&uui='+1*bbs.updateInterval+'&uul='+1*bbn.userLanguage+'&uwi='+1*bbs.width;
+if(typeof(bburlparam)=='string') { bbh+='&'+bburlparam; }
+if(typeof(bbkeywords)=='string') { bbh+='&keywords='+escape(bbkeywords); }
+document.write("<scr"+"ipt type='text/javascript' charset='utf-8' src='http://go.cz.bbelements.com/please/showit/15416/1/10/7/?typkodu=js"+bbh+"&bust="+Math.random()+"&target=_blank'><"+"\/scr"+"ipt>");
+/* ]]> */
+</script>
+<noscript>
+<a href="http://go.cz.bbelements.com/please/redirect/15416/1/10/7/" target="_blank"><img src="http://go.cz.bbelements.com/please/showit/15416/1/10/7/?typkodu=img" border='0' alt='' /></a>
+</noscript>
+</div>               
+        </div>
+ 
+
+
+    <script type="text/javascript">
+    $().ready(function() {
+    	$("#searchTitulky").autocomplete("search_autocomplete.php", {
+    		delay: 200,
+        width: 300,
+        minChars:3,
+        scroll: true,
+    		selectFirst: false
+    	});
+    
+    	$("#searchTitulky").result(function(event, data, formatted) {
+    		if (data)
+    			$(this).parent().next().find("input").val(data[1]);
+    	});
+    
+    }); 
+    </script>
+   
+   <div id="side1cont">
+      
+
+                       
+                <form action="index.php" method="post" style="margin:0;padding:0;">
+            <table id="tablelogin" border="0">
+              <tr style="height:60px">
+                <td style="width:180px;padding-top:30px">        
+                  <input id="log_login" tabindex="1" name="Login" size="12" />
+                  <input name="Detail2"  value="" type="hidden" />
+                </td>
+                <td style="">        
+                  <input style="border:1px solid #fff;" tabindex="3" class="tlacitkoform" onmouseover="this.style.background='#9DC8EB'" onmouseout="this.style.background='#DDDDDD'" type="submit" name="prihlasit" value="Přihlásit" />
+                  <input name="Detail2" value="" type="hidden" />
+                </td>
+              </tr>            
+              <tr>
+                <td style="vertical-align:top">
+                  <input tabindex="2" id="log_password" type="password" name="Password" size="12" /> <input type="checkbox" title="Přihlásit trvale" value="1" name="foreverlog">
+                </td>
+                <td style="vertical-align:top">
+                  <a style="margin-top:10px;border:1px solid #fff" class="tlacitko" href="index.php?Registration=New">Registrace</a>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2" style="padding-left:10px">
+                  <a href="mojeid_auth.php"><img src="/css/mojeID_button.png" alt="Přihlásit pomocí mojeID" /></a>
+                </td>
+              </tr>              
+            </table>  
+          </form>      
+        
+
+               
+               
+                             
+         
+                     
+         <form autocomplete="off" name="searchformsub" action="index.php" method="get" >
+          <table cellpadding="0" cellspacing="0" id="tablesearch" border="0">
+            <tr style="height:42px">
+              <td width="18">
+              </td>
+              <td>
+                <a class="tlacitko" id="pokrocile_link" href="index.php?Searching=AdvancedSearch&AFulltext=">Pokročilé hledání</a> 
+              </td>
+            </tr>
+            <tr>
+              <td>        
+                
+              </td>
+              <td>
+                <input onclick="this.select()" id="searchTitulky" type="text" name="Fulltext" class="text_field" size="20" value="" />
+                <input id="search_submit" type="submit" value="" />
+              </td>
+            </tr>  
+         </table>
+        </form>  
+
+      <div id="stat_bok_h">VZKAZY Z FÓRA</div><div id="stat_bok_v"><span><a href="index.php?film=1&Prispevek=524616"><div class="hid" style="width:270px;" title="Diky moc, vubec jsem si ty sipky nevsimla... :)">Diky moc, vubec jsem si ty sipky nevsimla... :)</div></a></span><span><a href="index.php?film=1&Prispevek=526662"><div class="hid" style="width:270px;" title="Nechtěl byste někdo dodělat zbývající 3 díly k tomuto britskému seriálu? <br />
+http://www.csfd.cz/film/2">Nechtěl byste někdo dodělat zbývající 3 díly k tomuto britskému seriálu? <br />
+http://www.csfd.cz/film/2</div></a></span><span><a href="index.php?film=1&Prispevek=526658"><div class="hid" style="width:270px;" title="Prosím o titulky k verzi Starship.Troopers.Invasion.2012.DVDRip.XviD-DiSPOSABLE[fg].avi nebo Starshi">Prosím o titulky k verzi Starship.Troopers.Invasion.2012.DVDRip.XviD-DiSPOSABLE[fg].avi nebo Starshi</div></a></span><span><a href="index.php?film=1&Prispevek=526222">Sry, cetl jsem "dodelavam". Shame on me :-)</a></span><span><a href="index.php?film=1&Prispevek=526222"><div class="hid" style="width:270px;" title="A cpes se do toho pravidelnym prekladatelum presne proc?">A cpes se do toho pravidelnym prekladatelum presne proc?</div></a></span><span><a href="index.php?film=1&Prispevek=523902"><div class="hid" style="width:270px;" title="Proc to pises petkrat? Proc to pises petkrat? Proc to pises petkrat? Proc to pises petkrat? Proc to ">Proc to pises petkrat? Proc to pises petkrat? Proc to pises petkrat? Proc to pises petkrat? Proc to </div></a></span><span><a href="index.php?film=1&Prispevek=526222">...fakt ale jen trochu nedočkavej. :-D</a></span><span><a href="index.php?film=1&Prispevek=526602"><div class="hid" style="width:270px;" title="Ahoj,<br />
+chtěl bych se zeptat, jestli se někdo nechystá ujmout týhle zábavný série?<br />
+Dříve to překláda">Ahoj,<br />
+chtěl bych se zeptat, jestli se někdo nechystá ujmout týhle zábavný série?<br />
+Dříve to překláda</div></a></span><span><a href="index.php?film=1&Prispevek=526564">Díky, pomohlo to :)</a></span><span><a href="index.php?film=1&Prispevek=524616"><div class="hid" style="width:270px;" title="K-lite nic moc, jednoznacne doporucuji CCCP (combined comunity codeck pack), od nahozeni zadne probl">K-lite nic moc, jednoznacne doporucuji CCCP (combined comunity codeck pack), od nahozeni zadne probl</div></a></span><span><a href="index.php?film=1&Prispevek=524616"><div class="hid" style="width:270px;" title="kdyz ti SW ukazuje titulky dvakrat, jedno z toho zobrazuje VobSub, ktery je hodi do obrazu bez ohled">kdyz ti SW ukazuje titulky dvakrat, jedno z toho zobrazuje VobSub, ktery je hodi do obrazu bez ohled</div></a></span><span><a href="index.php?film=1&Prispevek=526564"><div class="hid" style="width:270px;" title="podle mne opet problem s AAC kodekem zvuku (jako u SW), zkus nahodit nejnovejsi CCCP codec pack (201">podle mne opet problem s AAC kodekem zvuku (jako u SW), zkus nahodit nejnovejsi CCCP codec pack (201</div></a></span><span><a href="index.php?film=1&Prispevek=526564"><div class="hid" style="width:270px;" title="Ahoj, chtěl bych se zeptat, jestli má někdo zkušenosti s VSS? Už delší dobu mě trápí verze seriálů s">Ahoj, chtěl bych se zeptat, jestli má někdo zkušenosti s VSS? Už delší dobu mě trápí verze seriálů s</div></a></span><span><a href="index.php?film=1&Prispevek=526564"></a></span><span><a href="index.php?film=1&Prispevek=526559">Přeložil by to někdo? Je to dokument.</a></span><span><a href="index.php?film=1&Prispevek=526308"><div class="hid" style="width:270px;" title="když jsem tohle kdysi řešil, tuším jsem použil 'tmavé pivo'. majitel pivovaru může být pyšný, že vař">když jsem tohle kdysi řešil, tuším jsem použil "tmavé pivo". majitel pivovaru může být pyšný, že vař</div></a></span><span><a href="index.php?film=1&Prispevek=525906">Přečas se většinou nedělá pomocí EN titulků.</a></span><span><a href="index.php?film=1&Prispevek=526491"><div class="hid" style="width:270px;" title="Jo ták, děkuju moc za info, jsem blbka:) akorát jsem měla pocit, že jsem si na to vyplnění dávala ba">Jo ták, děkuju moc za info, jsem blbka:) akorát jsem měla pocit, že jsem si na to vyplnění dávala ba</div></a></span><span><a href="index.php?film=1&Prispevek=526491"><div class="hid" style="width:270px;" title="Keď si ich hodil pred niekoľkými dňami, presne si už nepamätám, tak nemali prakticky nič vyplnené...">Keď si ich hodil pred niekoľkými dňami, presne si už nepamätám, tak nemali prakticky nič vyplnené...</div></a></span><span><a href="index.php?film=1&Prispevek=525906"><div class="hid" style="width:270px;" title="Ja to robím takto:<br />
+Anglicke titulky otvorím v texťáku(Notepad) a upravované (Už preložené)v softe J">Ja to robím takto:<br />
+Anglicke titulky otvorím v texťáku(Notepad) a upravované (Už preložené)v softe J</div></a></span></div>
+   </div><!-- side1cont /-->   
+   
+   
+   
+   
+   
+       <div id="side2cont">
+    </div><!-- side2cont /-->
+      </div><!-- side2wrap /-->
+      <div id="bannery160x600P" class="banner" style="overflow:hidden;width:160px;height:600px"><!-- Pozice: go.cz.bbelements.com AdActive_FF(15522) / cely web(1) / skyscraper 120x600(3) / PRčlánek(7) -->
+<script type='text/javascript' charset='windows-1250'>
+/* <![CDATA[ */
+var bbs=screen,bbn=navigator,bbh;bbh='&ubl='+bbn.browserLanguage+'&ucc='+bbn.cpuClass+'&ucd='+bbs.colorDepth+'&uce='+bbn.cookieEnabled+'&udx='+bbs.deviceXDPI+'&udy='+bbs.deviceYDPI+'&usl='+bbn.systemLanguage+'&uje='+bbn.javaEnabled()+'&uah='+bbs.availHeight+'&uaw='+bbs.availWidth+'&ubd='+bbs.bufferDepth+'&uhe='+bbs.height+'&ulx='+bbs.logicalXDPI+'&uly='+bbs.logicalYDPI+'&use='+bbs.fontSmoothingEnabled+'&uto='+(new Date()).getTimezoneOffset()+'&uti='+(new Date()).getTime()+'&uui='+bbs.updateInterval+'&uul='+bbn.userLanguage+'&uwi='+bbs.width;
+if(typeof(bburlparam)=='string') { bbh+='&'+bburlparam; }
+if(typeof(bbkeywords)=='string') { bbh+='&keywords='+escape(bbkeywords); }
+document.write("<scr"+"ipt type='text/javascript' charset='windows-1250' src='http://go.cz.bbelements.com/please/showit/15522/1/3/7/?typkodu=js"+bbh+"&alttext=0&border=0&bust="+Math.random()+"&target=_top'><"+"\/scr"+"ipt>");
+/* ]]> */
+</script>
+<noscript>
+<a href="http://go.cz.bbelements.com/please/redirect/15522/1/3/7/" target="_top"><img src="http://go.cz.bbelements.com/please/showit/15522/1/3/7/?typkodu=img" border='0' alt='' /></a>
+</noscript>
+</div>           
+   <div id="contwrap">
+
+   </div><!-- contwrap /-->
+    
+
+<br /><br />
+    
+        <div class="reseter">&nbsp;
+   </div><!-- vertical stretching /-->
+  </div><!-- pagecont2 /-->
+  </div><!-- pagecont /-->
+  
+  
+
+  
+  
+  <div class="reseter"></div>
+  <br />
+  
+  
+  
+  <div id="pagefoot">  
+    <style type="text/css">
+#martevax-main{width:700px;border:0px dotted;height:23px;background:none;padding:0px;margin:0;overflow-y:hidden;text-align:center;}
+#martevax-main img, a{border:0px;}
+#martevax1{width:89px; height:23px; float:left; margin:0px; padding:0px;overflow:hidden;letter-spacing:1000px}
+#martevax1 a{background:url(http://www.martevax.cz/lista/lista1.gif) no-repeat left top; display:block; float:right; margin:0px; padding:0px; width:100%; height:100%; font-size:200px; color:#FDFEFC; overflow:hidden; }
+#martevax2{background:url(http://www.martevax.cz/lista/lista2.gif) repeat-x; width:auto;height:23px;float:left;padding:2px 0px 0px 2px;margin:0px;}
+#martevax2 a, hover, visited{font-size:8pt; font-family:verdana; text-decoration:none; background:url(http://www.martevax.cz/lista/lista2b.gif) no-repeat left bottom; padding-right:0px; padding-left:3px; color:#F9852D; }
+#martevax2 a:hover{text-decoration:underline; color:#000;}
+#martevax3{background:url(http://www.martevax.cz/lista/lista3.gif) no-repeat; width:5px;height:23px;float:left;padding:0px;margin:0px;}
+#martevax2 a.unfinished-beta, hover.unfinished-beta, visited.unfinished-beta {display:none}
+</style>
+
+<div id="martevax-main">
+		 <div id="martevax1"><a href="http://www.martevax.cz" title="Martevax s.r.o.">Martevax.cz</a></div>		 
+		 <div id="martevax2">
+		 			<a href="http://www.slimfox.cz" title="Bezbolestná liposukce">SlimFOX.cz</a>
+          <a href="http://www.ecig.cz" title="Elektronická cigareta">eCIG.cz</a>
+          <a href="http://www.babytoys.cz" title="Dětský nábytek a dětské pokoje">babytoys.cz</a>
+		 			<a href="http://primadvd.cz" title="DVD Filmy - prodej DVD filmů">primaDVD.cz</a>
+          <a href="http://www.netusers.cz" title="Bonus program, slevy, akce, registr uživatelů internetu">Netusers.cz</a>
+					<a href="http://www.kryolipolyza.com/" title="Kryolipolýza">Kryolipolyza.com</a>						
+					<a href="http://www.titulky.com" title="Nejnavštěvovanější český server s titulky k filmům">Titulky.com</a>
+          <a href="http://www.byty-nemovitosti.cz" title="Nové byty, domy na klíč, developerské projekty" class="unfinished-beta">Byty-Nemovitosti.cz</a>
+          <a href="http://www.aktualizace.net" title="Aktualizace na NETu" class="unfinished-beta">Aktualizace.net</a>												 
+		 </div>
+		 <div id="martevax3"></div> 
+</div>  </div><!-- bodyfoot /-->
+ 
+ </div><!-- pagewrap2 /-->
+ </div><!-- pagewrap1 /-->
+ 
+ 
+   
+
+    <br />
+ 
+ 
+ </div><!-- pagewrap /-->
+ </div><!-- bodycont /-->
+</div><!-- bodywrap /-->
+<script type='text/javascript'>
+        getEML('id_posta'); 
+        document.write ('<img src="http://toplist.cz/count.asp?id=91272&amp;logo=&amp;http='+escape(document.referrer)+'&amp;wi='+escape(window.screen.width)+'&he='+escape(window.screen.height)+'&amp;cd='+escape(window.screen.colorDepth)+'&amp;t='+escape(document.title)+'" width=0 height=0 border=0 />');               
+</script>
+
+
+
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-2415145-1";
+ var len = _uOsr.length;
+ //CZ vyhledavace
+ _uOsr[len]="centrum.cz";    _uOkw[len]="q";
+ _uOsr[len+1]="jyxo.cz";       _uOkw[len+1]="s";
+ _uOsr[len+2]="atlas.cz";      _uOkw[len+2]="q";
+ _uOsr[len+3]="zoohoo.cz";     _uOkw[len+3]="q";
+ _uOsr[len+4]="tiscali.cz";    _uOkw[len+4]="query";
+ _uOsr[len+5]="1.cz";          _uOkw[len+5]="q";
+ _uOsr[len+6]="volny.cz";      _uOkw[len+6]="search";
+ //SK vyhledavace
+ _uOsr[len+7]="zoznam.sk";     _uOkw[len+7]="s";
+ _uOsr[len+8]="atlas.sk";      _uOkw[len+8]="phrase";
+ _uOsr[len+9]="zoohoo.sk";    _uOkw[len+9]="q";
+ _uOsr[len+10]="centrum.sk";   _uOkw[len+10]="q";
+ _uOsr[len+11]="morfeo.sk";    _uOkw[len+11]="q";
+ _uOsr[len+12]="azet";         _uOkw[len+12]="sq";
+urchinTracker();
+</script>
+
+
+
+
+  <!-- (C)2000-2009 Gemius SA - gemiusAudience / titulky.com / Homepage -->
+  <script type="text/javascript">
+  <!--//--><![CDATA[//><!--
+  var pp_gemius_identifier = new String('ncbqKD9795l.HS09wDrfcsU1.BfNtligLQGlGhZemlX.z7');
+  //--><!]]>
+  </script>
+  <script type="text/javascript" src="xgemius.js"></script>
+
+
+
+</body>
+</html>
+
+
