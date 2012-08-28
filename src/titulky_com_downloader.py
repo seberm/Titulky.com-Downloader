@@ -1,16 +1,33 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+# Copyright (C) 2012 Seberm (Otto Sabart)
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# (version 3) as published by the Free Software Foundation.
+#
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+
 import re
 import sys
 import os
 import threading
-from datetime import datetime
 import logging
 import time
 import urllib
+
 from urllib import request
 from urllib.parse import urlparse, urlencode
+from datetime import datetime
 from http import cookiejar
 
 # @deprecated
@@ -38,7 +55,6 @@ titlesLinks = []
 class IFrameParser(threading.Thread):
 
     def __init__(self, opener, url, name, encoding):
-
         self.__opener = opener
         self.__url = url
         self.__name = name
@@ -48,7 +64,6 @@ class IFrameParser(threading.Thread):
 
 
     def run(self):
-
         logging.debug('[%s]: Running new IFrameParser thread (%s)' % (self.__name, self.__url))
          
         try:
@@ -88,14 +103,12 @@ class IFrameParser(threading.Thread):
 
 
 def getLinks(url, encoding, login, password):
-
     cj = cookiejar.CookieJar()
     opener = request.build_opener(request.HTTPCookieProcessor(cj))
     
     loginData = urlencode({'Login' : login, 'Password' : password, 'foreverlog' : 1})
 
     htmlSource = ''
-
     try:
         # We send POST data to login
         if login and password:
@@ -138,16 +151,13 @@ def getLinks(url, encoding, login, password):
            '''
 
     logging.debug('Looking for subtitles links on %s' % url.geturl())
-
     links = re.findall(pattern, htmlSource, re.VERBOSE)
 
     if links:
         logging.debug('Links found: %d' % len(links))
         for link in links:
-
             iframeURL = PAGE + '/' + link[0]
             name = link[1]
-
             try:
                 # Start thread
                 IFrameParser(opener, iframeURL, name, encoding).start()
@@ -167,12 +177,10 @@ def getLinks(url, encoding, login, password):
         sys.exit(1)
 
 
-def downloadFiles(links = [], userVIP=False):
-
+def downloadFiles(links=[], userVIP=False):
     logging.debug('Downloading links: %d' % len(links))
 
     for name, url, wait in links:
-
         if not userVIP:
             # +1 because we should make sure that we can download
             waitTime = wait + 1
@@ -182,7 +190,6 @@ def downloadFiles(links = [], userVIP=False):
 
             # Waiting for download
             time.sleep(float(waitTime))
-
         try:
             logging.debug('[%s]: Downloading from: %s' % (name, url))
             fd = request.urlopen(url)
@@ -200,7 +207,6 @@ def downloadFiles(links = [], userVIP=False):
 
 
 def main():
-
     # Parsing Options & Args
     parser = OptionParser(description = '%prog Download subtitles from titulky.com',
                           usage = '%prog [OPTION]... [URL]...',
@@ -231,7 +237,6 @@ def main():
     level = DEFAULT_LOGGING_LEVEL
     if opt.logLevel:
         level = opt.logLevel
-
     try:
         logging.basicConfig(format=DEFAULT_LOGGING_FORMAT, level=level.upper())
     except ValueError:
@@ -260,7 +265,6 @@ def main():
         elif not opt.download:
             for l in links:
                 print(l[1])
-
 
 
 if __name__ == '__main__':
