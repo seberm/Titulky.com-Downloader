@@ -12,8 +12,9 @@ import urllib
 from urllib import request
 from urllib.parse import urlparse, urlencode
 from http import cookiejar
-from optparse import OptionParser, OptionGroup
 
+# @deprecated
+from optparse import OptionParser, OptionGroup
 
 # Globals
 NAME = 'titulky_com_downloader'
@@ -32,10 +33,6 @@ CHECK_TIME = 0.05 #s
 
 # Global variable only for now (in future it will be part of some class)
 titlesLinks = []
-
-
-def log(fmtstr):
-    print(fmtstr)
 
 
 class IFrameParser(threading.Thread):
@@ -110,7 +107,7 @@ def getLinks(url, encoding, login, password):
         htmlSource = str(fd.read().decode(encoding))
 
     except urllib.error.HTTPError as e:
-        log('HTTP Connection error (%d): %s' % (e.code, e.reason))
+        logging.error('HTTP Connection error (%d): %s' % (e.code, e.reason))
         sys.exit(1)
     except urllib.error.URLError as e:
         logging.error('URL error: %s' % e.reason)
