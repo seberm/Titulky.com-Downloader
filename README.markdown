@@ -35,6 +35,6 @@ So, maybe is better to use following command for now.
 > $ run.sh --direct-link http://www.titulky.com/idown.php?R=1343462842&titulky=0000144275&zip=&histstamp=
 
 > For subtitles which are newer than 2 weeks it's necessary to be registered and provide your login and password to netusers.cz
-> $ run.sh --login otto --password sabart http://www.titulky.com/Cougar-Town-S01E17-202766.htm
+> $ run.sh --login http://www.titulky.com/Cougar-Town-S01E17-202766.htm
 
 #### Copyright © 2012 Sabart Otto <seberm[at]gmail[dot]com>

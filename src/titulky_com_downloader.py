@@ -123,7 +123,7 @@ def getLinks(url, encoding, login, password):
         logging.error('HTTP Connection error (%d): %s' % (e.code, e.reason))
         sys.exit(1)
     except urllib.error.URLError as e:
-        logging.error('URL error: %s' % e.reason)
+        logging.error('[%s]: URL error: %s' % (url.geturl(), e.reason))
         sys.exit(1)
     except IOError:
         logging.error('Cannot read page data - %s' % url)
@@ -219,8 +219,7 @@ def main():
     options.add_option('-e', '--page-encoding', dest='pageEncoding', action='store', metavar='<encoding>', default=PAGE_ENCODING, help='Sets webpage encoding - default [cp1250]')
     options.add_option('-n', '--with-info', dest='withInfo', action='store_true', help='Print download links with movie name and number of secs to link activation')
     options.add_option('-p', '--dir', dest='dir', action='store', help='Change program directory')
-    options.add_option('--login', dest='login', action='store', default='', help='Login name to netusers.cz (titulky.com)')
-    options.add_option('--password', dest='password', action='store', default='', help='Password to netusers.cz (titulky.com)')
+    options.add_option('--login', dest='login', action='store_true', help='Login to netusers.cz (titulky.com)')
     options.add_option('--log', dest='logLevel', action='store', default=DEFAULT_LOGGING_LEVEL, help='Set logging level (debug, info, warning, error, critical)')
     options.add_option('-i', '--vip', dest='vip', action='store_true', help='Set up a VIP user download')
 
@@ -254,7 +253,13 @@ def main():
 
     for arg in args:
         url = urlparse(arg)
-        links = getLinks(url, opt.pageEncoding, opt.login, opt.password)
+        password = ''
+        login = ''
+        if opt.login:
+            login = input('[netusers.cz] Login: ')
+            password = input('[netusers.cz] Password: ')
+
+        links = getLinks(url, opt.pageEncoding, login, password)
 
         if opt.download:
             downloadFiles(links, opt.vip)
