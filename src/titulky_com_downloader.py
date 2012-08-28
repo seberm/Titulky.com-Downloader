@@ -91,7 +91,7 @@ class IFrameParser(threading.Thread):
 
         if data:
             logging.debug('[%s]: Found link: %s' % (self.__name, PAGE + data.group('addr')))
-            titlesLinks.append((self.__name, PAGE + data.group('addr'), datetime.now().hour))
+            titlesLinks.append({'name' : self.__name, 'url' : PAGE + data.group('addr'), 'wait' : datetime.now().hour})
         else:
             logging.debug('[%s]: No links found' % self.__name)
             pattern = r'<img[\s]+src="./captcha/captcha.php"[\s]+/>'
@@ -126,10 +126,10 @@ def getLinks(url, encoding, login, password):
         logging.error('[%s]: URL error: %s' % (url.geturl(), e.reason))
         sys.exit(1)
     except IOError:
-        logging.error('Cannot read page data - %s' % url)
+        logging.error('Cannot read page data - %s' % url.geturl())
         sys.exit(1)
     except ValueError:
-        logging.error('URL value error: Unknown URL type')
+        logging.error('URL value error: Unknown URL type: %s' % url.geturl())
         sys.exit(1)
 
     pattern = r'''
@@ -221,7 +221,7 @@ def main():
     options.add_option('-p', '--dir', dest='dir', action='store', help='Change program directory')
     options.add_option('--login', dest='login', action='store_true', help='Login to netusers.cz (titulky.com)')
     options.add_option('--log', dest='logLevel', action='store', default=DEFAULT_LOGGING_LEVEL, help='Set logging level (debug, info, warning, error, critical)')
-    options.add_option('-i', '--vip', dest='vip', action='store_true', help='Set up a VIP user download')
+    options.add_option('-i', '--vip', dest='vip', action='store_true', help='Set up a VIP user download (we don\'t want to wait for download)')
 
     # @todo Remove warning message in following option
     options.add_option('-d', '--download', dest='download', action='store_true', help='Download subtitles to current folder (sometimes does not work - use option -l in combination with wget - just take a look to README)')
@@ -266,10 +266,10 @@ def main():
 
         if opt.withInfo:
             for l in links:
-                print('[%s][after %d secs]: %s' % (l[0], l[2], l[1]))
+                print('[%s][after %d secs]: %s' % (l['name'], l['wait'], l['url']))
         elif not opt.download:
             for l in links:
-                print(l[1])
+                print(l['url'])
 
 
 if __name__ == '__main__':
