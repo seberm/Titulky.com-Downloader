@@ -35,7 +35,7 @@ from optparse import OptionParser, OptionGroup
 
 # Globals
 NAME = 'titulky_com_downloader'
-VERSION = '1.0.0-beta'
+VERSION = '1.0.0'
 
 PAGE = 'http://www.titulky.com'
 
