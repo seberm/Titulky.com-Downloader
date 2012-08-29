@@ -183,7 +183,7 @@ def downloadFiles(links=[], userVIP=False):
     for l in links:
         if not userVIP:
             # +1 because we should make sure that we can download
-            waitTime = l['wait'] + 1
+            waitTime = l['wait'] + 2
 
             logging.debug('[%s][%d secs] - %s' % (l['name'], waitTime, l['url']))
             logging.debug('[%s]: Waiting for download ...' % l['name'])
