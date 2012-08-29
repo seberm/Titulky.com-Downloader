@@ -180,29 +180,29 @@ def getLinks(url, encoding, login, password):
 def downloadFiles(links=[], userVIP=False):
     logging.debug('Downloading links: %d' % len(links))
 
-    for name, url, wait in links:
+    for l in links:
         if not userVIP:
             # +1 because we should make sure that we can download
-            waitTime = wait + 1
+            waitTime = l['wait'] + 1
 
-            logging.debug('[%s][%d secs] - %s' % (name, waitTime, url))
-            logging.debug('[%s]: Waiting for download ...' % name)
+            logging.debug('[%s][%d secs] - %s' % (l['name'], waitTime, l['url']))
+            logging.debug('[%s]: Waiting for download ...' % l['name'])
 
             # Waiting for download
             time.sleep(float(waitTime))
         try:
-            logging.debug('[%s]: Downloading from: %s' % (name, url))
-            fd = request.urlopen(url)
+            logging.debug('[%s]: Downloading from: %s' % (l['name'], l['url']))
+            fd = request.urlopen(l['url'])
 
-            with open(name + '.srt', mode='wb') as titles:
+            with open(l['name'] + '.srt', mode='wb') as titles:
                 titles.write(fd.read())
 
             fd.close()
         except urllib.error.URLError as e:
-            logging.error('[%s]: Cannot get subtitles: %s' % (name, e.reason))
+            logging.error('[%s]: Cannot get subtitles: %s' % (l['name'], e.reason))
             sys.exit(1)
         except IOError:
-            logging.error('[%s]: Cannot open file: %s.srt' % (name, name))
+            logging.error('[%s]: Cannot open file: %s.srt' % (l['name'], l['name']))
             sys.exit(1)
 
 
