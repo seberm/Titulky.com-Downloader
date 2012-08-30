@@ -75,6 +75,8 @@ class CaptchaDialog(QtGui.QDialog):
     def sendCode(self):
 
         self.leCode.setDisabled(True)
+        self.btnSend.setDisabled(True)
+        self.btnReload.setDisabled(True)
         self.captchaCode = self.leCode.text()
 
         # We just emit a signal
