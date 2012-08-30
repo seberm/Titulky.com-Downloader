@@ -1,2 +1,2 @@
 - In future will be possible download titles after exhaustion of daily limit - but will be necessary to rewrite captcha code
-- It will be possible to download titles which are on the server less then 2 weeks - but it will be necessary to login
+- [BUG] - If downloading subtitles newer then 2 weeks - it's necessary login; we login with opener which we give to IFrameParser - after it it's possibleto get download link. But when we are downloading file it's necessary to be logged in too! So... it's necessary to get the logged opener

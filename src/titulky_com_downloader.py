@@ -25,6 +25,7 @@ import logging
 import time
 import urllib
 
+from getpass import getpass
 from urllib import request
 from urllib.parse import urlparse, urlencode
 from datetime import datetime
@@ -35,7 +36,7 @@ from optparse import OptionParser, OptionGroup
 
 # Globals
 NAME = 'titulky_com_downloader'
-VERSION = '1.0.0-beta'
+VERSION = '1.0.0'
 
 PAGE = 'http://www.titulky.com'
 
@@ -257,7 +258,7 @@ def main():
         login = ''
         if opt.login:
             login = input('[netusers.cz] Login: ')
-            password = input('[netusers.cz] Password: ')
+            password = getpass('[netusers.cz] Password: ')
 
         links = getLinks(url, opt.pageEncoding, login, password)
 
