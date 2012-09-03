@@ -1,16 +1,39 @@
+# -*- coding: utf-8 -*-
+
+# Copyright (C) 2012 Seberm (Otto Sabart)
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# (version 3) as published by the Free Software Foundation.
+#
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+
 import urllib
 import logging
+import threading
+import re
+import sys
 import time
 
-from cookiejar import CookieJar
 from urllib import request
-from urllib.parse import urlparse, urlencode
+from urllib.parse import urlencode
 from threading import Lock
+from http.cookiejar import CookieJar
 #from logging import debug, info, error, warning, exception
 
 import IFrameParser
-from IFrameParser import IFrameParser
+from TitulkyDownloader import PAGE
 
+# Constants
+CHECK_TIME = 0.05 #s
 
 
 class Manager:
@@ -21,45 +44,44 @@ class Manager:
     }
 
 
-    def __init__(self, conf={}):
-        self.encoding = DEFAULTS['Encoding']
+    def __init__(self, encoding='', url=''):
+        self.encoding = self.DEFAULTS['Encoding']
         self.login = ''
         self.password = ''
         self.url = ''
         self.links = []
         self.parsers = []
 
-        if conf['encoding']:
-            self.encoding = conf['encoding']
+        if encoding:
+            self.encoding = encoding
 
-        if conf['url']:
-            self.encoding = conf['url']
+        if url:
+            self.encoding = url
 
         self.opener = request.build_opener(request.HTTPCookieProcessor(CookieJar()))
 
 
-    def login(self, credentials={}):
-        if credentials['login']:
-            self.login = credentials['login']
+    def logIn(self, login='', password=''):
+        if not login:
+            login = self.login
 
-        if credentials['password']:
-            self.password = credentials['password']
+        if not password:
+            password = self.password
 
-        if self.login and self.password:
-            loginData = urlencode({'Login' : self.login, 'Password' : self.password, 'foreverlog' : 1})
+        if login and password:
+            loginData = urlencode({'Login' : login, 'Password' : password, 'foreverlog' : 1})
             try:
-                logging.debug('Posting login credentials [user: %s]' % self.login)
-                self.opener.open('http://www.titulky.com/index.php', loginData.encode(encoding))
+                logging.debug('Posting login credentials [user: %s]' % login)
+                self.opener.open('http://www.titulky.com/index.php', loginData.encode(self.encoding))
             except urllib.error.URLError as e:
                 logging.error('URL error: %s' % e.reason)
                 logging.error('Login failed')
                 sys.exit(1)
 
 
-    def getLinks(self, url='', conf={}):
-        encoding = self.encoding
-        if conf['encoding']:
-            encoding = conf['encoding']
+    def getLinks(self, url='', encoding=''):
+        if not encoding:
+            encoding = self.encoding
 
         htmlSource = ''
         try:
@@ -107,7 +129,7 @@ class Manager:
                 iframeURL = PAGE + '/' + link[0]
                 name = link[1]
                 try:
-                    parser = IFrameParser(self.opener, iframeURL, name, encoding, lock)
+                    parser = IFrameParser.IFrameParser(self.opener, iframeURL, name, encoding, lock)
                     # Start thread
                     parser.start()
                     #parser.join()
@@ -156,3 +178,17 @@ class Manager:
             except IOError:
                 logging.error('[%s]: Cannot open file: %s.srt' % (l['name'], l['name']))
                 sys.exit(1)
+
+
+    def printLinks(self, withInfo=False, links=[]):
+        if not links:
+            links = self.links
+
+        if withInfo:
+            for l in links:
+                print('[%s][after %d secs]: %s' % (l['name'], l['wait'], l['url']))
+        else:
+            for l in links:
+                print(l['url'])
+
+

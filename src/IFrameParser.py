@@ -1,7 +1,29 @@
+# -*- coding: utf-8 -*-
+
+# Copyright (C) 2012 Seberm (Otto Sabart)
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# (version 3) as published by the Free Software Foundation.
+#
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+
+import re
+import urllib
+
 from logging import debug, info, error, warning, exception
 from datetime import datetime
-
 from threading import Thread
+
+from TitulkyDownloader import PAGE
 
 titlesLinks = []
 
@@ -18,6 +40,7 @@ class IFrameParser(Thread):
 
 
     def run(self):
+        global titlesLinks
         debug('[%s]: Running new IFrameParser thread (%s)' % (self.__name, self.__url))
          
         try:
@@ -45,9 +68,9 @@ class IFrameParser(Thread):
 
         if data:
             debug('[%s]: Found link: %s' % (self.__name, PAGE + data.group('addr')))
-            self.lock.acquire()
+            self.__lock.acquire()
             titlesLinks.append({'name' : self.__name, 'url' : PAGE + data.group('addr'), 'wait' : datetime.now().hour})
-            self.lock.release()
+            self.__lock.release()
         else:
             debug('[%s]: No links found' % self.__name)
             pattern = r'<img[\s]+src="./captcha/captcha.php"[\s]+/>'
