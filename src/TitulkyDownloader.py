@@ -88,8 +88,7 @@ def main():
         sys.exit(1)
 
     from Manager import Manager
-    #manager = Manager(encoding=PAGE_ENCODING)
-    manager = Manager(PAGE_ENCODING)
+    manager = Manager(encoding=PAGE_ENCODING)
 
     for arg in args:
         url = urlparse(arg)
