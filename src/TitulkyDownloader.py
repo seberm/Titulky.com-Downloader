@@ -20,13 +20,10 @@
 import re
 import sys
 import os
-import threading
 import logging
 
+from urllib.parse import urlparse
 from getpass import getpass
-#from urllib import request
-#from urllib.parse import urlparse, urlencode
-from http import cookiejar
 
 # @deprecated
 from optparse import OptionParser, OptionGroup
@@ -41,7 +38,6 @@ DEFAULT_LOGGING_LEVEL = 'INFO' #logging.INFO
 DEFAULT_LOGGING_FORMAT = '%(levelname)s: %(message)s'
 
 PAGE_ENCODING = 'cp1250'
-CHECK_TIME = 0.05 #s
 
 
 def main():
@@ -90,26 +86,26 @@ def main():
         sys.exit(1)
 
     from Manager import Manager
-    manager = Manager()
+    #manager = Manager(encoding=PAGE_ENCODING)
+    manager = Manager(PAGE_ENCODING)
 
     for arg in args:
         url = urlparse(arg)
 
         if opt.login:
-            manager.login = input('[netusers.cz] Login: ')
-            manager.password = getpass('[netusers.cz] Password: ')
+            login = input('[netusers.cz] Login: ')
+            password = getpass('[netusers.cz] Password: ')
+            manager.logIn(login=login, password=password)
 
-        links = getLinks(url.geturl(), opt.pageEncoding, login, password)
+        manager.getLinks(url.geturl())
 
         if opt.download:
-            downloadFiles(links, opt.vip)
+            manager.downloadFiles(opt.vip)
 
         if opt.withInfo:
-            for l in links:
-                print('[%s][after %d secs]: %s' % (l['name'], l['wait'], l['url']))
+            manager.printLinks(True)
         elif not opt.download:
-            for l in links:
-                print(l['url'])
+            manager.printLinks()
 
 
 if __name__ == '__main__':
