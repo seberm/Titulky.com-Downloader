@@ -27,7 +27,7 @@ from urllib import request
 from urllib.parse import urlencode
 from threading import Lock
 from http.cookiejar import CookieJar
-#from logging import debug, info, error, warning, exception
+from logging import debug, info, error, warning, exception
 
 import IFrameParser
 from TitulkyDownloader import PAGE
@@ -71,11 +71,11 @@ class Manager:
         if login and password:
             loginData = urlencode({'Login' : login, 'Password' : password, 'foreverlog' : 1})
             try:
-                logging.debug('Posting login credentials [user: %s]' % login)
+                debug('Posting login credentials [user: %s]' % login)
                 self.opener.open('http://www.titulky.com/index.php', loginData.encode(self.encoding))
             except urllib.error.URLError as e:
-                logging.error('URL error: %s' % e.reason)
-                logging.error('Login failed')
+                error('URL error: %s' % e.reason)
+                error('Login failed')
                 sys.exit(1)
 
 
@@ -88,16 +88,16 @@ class Manager:
             fd = self.opener.open(url)
             htmlSource = str(fd.read().decode(encoding))
         except urllib.error.HTTPError as e:
-            logging.error('HTTP Connection error (%d): %s' % (e.code, e.reason))
+            error('HTTP Connection error (%d): %s' % (e.code, e.reason))
             sys.exit(1)
         except urllib.error.URLError as e:
-            logging.error('[%s]: URL error: %s' % (url, e.reason))
+            error('[%s]: URL error: %s' % (url, e.reason))
             sys.exit(1)
         except IOError:
-            logging.error('Cannot read page data - %s' % url)
+            error('Cannot read page data - %s' % url)
             sys.exit(1)
         except ValueError:
-            logging.error('URL value error: Unknown URL type: %s' % url)
+            error('URL value error: Unknown URL type: %s' % url)
             sys.exit(1)
 
         pattern = r'''
@@ -118,13 +118,13 @@ class Manager:
                 </a>                                         # Tag end
                '''
 
-        logging.debug('Looking for subtitles links on %s' % url)
+        debug('Looking for subtitles links on %s' % url)
         links = re.findall(pattern, htmlSource, re.VERBOSE)
 
         if links:
             lock = Lock()
 
-            logging.debug('Links found: %d' % len(links))
+            debug('Links found: %d' % len(links))
             for link in links:
                 iframeURL = PAGE + '/' + link[0]
                 name = link[1]
@@ -135,7 +135,7 @@ class Manager:
                     #parser.join()
                     self.parsers = parser
                 except RuntimeError as e:
-                    logging.exception('Thread caused runtime error: %s' % e)
+                    exception('Thread caused runtime error: %s' % e)
                     sys.exit(1)
 
             # We're active waiting for end of all threads
@@ -147,25 +147,25 @@ class Manager:
             self.links = IFrameParser.titlesLinks
             return self.links
         else:
-            logging.info('Cannot find data on page')
+            info('Cannot find data on page')
             sys.exit(1)
 
 
     def downloadFiles(self, userVIP=False):
-        logging.debug('Downloading links: %d' % len(self.links))
+        debug('Downloading links: %d' % len(self.links))
 
         for l in self.links:
             if not userVIP:
                 # +2 because we should make sure that we can download
                 waitTime = l['wait'] + 2
 
-                logging.debug('[%s][%d secs] - %s' % (l['name'], waitTime, l['url']))
-                logging.debug('[%s]: Waiting for download ...' % l['name'])
+                debug('[%s][%d secs] - %s' % (l['name'], waitTime, l['url']))
+                debug('[%s]: Waiting for download ...' % l['name'])
 
                 # Waiting for download
                 time.sleep(float(waitTime))
             try:
-                logging.debug('[%s]: Downloading from: %s' % (l['name'], l['url']))
+                debug('[%s]: Downloading from: %s' % (l['name'], l['url']))
                 fd = request.urlopen(l['url'])
 
                 with open(l['name'] + '.srt', mode='wb') as titles:
@@ -173,10 +173,10 @@ class Manager:
 
                 fd.close()
             except urllib.error.URLError as e:
-                logging.error('[%s]: Cannot get subtitles: %s' % (l['name'], e.reason))
+                error('[%s]: Cannot get subtitles: %s' % (l['name'], e.reason))
                 sys.exit(1)
             except IOError:
-                logging.error('[%s]: Cannot open file: %s.srt' % (l['name'], l['name']))
+                error('[%s]: Cannot open file: %s.srt' % (l['name'], l['name']))
                 sys.exit(1)
 
 

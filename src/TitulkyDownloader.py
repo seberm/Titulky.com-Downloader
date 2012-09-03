@@ -22,6 +22,8 @@ import sys
 import os
 import logging
 
+from logging import debug, info, error, warning, exception
+
 from urllib.parse import urlparse
 from getpass import getpass
 
@@ -74,15 +76,15 @@ def main():
         logging.basicConfig(format=DEFAULT_LOGGING_FORMAT, level=level.upper())
     except ValueError:
         logging.basicConfig(format=DEFAULT_LOGGING_FORMAT, level=DEFAULT_LOGGING_LEVEL)
-        logging.warning('It is not possible to set logging level to %s' % level)
-        logging.warning('Using default setting logging level: INFO')
+        warning('It is not possible to set logging level to %s' % level)
+        warning('Using default setting logging level: INFO')
 
     if opt.dir:
-        logging.debug('Changing default program directory to %s' % opt.dir)
+        debug('Changing default program directory to %s' % opt.dir)
         os.chdir(opt.dir)
 
     if not args[0:]:
-        logging.error('You have to provide an URL address!')
+        error('You have to provide an URL address!')
         sys.exit(1)
 
     from Manager import Manager
@@ -112,5 +114,5 @@ if __name__ == '__main__':
     try:
         main()
     except KeyboardInterrupt: # Catch ^C interrupt
-        logging.info('Program interrupted')
+        info('Program interrupted')
         sys.exit(1)
