@@ -1,0 +1,15 @@
+INSTALLATION
+------------
+
+
+Dependencies
+============
+- Python 3
+- Python Requests >= 0.13.7 (https://github.com/kennethreitz/requests)
+
+
+Installation
+============
+For Archlinux there is a package called titulky_com_downloader here: https://aur.archlinux.org/packages.php?ID=61099
+
+For other linux distributions just run file 'run.sh'
