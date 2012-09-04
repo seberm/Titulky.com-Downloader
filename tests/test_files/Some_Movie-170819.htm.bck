@@ -1,0 +1,619 @@
+<!--
+********************************************************
+ Created by Martin Kroulík (c) 2003-2011 Martevax s.r.o.
+********************************************************
+  Company:  Martevax s.r.o.
+  Web Site: www.martevax.cz
+  Email:    martevax[zavinac]martevax.cz
+-->
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="cs" lang="cs">
+<head>
+ <meta http-equiv="x-xrds-location" content="http://www.titulky.com/xrds.xml" />
+ <meta http-equiv="Content-Type" content="text/html; charset=windows-1250" />
+ <meta http-equiv="Content-language" content="cs" />
+ <meta http-equiv="Cache-Control" content="must-revalidate, post-check=0, pre-check=0" />
+ <meta http-equiv="Cache-Control" content="no-cache" />
+ <meta http-equiv="Pragma"        content="no-cache" />
+ <meta http-equiv="Expires"       content="-1" />
+ <meta name="copyright" content="2004-2012 Martevax s.r.o" />
+ <meta name="author" content="Martin Kroulík" />
+ <meta name="keywords" content="titulky k filmům,titulky k filmum,DivX,XviD,DVD, film,movie,subtitle,subtitles,bigweb.cz,titulky.cz" />
+ <meta name="description" content="Titulky.com - titulky k filmům ke stažení - největší a nejaktuálnější databáze CS/SK a bonusové dárky zdarma" />
+ <link rel="shortcut icon" href="favicon-tecko.ico" />
+ <link rel="alternate" type="application/rss+xml" title="www.titulky.com - nové titulky - RSS" href="/rss/titulky_rss.xml" />
+ <link rel="alternate" type="application/rss+xml" title="www.titulky.com - diskuze - RSS" href="/rss/diskuze_rss.xml" />
+ <link rel="image_src" href="http://www.titulky.com/css/logo.png" />
+ <link rel="stylesheet" type="text/css" href="css/jquery.autocomplete.css" />
+ <script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+ <script type='text/javascript' src='js/jquery.autocomplete.js'></script>
+ <script type="text/javascript" src="/swfobject.js"></script> 
+
+ <link rel="stylesheet" type="text/css" media="all"   href="/css/zaklad.css" />
+
+
+
+ <!--[if gte IE 5]>
+
+ <style type="text/css">
+  #menu li {
+    padding-bottom: 0px; 
+    list-style-type: none;
+    margin: 7px 0px 0px;
+    padding-left: 10px; 
+    padding-right: 10px; 
+    background: url('css/menu-predel.jpg') no-repeat left center; 
+    float: left; 
+    height: 40px; 
+    overflow: hidden; 
+    padding-top: 4px;
+  }
+  #pagewrap{
+    width: 1151px;
+  }  
+  div.ibox {
+   height:220px;
+  }
+  .iboxtitle{
+    height:40px;
+  }
+  #stat_bok_h{
+    height:40px;  
+  }
+  .tlacitkoform{
+    width: 100px; 
+  }
+  </style>
+<![endif]-->
+
+<![if !IE]>
+ <style type="text/css">
+   #menu li {
+  	float: left;
+  	height: 37px;
+  	overflow: hidden;
+  	list-style: none;
+    XXXXwidth: 96px;
+  	margin: 1px 0px 0px 0px;
+  	padding: 6px 8px 0px 8px;
+  	background: url('css/menu-predel.jpg') no-repeat left center;
+  }
+   #pagewrap{
+    width: 1150px;
+  }
+  div.ibox {
+   height:auto;
+   min-height:210px
+  }   
+  .iboxtitle{
+    height:22px;
+  }
+  #div_nahled{ 
+     position:absolute;
+  } 
+  #stat_bok_h{
+    height:30px; 
+  }
+  .tlacitkoform{
+      width:auto !important; 
+  }      
+ </style>
+<![endif]>
+
+<title>Batman - Titulky k DivX filmům</title>
+<script type='text/javascript' src='/localfnc.js'></script>
+<script type='text/javascript'>
+function UD(k){
+document.location='index.php?UserDetail='+k;
+}
+</script>
+</head>
+
+<body>
+<div XXstyle="background:#5da8e9 url(/css/pozadi.png)" id="bodywrap">
+  <!-- bodyhead /-->
+ <div id="bodycont" style="text-align:center;">
+    
+          
+ <div id="head"> 
+   <div id="head_a">
+     <div id="head_a1">
+      <a href="/"><img src="css/logo.png" alt="České a slovenské titulky" /></a>
+     </div>
+     <div id="head_a2">
+       
+           
+                      
+       <!-- Pozice: go.cz.bbelements.com AdActive_CC(15371) / cely web(1) / leadeboard 750x100(2) / PRčlánek(7) -->
+        <script type='text/javascript' charset='windows-1250'>
+        /* <![CDATA[ */
+        var bbs=screen,bbn=navigator,bbh;bbh='&ubl='+bbn.browserLanguage+'&ucc='+bbn.cpuClass+'&ucd='+bbs.colorDepth+'&uce='+bbn.cookieEnabled+'&udx='+bbs.deviceXDPI+'&udy='+bbs.deviceYDPI+'&usl='+bbn.systemLanguage+'&uje='+bbn.javaEnabled()+'&uah='+bbs.availHeight+'&uaw='+bbs.availWidth+'&ubd='+bbs.bufferDepth+'&uhe='+bbs.height+'&ulx='+bbs.logicalXDPI+'&uly='+bbs.logicalYDPI+'&use='+bbs.fontSmoothingEnabled+'&uto='+(new Date()).getTimezoneOffset()+'&uti='+(new Date()).getTime()+'&uui='+bbs.updateInterval+'&uul='+bbn.userLanguage+'&uwi='+bbs.width;
+        if(typeof(bburlparam)=='string') { bbh+='&'+bburlparam; }
+        if(typeof(bbkeywords)=='string') { bbh+='&keywords='+escape(bbkeywords); }
+        document.write("<scr"+"ipt type='text/javascript' charset='windows-1250' src='http://go.cz.bbelements.com/please/showit/15371/1/2/7/?typkodu=js"+bbh+"&alttext=0&border=0&bust="+Math.random()+"&target=_blank'><"+"\/scr"+"ipt>");
+        /* ]]> */
+        </script>
+        <noscript>
+        <a href="http://go.cz.bbelements.com/please/redirect/15371/1/2/7/" target="_blank"><img src="http://go.cz.bbelements.com/please/showit/15371/1/2/7/?typkodu=img" border='0' alt='' /></a>
+        </noscript>
+
+      
+       
+       
+    </div>     
+    </div> 
+     <div id="head_b">
+      <!-- menu /-->
+      <div id="menu">
+      <ul>
+        <li>
+          <a href="index.php?Forum=1" >Fórum</a></li>
+        <li>
+          <a href="http://premium.titulky.com/?LGLogin=&LGId=&LGCRC=&Goto=Nahrat%3D1" target="premium" >Nahrát titulky</a></li>
+        <li>
+          <a href="index.php?Napoveda=2">Pravidla</a></li>
+        <li>
+          <a href="index.php?Napoveda=3">FAQ</a></li>
+        <li>
+          <a title="Požadavky titulků" href="index.php?Stat=6">Požadavky</a></li>
+        <li>
+          <a title="Rozpracované titulky" href="index.php?Stat=5">Rozpracované</a></li>
+        <li>
+          <a href="index.php?Bonus=1">Odměny</a></li>
+        <li>
+                    <a target="reklama-titulky" href="/internetova-reklama/">Reklama</a></li>
+        <li>
+          <a href="index.php?Web=1">Zajímavé weby</a></li>
+        <li>
+          <a href="index.php?Napoveda=7">O serveru</a></li> 
+          
+          <li style="padding:0px 2px 0px 2px"><a href="http://www.facebook.com/titulkycom"><img style="padding-top:-0px" src="css/facebook.jpg" alt="oficiální stránka na facebooku" /></a></li> 
+          <li style="padding:0px 2px 0px 2px"><a href="index.php?Napoveda=5"><img style="margin-top:-4px" src="css/rss.jpg" alt="RSS kanál" /></a></li> 
+          <li style="padding:0px 2px 0px 2px"><a href="javascript:bookmarksite('Titulky k filmům - titulky.com', 'http://www.titulky.com')"><img style="margin-top:-4px" src="css/favorite.jpg" alt="přidat k oblíbeným" /></a></li> 
+        
+        </ul>
+      </div>     
+     </div>
+
+ </div>
+
+ 
+ <div id="pagewrap">
+ <div id="pagewrap1">
+ <div id="pagewrap2">
+
+  <div id="pagecont">
+  <div id="pagecont2">
+   <div id="side1wrap">
+    
+
+       
+    
+        
+    
+<!-- Detail -->
+
+ 	<link rel="stylesheet" href="style.css" />  
+  <script type="text/javascript" src="js/jquery.colorbox-min.js"></script>  
+ 	<link rel="stylesheet" href="style.css" />
+ 	<link rel="stylesheet" href="css/colorbox.css" />
+	<script type="text/javascript">
+			$(document).ready(function(){
+				//Examples of how to assign the ColorBox event to elements
+				$(".titulkydownloadajax").colorbox({iframe:true,scalePhotos:true, transition:"elastic", opacity:0.80, innerWidth:550, innerHeight:350});
+				//$(".titulkydownloadajax").colorbox({iframe:true,scalePhotos:true, transition:"elastic", opacity:0.80, innerWidth:640, innerHeight:500});
+        });
+
+	</script>  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+ <div id="contcont">  
+  <table cellpadding="0" cellspacing="3" class="detail" style="margin-top:0px">
+  <tr>
+   <th colspan="3" style="background-image:url('css/flag-CZ-big.gif')">
+    <h1>Batman (1989)</h1></th>
+  </tr>
+      
+  <tr>
+   <td rowspan="22" valign="top">
+          </td>
+   <td class="detailh ucase" width="100">Další název</td><td><h2>Batman </h2></td>
+  </tr>
+  <tr>
+   <td class="detailh ucase">Uložil</td><td>               <div style="width:50px">
+                               <img src="img/avatar/anonymM.gif" alt="bez fotografie" />
+                              </div>
+            <a href="index.php" onclick="UD('483334');return false;" >Biopler</a>  <img src="./img/stars/4.gif" alt="" title="uložil 101 titulků" /> <a href="index.php?Ocenit=483334"><img title="Ocenit překladatele" alt="Hodnocení" src="css/dej-hlas.gif" /></a>
+     <span class="detailh2">uloženo: </span>18.2.2011</td>
+  </tr>
+  <tr>
+   <td class="detailh ucase">Staženo</td><td><span class="detailh2"  style="margin:0px">Tento měsíc: </span>
+        2          <span class="detailh2" >Celkem: </span>26          <span class="detailh2">Naposledy: </span>12.8.2012          </td>
+  </tr>
+  <tr>
+   <td class="detailh ucase">Další info</td><td><span class="detailh2"  style="margin:0px">Počet CD: </span>2<span class="detailh2">Velikost 1.CD: </span>
+                        734 162 944 B            <span class="detailh2">typ titulků:</span> srt            <span class="detailh2">FPS:</span>  25            
+            </td>
+  </tr>  
+  <tr>
+   <td class="detailh ucase">Verze pro</td><td>Devilsfunhouse.org.Batman.1989<span class="detailh2"><a href="index.php?related=0096895">Další verze</a></span></td>
+  </tr>
+      <tr>
+   <td class="detailh ucase">Náhled</td><td>
+    <a class="tlacitko titulkydownloadajax"  href="nahled.php?Titulky=170819&histstamp=">zobrazit náhled</a>
+   </td>
+  </tr>
+  <tr>
+  <td colspan="3" style="padding:0px">
+     
+   
+    <!-- Kontextová reklama Sklik -->
+    <div id="sklikReklama_8584"></div>
+    <script type="text/javascript">
+        var sklikData = { elm: "sklikReklama_8584", zoneId: 8584, w: 468, h: 80 };
+    </script>
+    <script type="text/javascript" src="http://out.sklik.cz/js/script.js"></script>
+  
+  
+  </td>
+  </tr>
+  </table>
+
+ 
+ 
+  
+  <table cellpadding="0" cellspacing="3" class="detail">
+  <tr>
+     <td colspan="2" class="detailh">Poznámka</td>
+  </tr>
+  <tr valign="top" >
+     <td class="detailv" colspan="2"><div class="orezdetail">&nbsp;</div></td>
+  </tr>
+  <tr valign="middle">
+   <td>
+                    <a href="http://www.imdb.com/title/tt0096895/" target="imdb"><img  src="./css/imdb-big.gif" alt="IMDB.com" /></a>
+          
+          
+   </td>
+   <td width="455">
+        <iframe src="http://www.facebook.com/plugins/like.php?href=http%253A%252F%252Fwww.titulky.com%252Fhttp%253A%252F%252Fwww.titulky.com%252FBatman-170819.htm&amp;send=false&amp;layout=standard&amp;width=450&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font=trebuchet+ms&amp;height=35" scrolling="no" frameborder="00" style="border:0px solid; overflow:hidden; width:450px; height:27px;" allowTransparency="true"></iframe>
+   </td>
+  </tr>
+  </table>
+   
+   
+
+      <!-- BBelements AdServer one2many Pozice: go.cz.bbelements.com ADACTIVE_DD(15416) / Celý web(1) / 300x300(10) / PRčlánek(7)-->
+      <!-- HowTo: Place this code into the html page there the ad should appear. -->
+      <div id='bmone2n-15416.1.10.7'>
+      <noscript><div style='display:inline'><a href='http://go.cz.bbelements.com/please/redirect/15416/1/10/7/'><img src='http://go.cz.bbelements.com/please/showit/15416/1/10/7/?typkodu=img' width='0' height='0' style='border-width:0' alt='' /></a></div></noscript>
+      </div>
+      <script type='text/javascript' charset='windows-1250' src='http://go.cz.bbelements.com/bb/bb_one2n.js'></script>
+      <script type='text/javascript'>/* <![CDATA[ */ 
+      bmone2n.addPosition('15416.1.10.7','');
+      bmone2n.getAd('go.cz.bbelements.com','',''+(typeof(bburlparam)=='string'?'&'+bburlparam:''),'windows-1250');
+      /* ]]> */</script>
+      <div id='bmone2t-15416.1.10.7' style='display:none'><script type='text/javascript'>/* <![CDATA[ */ bmone2n.makeAd('15416.1.10.7'); /* ]]> */</script></div>
+      <script type='text/javascript'>/* <![CDATA[ */ bmone2n.moveAd(); /* ]]> */</script>
+      </a>
+  
+
+  <table cellpadding="0" cellspacing="3" class="detail">
+     <tr>
+     <td colspan="3" class="detailh"><h3>Titulky Batman ke stažení</h3></td>
+  </tr>
+                <tr><td class="detailv"><a class="titulkydownloadajax"  href="iframe-normal-unlogged.php?R=1345383815&titulky=0000170819&zip=&histstamp=" >Some Movie (CD 1)</a></td><td class="detailv">734 162 944 B</td></tr>
+                        <tr><td class="detailv"><a class="titulkydownloadajax"  href="iframe-normal-unlogged.php?R=1345383815&titulky=0000170820&zip=&histstamp=" >Some Movie (CD 2)</a></td><td class="detailv">731 406 336 B</td></tr>
+              
+  </tr>
+  <tr class="detailv">
+  <td>
+  Stáhnout v jednom archivu 
+  </td>
+  <td>
+      <a class="tlacitko titulkydownloadajax"  href="idown.php?R=1345383815&titulky=170819&zip=z&histstamp=" id="opendown" onclick="//OpenDownload('170819','z',''); return false;" >Batman</a>
+  </td>
+  </tr>
+  </table>
+  
+    <table cellpadding="0" cellspacing="3" class="detail">
+     <tr>
+     <td colspan="3" class="detailh"><h3>Historie Batman</h3></td>
+    </tr>
+         <tr><td colspan="3" class="detailv">Zatím žádná historie ani nové verze těchto titulků</td></tr> 
+      </table>
+      
+
+      
+                <table cellpadding="3" cellspacing="3" class="detail">
+        <tr>
+          <td colspan="3" class="detailh"><h3>RECENZE  Batman</h3></td>
+        </tr>
+  
+
+         <tr class="detailv"><td colspan="3"><i>Čekáme na váš vzkaz či komentář, který může být první...</i></td></tr>
+        
+  </table>
+  <br />
+      
+  <table cellpadding="3" cellspacing="3" class="detail">
+  <tr>
+  <td  class="detailh" style="border:1px solid #444">
+  <form method="post" action="" name="formDiskuze" enctype="multipart/form-data" onsubmit="return CheckDiskuze(this)" class="diskuze">
+  <input type="hidden" name="film" value="170819" />
+  <input type="hidden" name="akce" value="diskuze" />
+  <input type="hidden" name="akceinc" value="" />
+  <input type="hidden" name="typ" value="zapis" />
+  <input type="hidden" name="auth" value="483334" />
+  <input type="hidden" name="SQLnParent" value="0" />
+  <a name="reply"></a>
+  Příspěvek:<br /><textarea name="SQLsText" rows="4" cols="50" style="width:640px"></textarea>
+    
+      Můžete připojit přílohu do velikosti 1 MB<br />
+      <input class="u_input" type="file" name="Priloha" accept="text/plain" />
+      <br /><br />
+
+        <input name="Souhlas" type="checkbox" value="1" checked="checked" style="display:none" />    
+        
+    <input onclick="NoReply()" type="reset" value="Smazat" class="tlacitkoform" onmouseover="this.style.background='#9DC8EB'" onmouseout="this.style.background='#DDDDDD'"/>
+    <input type="submit" value="Odeslat" class="tlacitkoform" onmouseover="this.style.background='#9DC8EB'" onmouseout="this.style.background='#DDDDDD'"   onclick="alert('K zapsání příspěvku musíte být přihlášeni');return false"  style="margin-left:10px" />
+  </td>
+  </tr>
+  </form>
+  </table>
+
+      
+      
+    </div>
+
+   </div><!-- contcont /-->
+   </div><!-- contwrap /-->
+   
+   
+
+   <div class="banner" id="reklama" style="width:1px;height:1px;border:none;"><div id="banner"><img src="/bannery/02xE.gif" alt="XXDF" id="02xE" /></div></div>
+
+
+        <script type='text/javascript'>
+        getEML('id_kontakt');
+</script>
+                     </div><!-- side1wrap /-->
+   <div id="side2wrap">
+
+
+        <div id="bannery300x300" style="border:0px solid #666;">        
+         <div id="bannery300x300" class="banner" style="overflow:hidden;width:300px;height:300px"><script type="text/javascript">var flashvars = {};var params = {};var attributes = {};swfobject.embedSWF("/bannery/casino8118_300x300_v1cz1342434854_40461100.swf?clickthru=http%3A%2F%2Fwww.titulky.com%3FMBID%3D547%26custlink%3Dhttp%253A%252F%252Fwww.casino8118.com%252F%253Faffid%253Dtitulky%2526utm_source%253Dtitulky.com%2526utm_medium%253Dcpc%2526utm_campaign%253Dbanners","bannery300x300", "300", "300", "9.0.0", false, flashvars, params, attributes);</script></div>               
+        </div>
+ 
+
+
+    <script type="text/javascript">
+    $().ready(function() {
+    	$("#searchTitulky").autocomplete("search_autocomplete.php", {
+    		delay: 200,
+        width: 300,
+        minChars:3,
+        scroll: true,
+    		selectFirst: false
+    	});
+    
+    	$("#searchTitulky").result(function(event, data, formatted) {
+    		if (data)
+    			$(this).parent().next().find("input").val(data[1]);
+    	});
+    
+    }); 
+    </script>
+   
+   <div id="side1cont">
+      
+
+                       
+                <form action="index.php" method="post" style="margin:0;padding:0;">
+            <table id="tablelogin" border="0">
+              <tr style="height:60px">
+                <td style="width:180px;padding-top:30px">        
+                  <input id="log_login" tabindex="1" name="Login" size="12" />
+                  <input name="Detail2"  value="170819" type="hidden" />
+                </td>
+                <td style="">        
+                  <input style="border:1px solid #fff;" tabindex="3" class="tlacitkoform" onmouseover="this.style.background='#9DC8EB'" onmouseout="this.style.background='#DDDDDD'" type="submit" name="prihlasit" value="Přihlásit" />
+                  <input name="Detail2" value="170819" type="hidden" />
+                </td>
+              </tr>            
+              <tr>
+                <td style="vertical-align:top">
+                  <input tabindex="2" id="log_password" type="password" name="Password" size="12" /> <input type="checkbox" title="Přihlásit trvale" value="1" name="foreverlog">
+                </td>
+                <td style="vertical-align:top">
+                  <a style="margin-top:10px;border:1px solid #fff" class="tlacitko" href="index.php?Registration=New">Registrace</a>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2" style="padding-left:10px">
+                  <a href="mojeid_auth.php"><img src="/css/mojeID_button.png" alt="Přihlásit pomocí mojeID" /></a>
+                </td>
+              </tr>              
+            </table>  
+          </form>      
+        
+
+               
+               
+                             
+         
+                     
+         <form autocomplete="off" name="searchformsub" action="index.php" method="get" >
+          <table cellpadding="0" cellspacing="0" id="tablesearch" border="0">
+            <tr style="height:42px">
+              <td width="18">
+              </td>
+              <td>
+                <a class="tlacitko" id="pokrocile_link" href="index.php?Searching=AdvancedSearch&AFulltext=">Pokročilé hledání</a> 
+              </td>
+            </tr>
+            <tr>
+              <td>        
+                
+              </td>
+              <td>
+                <input onclick="this.select()" id="searchTitulky" type="text" name="Fulltext" class="text_field" size="20" value="" />
+                <input id="search_submit" type="submit" value="" />
+              </td>
+            </tr>  
+         </table>
+        </form>  
+
+      <div id="stat_bok_h">VZKAZY Z FÓRA</div><div id="stat_bok_v"><span><a href="index.php?film=1&Prispevek=526662"><div class="hid" style="width:270px;" title="Nechtěl byste někdo dodělat zbývající 3 díly k tomuto britskému seriálu? <br />
+http://www.csfd.cz/film/2">Nechtěl byste někdo dodělat zbývající 3 díly k tomuto britskému seriálu? <br />
+http://www.csfd.cz/film/2</div></a></span><span><a href="index.php?film=1&Prispevek=526658"><div class="hid" style="width:270px;" title="Prosím o titulky k verzi Starship.Troopers.Invasion.2012.DVDRip.XviD-DiSPOSABLE[fg].avi nebo Starshi">Prosím o titulky k verzi Starship.Troopers.Invasion.2012.DVDRip.XviD-DiSPOSABLE[fg].avi nebo Starshi</div></a></span><span><a href="index.php?film=1&Prispevek=526222">Sry, cetl jsem "dodelavam". Shame on me :-)</a></span><span><a href="index.php?film=1&Prispevek=526222"><div class="hid" style="width:270px;" title="A cpes se do toho pravidelnym prekladatelum presne proc?">A cpes se do toho pravidelnym prekladatelum presne proc?</div></a></span><span><a href="index.php?film=1&Prispevek=523902"><div class="hid" style="width:270px;" title="Proc to pises petkrat? Proc to pises petkrat? Proc to pises petkrat? Proc to pises petkrat? Proc to ">Proc to pises petkrat? Proc to pises petkrat? Proc to pises petkrat? Proc to pises petkrat? Proc to </div></a></span><span><a href="index.php?film=1&Prispevek=526222">...fakt ale jen trochu nedočkavej. :-D</a></span><span><a href="index.php?film=1&Prispevek=526602"><div class="hid" style="width:270px;" title="Ahoj,<br />
+chtěl bych se zeptat, jestli se někdo nechystá ujmout týhle zábavný série?<br />
+Dříve to překláda">Ahoj,<br />
+chtěl bych se zeptat, jestli se někdo nechystá ujmout týhle zábavný série?<br />
+Dříve to překláda</div></a></span><span><a href="index.php?film=1&Prispevek=526564">Díky, pomohlo to :)</a></span><span><a href="index.php?film=1&Prispevek=524616"><div class="hid" style="width:270px;" title="K-lite nic moc, jednoznacne doporucuji CCCP (combined comunity codeck pack), od nahozeni zadne probl">K-lite nic moc, jednoznacne doporucuji CCCP (combined comunity codeck pack), od nahozeni zadne probl</div></a></span><span><a href="index.php?film=1&Prispevek=524616"><div class="hid" style="width:270px;" title="kdyz ti SW ukazuje titulky dvakrat, jedno z toho zobrazuje VobSub, ktery je hodi do obrazu bez ohled">kdyz ti SW ukazuje titulky dvakrat, jedno z toho zobrazuje VobSub, ktery je hodi do obrazu bez ohled</div></a></span><span><a href="index.php?film=1&Prispevek=526564"><div class="hid" style="width:270px;" title="podle mne opet problem s AAC kodekem zvuku (jako u SW), zkus nahodit nejnovejsi CCCP codec pack (201">podle mne opet problem s AAC kodekem zvuku (jako u SW), zkus nahodit nejnovejsi CCCP codec pack (201</div></a></span><span><a href="index.php?film=1&Prispevek=526564"><div class="hid" style="width:270px;" title="Ahoj, chtěl bych se zeptat, jestli má někdo zkušenosti s VSS? Už delší dobu mě trápí verze seriálů s">Ahoj, chtěl bych se zeptat, jestli má někdo zkušenosti s VSS? Už delší dobu mě trápí verze seriálů s</div></a></span><span><a href="index.php?film=1&Prispevek=526564"></a></span><span><a href="index.php?film=1&Prispevek=526559">Přeložil by to někdo? Je to dokument.</a></span><span><a href="index.php?film=1&Prispevek=526308"><div class="hid" style="width:270px;" title="když jsem tohle kdysi řešil, tuším jsem použil 'tmavé pivo'. majitel pivovaru může být pyšný, že vař">když jsem tohle kdysi řešil, tuším jsem použil "tmavé pivo". majitel pivovaru může být pyšný, že vař</div></a></span><span><a href="index.php?film=1&Prispevek=525906">Přečas se většinou nedělá pomocí EN titulků.</a></span><span><a href="index.php?film=1&Prispevek=526491"><div class="hid" style="width:270px;" title="Jo ták, děkuju moc za info, jsem blbka:) akorát jsem měla pocit, že jsem si na to vyplnění dávala ba">Jo ták, děkuju moc za info, jsem blbka:) akorát jsem měla pocit, že jsem si na to vyplnění dávala ba</div></a></span><span><a href="index.php?film=1&Prispevek=526491"><div class="hid" style="width:270px;" title="Keď si ich hodil pred niekoľkými dňami, presne si už nepamätám, tak nemali prakticky nič vyplnené...">Keď si ich hodil pred niekoľkými dňami, presne si už nepamätám, tak nemali prakticky nič vyplnené...</div></a></span><span><a href="index.php?film=1&Prispevek=525906"><div class="hid" style="width:270px;" title="Ja to robím takto:<br />
+Anglicke titulky otvorím v texťáku(Notepad) a upravované (Už preložené)v softe J">Ja to robím takto:<br />
+Anglicke titulky otvorím v texťáku(Notepad) a upravované (Už preložené)v softe J</div></a></span><span><a href="index.php?film=1&Prispevek=525906"><div class="hid" style="width:270px;" title="gogo v čom robíš tie prečasy...? nejaký dobrý program kde si viem otvoriť ENG aj preložené titulky n">gogo v čom robíš tie prečasy...? nejaký dobrý program kde si viem otvoriť ENG aj preložené titulky n</div></a></span></div>
+   </div><!-- side1cont /-->   
+   
+   
+   
+   
+   
+       <div id="side2cont">
+    </div><!-- side2cont /-->
+      </div><!-- side2wrap /-->
+      <div id="bannery160x600P" class="banner" style="overflow:hidden;width:160px;height:600px"><!-- Pozice: go.cz.bbelements.com AdActive_FF(15522) / cely web(1) / skyscraper 120x600(3) / PRčlánek(7) -->
+<script type='text/javascript' charset='windows-1250'>
+/* <![CDATA[ */
+var bbs=screen,bbn=navigator,bbh;bbh='&ubl='+bbn.browserLanguage+'&ucc='+bbn.cpuClass+'&ucd='+bbs.colorDepth+'&uce='+bbn.cookieEnabled+'&udx='+bbs.deviceXDPI+'&udy='+bbs.deviceYDPI+'&usl='+bbn.systemLanguage+'&uje='+bbn.javaEnabled()+'&uah='+bbs.availHeight+'&uaw='+bbs.availWidth+'&ubd='+bbs.bufferDepth+'&uhe='+bbs.height+'&ulx='+bbs.logicalXDPI+'&uly='+bbs.logicalYDPI+'&use='+bbs.fontSmoothingEnabled+'&uto='+(new Date()).getTimezoneOffset()+'&uti='+(new Date()).getTime()+'&uui='+bbs.updateInterval+'&uul='+bbn.userLanguage+'&uwi='+bbs.width;
+if(typeof(bburlparam)=='string') { bbh+='&'+bburlparam; }
+if(typeof(bbkeywords)=='string') { bbh+='&keywords='+escape(bbkeywords); }
+document.write("<scr"+"ipt type='text/javascript' charset='windows-1250' src='http://go.cz.bbelements.com/please/showit/15522/1/3/7/?typkodu=js"+bbh+"&alttext=0&border=0&bust="+Math.random()+"&target=_top'><"+"\/scr"+"ipt>");
+/* ]]> */
+</script>
+<noscript>
+<a href="http://go.cz.bbelements.com/please/redirect/15522/1/3/7/" target="_top"><img src="http://go.cz.bbelements.com/please/showit/15522/1/3/7/?typkodu=img" border='0' alt='' /></a>
+</noscript>
+</div>           
+   <div id="contwrap">
+
+   </div><!-- contwrap /-->
+    
+
+<br /><br />
+    
+        <div class="reseter">&nbsp;
+   </div><!-- vertical stretching /-->
+  </div><!-- pagecont2 /-->
+  </div><!-- pagecont /-->
+  
+  
+
+  
+  
+  <div class="reseter"></div>
+  <br />
+  
+  
+  
+  <div id="pagefoot">  
+    <style type="text/css">
+#martevax-main{width:700px;border:0px dotted;height:23px;background:none;padding:0px;margin:0;overflow-y:hidden;text-align:center;}
+#martevax-main img, a{border:0px;}
+#martevax1{width:89px; height:23px; float:left; margin:0px; padding:0px;overflow:hidden;letter-spacing:1000px}
+#martevax1 a{background:url(http://www.martevax.cz/lista/lista1.gif) no-repeat left top; display:block; float:right; margin:0px; padding:0px; width:100%; height:100%; font-size:200px; color:#FDFEFC; overflow:hidden; }
+#martevax2{background:url(http://www.martevax.cz/lista/lista2.gif) repeat-x; width:auto;height:23px;float:left;padding:2px 0px 0px 2px;margin:0px;}
+#martevax2 a, hover, visited{font-size:8pt; font-family:verdana; text-decoration:none; background:url(http://www.martevax.cz/lista/lista2b.gif) no-repeat left bottom; padding-right:0px; padding-left:3px; color:#F9852D; }
+#martevax2 a:hover{text-decoration:underline; color:#000;}
+#martevax3{background:url(http://www.martevax.cz/lista/lista3.gif) no-repeat; width:5px;height:23px;float:left;padding:0px;margin:0px;}
+#martevax2 a.unfinished-beta, hover.unfinished-beta, visited.unfinished-beta {display:none}
+</style>
+
+<div id="martevax-main">
+		 <div id="martevax1"><a href="http://www.martevax.cz" title="Martevax s.r.o.">Martevax.cz</a></div>		 
+		 <div id="martevax2">
+		 			<a href="http://www.slimfox.cz" title="Bezbolestná liposukce">SlimFOX.cz</a>
+          <a href="http://www.ecig.cz" title="Elektronická cigareta">eCIG.cz</a>
+          <a href="http://www.babytoys.cz" title="Dětský nábytek a dětské pokoje">babytoys.cz</a>
+		 			<a href="http://primadvd.cz" title="DVD Filmy - prodej DVD filmů">primaDVD.cz</a>
+          <a href="http://www.netusers.cz" title="Bonus program, slevy, akce, registr uživatelů internetu">Netusers.cz</a>
+					<a href="http://www.kryolipolyza.com/" title="Kryolipolýza">Kryolipolyza.com</a>						
+					<a href="http://www.titulky.com" title="Nejnavštěvovanější český server s titulky k filmům">Titulky.com</a>
+          <a href="http://www.byty-nemovitosti.cz" title="Nové byty, domy na klíč, developerské projekty" class="unfinished-beta">Byty-Nemovitosti.cz</a>
+          <a href="http://www.aktualizace.net" title="Aktualizace na NETu" class="unfinished-beta">Aktualizace.net</a>												 
+		 </div>
+		 <div id="martevax3"></div> 
+</div>  </div><!-- bodyfoot /-->
+ 
+ </div><!-- pagewrap2 /-->
+ </div><!-- pagewrap1 /-->
+ 
+ 
+   
+
+    <br />
+ 
+ 
+ </div><!-- pagewrap /-->
+ </div><!-- bodycont /-->
+</div><!-- bodywrap /-->
+<script type='text/javascript'>
+        getEML('id_posta'); 
+        document.write ('<img src="http://toplist.cz/count.asp?id=91272&amp;logo=&amp;http='+escape(document.referrer)+'&amp;wi='+escape(window.screen.width)+'&he='+escape(window.screen.height)+'&amp;cd='+escape(window.screen.colorDepth)+'&amp;t='+escape(document.title)+'" width=0 height=0 border=0 />');               
+</script>
+
+
+
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-2415145-1";
+ var len = _uOsr.length;
+ //CZ vyhledavace
+ _uOsr[len]="centrum.cz";    _uOkw[len]="q";
+ _uOsr[len+1]="jyxo.cz";       _uOkw[len+1]="s";
+ _uOsr[len+2]="atlas.cz";      _uOkw[len+2]="q";
+ _uOsr[len+3]="zoohoo.cz";     _uOkw[len+3]="q";
+ _uOsr[len+4]="tiscali.cz";    _uOkw[len+4]="query";
+ _uOsr[len+5]="1.cz";          _uOkw[len+5]="q";
+ _uOsr[len+6]="volny.cz";      _uOkw[len+6]="search";
+ //SK vyhledavace
+ _uOsr[len+7]="zoznam.sk";     _uOkw[len+7]="s";
+ _uOsr[len+8]="atlas.sk";      _uOkw[len+8]="phrase";
+ _uOsr[len+9]="zoohoo.sk";    _uOkw[len+9]="q";
+ _uOsr[len+10]="centrum.sk";   _uOkw[len+10]="q";
+ _uOsr[len+11]="morfeo.sk";    _uOkw[len+11]="q";
+ _uOsr[len+12]="azet";         _uOkw[len+12]="sq";
+urchinTracker();
+</script>
+
+
+
+
+  <!-- (C)2000-2009 Gemius SA - gemiusAudience / titulky.com / Ostatni -->
+  <script type="text/javascript">
+  <!--//--><![CDATA[//><!--
+  var pp_gemius_identifier = new String('B71KiKcXB9KOKG2TO5Wfx_W0rfGdLIM0zanX3WZrZ7f.77');
+  //--><!]]>
+  </script>
+  <script type="text/javascript" src="xgemius.js"></script>
+
+
+
+</body>
+</html>
+
+

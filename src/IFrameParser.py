@@ -13,9 +13,10 @@ titlesLinks = []
 
 class IFrameParser(Thread):
 
-    def __init__(self, opener, url, name, encoding, lock):
+    def __init__(self, opener, url, name, encoding, lock, page=PAGE):
         self.__opener = opener
         self.__url = url
+        self.__page = page
         self.__name = name
         self.__encoding = encoding
         self.__lock = lock
@@ -51,9 +52,9 @@ class IFrameParser(Thread):
         data = re.search(pattern, iframe, re.VERBOSE)
 
         if data:
-            debug('[%s]: Found link: %s' % (self.__name, PAGE + data.group('addr')))
+            debug('[%s]: Found link: %s' % (self.__name, self.__page + data.group('addr')))
             self.__lock.acquire()
-            titlesLinks.append({'name' : self.__name, 'url' : PAGE + data.group('addr'), 'wait' : datetime.now().hour})
+            titlesLinks.append({'name' : self.__name, 'url' : self.__page + data.group('addr'), 'wait' : datetime.now().hour})
             self.__lock.release()
         else:
             debug('[%s]: No links found' % self.__name)
