@@ -5,15 +5,19 @@ import urllib
 
 from logging import debug, info, error, warning, exception
 from datetime import datetime
-from threading import Thread
+from threading import Thread, Lock
 
-from TitulkyDownloader import PAGE
+from TitulkyDownloader import PAGE, PAGE_ENCODING
 
 titlesLinks = []
 
 class IFrameParser(Thread):
 
-    def __init__(self, opener, url, name, encoding, lock, page=PAGE):
+    def __init__(self, opener=None, url='', name='', encoding=PAGE_ENCODING, lock = Lock(), page=PAGE):
+
+        if not opener:
+            opener = urllib.request
+
         self._opener = opener
         self._url = url
         self._page = page
@@ -22,6 +26,19 @@ class IFrameParser(Thread):
         self._lock = lock
 
         Thread.__init__(self)
+
+    
+    def getSourceLink(content=''):
+        pattern = r'''
+                    <a                          # Tag start
+                    [\s]+                       # Ignore white chars
+                    [^h]+                       # Ignore all other atributes like id, class, etc.
+                    href="(?P<addr>[^"]+)"      # Get address of titles
+                    [^>]*                       # Ignore other atributes
+                    >                           # Tag end
+                   '''
+
+        return re.search(pattern, content, re.VERBOSE)
 
 
     def run(self):
@@ -37,23 +54,12 @@ class IFrameParser(Thread):
             error('[%s]: IO Error - thread exiting' % self._movieName)
             sys.exit(1)
 
-        pattern = r'''
-                    <a                          # Tag start
-                    [\s]+                       # Ignore white chars
-                    [^h]+                       # Ignore all other atributes like id, class, etc.
-                    href="(?P<addr>[^"]+)"      # Get address of titles
-                    [^>]*                       # Ignore other atributes
-                    >                           # Tag end
-                   '''
-
-        debug('[%s]: Parsing iframe ...' % self._movieName)
-
-        data = re.search(pattern, iframe, re.VERBOSE)
-
-        if data:
-            debug('[%s]: Found link: %s' % (self._movieName, self._page + data.group('addr')))
+        debug('[%s]: Getting source link from iframe ...' % self._movieName)
+        sourceLink = IFrameParser.getSourceLink(iframe) 
+        if sourceLink:
+            debug('[%s]: Found link: %s' % (self._movieName, self._page + sourceLink.group('addr')))
             self._lock.acquire()
-            titlesLinks.append({'name' : self._movieName, 'url' : self._page + data.group('addr'), 'wait' : datetime.now().hour})
+            titlesLinks.append({'name' : self._movieName, 'url' : self._page + sourceLink.group('addr'), 'wait' : datetime.now().hour})
             self._lock.release()
         else:
             debug('[%s]: No links found' % self._movieName)
@@ -61,5 +67,5 @@ class IFrameParser(Thread):
             if re.search(pattern, iframe):
                 warning('[%s]: You exhausted your free daily limit of downloads - it\'s necessary to re-type captcha code' % self._movieName)
             else:
-                info('[%s]: Cannot find data on page' % self._movieName)
+                info('[%s]: Cannot find source link on page' % self._movieName)
 
