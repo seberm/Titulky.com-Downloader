@@ -21,7 +21,7 @@ from TitulkyDownloader import PAGE
 CHECK_TIME = 0.05 #s
 
 
-class Manager:
+class Manager(object):
 
     # Constants
     DEFAULTS = {
@@ -30,31 +30,31 @@ class Manager:
 
 
     def __init__(self, encoding='', page=PAGE):
-        self.encoding = self.DEFAULTS['Encoding']
-        self.login = ''
-        self.password = ''
-        self.page = page
-        self.links = []
-        self.parsers = []
+        self._encoding = self.DEFAULTS['Encoding']
+        self._login = ''
+        self._password = ''
+        self._page = page
+        self._links = []
+        self._parsers = []
 
         if encoding:
-            self.encoding = encoding
+            self._encoding = encoding
 
-        self.opener = request.build_opener(request.HTTPCookieProcessor(CookieJar()))
+        self._opener = request.build_opener(request.HTTPCookieProcessor(CookieJar()))
 
 
     def logIn(self, login='', password=''):
         if not login:
-            login = self.login
+            login = self._login
 
         if not password:
-            password = self.password
+            password = self._password
 
         if login and password:
             loginData = urlencode({'Login' : login, 'Password' : password, 'foreverlog' : 1})
             try:
                 debug('Posting login credentials [user: %s]' % login)
-                with self.opener.open('http://www.titulky.com/index.php', loginData.encode(self.encoding)):
+                with self._opener.open('http://www.titulky.com/index.php', loginData.encode(self._encoding)):
                     pass
             except urllib.error.URLError as e:
                 error('URL error: %s' % e.reason)
@@ -62,13 +62,13 @@ class Manager:
                 sys.exit(1)
 
 
-    def getLinks(self, url='', encoding=''):
+    def getIframeLinks(self, url='', encoding=''):
         if not encoding:
-            encoding = self.encoding
+            encoding = self._encoding
 
         htmlSource = ''
         try:
-            with self.opener.open(url) as fd:
+            with self._opener.open(url) as fd:
                 htmlSource = str(fd.read().decode(encoding))
         except urllib.error.HTTPError as e:
             error('HTTP Connection error (%d): %s' % (e.code, e.reason))
@@ -102,21 +102,28 @@ class Manager:
                '''
 
         debug('Looking for subtitles links on %s' % url)
-        links = re.findall(pattern, htmlSource, re.VERBOSE)
+        return re.findall(pattern, htmlSource, re.VERBOSE)
+
+
+    def getLinks(self, url='', encoding=''):
+        if not encoding:
+            encoding = self._encoding
+
+        links = self.getIframeLinks(url, encoding)
 
         if links:
             lock = Lock()
 
             debug('Links found: %d' % len(links))
             for link in links:
-                iframeURL = self.page + '/' + link[0]
+                iframeURL = self._page + '/' + link[0]
                 name = link[1]
                 try:
-                    parser = IFrameParser.IFrameParser(self.opener, iframeURL, name, encoding, lock, self.page)
+                    parser = IFrameParser.IFrameParser(self._opener, iframeURL, name, encoding, lock, self._page)
                     # Start thread
                     parser.start()
                     #parser.join()
-                    self.parsers = parser
+                    self._parsers.append(parser)
                 except RuntimeError as e:
                     exception('Thread caused runtime error: %s' % e)
                     sys.exit(1)
@@ -127,18 +134,18 @@ class Manager:
             while threading.active_count() != 1:
                 time.sleep(CHECK_TIME)
 
-            self.links = IFrameParser.titlesLinks
-            return self.links
+            self._links = IFrameParser.titlesLinks
+            return self._links
         else:
             info('Cannot find data on page')
             sys.exit(1)
 
 
     def downloadFiles(self, userVIP=False, links=[{}]):
-        debug('Downloading links: %d' % len(self.links))
+        debug('Downloading links: %d' % len(self._links))
 
         if not links:
-            links = self.links
+            links = self._links
 
         for l in links:
             if not userVIP:
@@ -166,7 +173,7 @@ class Manager:
 
     def printLinks(self, withInfo=False, links=[]):
         if not links:
-            links = self.links
+            links = self._links
 
         if withInfo:
             for l in links:

@@ -11,30 +11,30 @@ from TitulkyDownloader import PAGE
 
 titlesLinks = []
 
-class IFrameParser(Thread):
+class IFrameParser(object, Thread):
 
     def __init__(self, opener, url, name, encoding, lock, page=PAGE):
-        self.__opener = opener
-        self.__url = url
-        self.__page = page
-        self.__name = name
-        self.__encoding = encoding
-        self.__lock = lock
+        self._opener = opener
+        self._url = url
+        self._page = page
+        self._name = name
+        self._encoding = encoding
+        self._lock = lock
 
         Thread.__init__(self)
 
 
     def run(self):
         global titlesLinks
-        debug('[%s]: Running new IFrameParser thread (%s)' % (self.__name, self.__url))
+        debug('[%s]: Running new IFrameParser thread (%s)' % (self._name, self._url))
          
         try:
-            with self.__opener.open(self.__url) as fd:
-                iframe = str(fd.read().decode(self.__encoding))
+            with self._opener.open(self._url) as fd:
+                iframe = str(fd.read().decode(self._encoding))
         except urllib.error.URLError as e:
-            error('[%s]: URL error: %s' % (self.__name, e.reason))
+            error('[%s]: URL error: %s' % (self._name, e.reason))
         except IOError:
-            error('[%s]: IO Error - thread exiting' % self.__name)
+            error('[%s]: IO Error - thread exiting' % self._name)
             sys.exit(1)
 
         pattern = r'''
@@ -46,20 +46,20 @@ class IFrameParser(Thread):
                     >                           # Tag end
                    '''
 
-        debug('[%s]: Parsing iframe ...' % self.__name)
+        debug('[%s]: Parsing iframe ...' % self._name)
 
         data = re.search(pattern, iframe, re.VERBOSE)
 
         if data:
-            debug('[%s]: Found link: %s' % (self.__name, self.__page + data.group('addr')))
-            self.__lock.acquire()
-            titlesLinks.append({'name' : self.__name, 'url' : self.__page + data.group('addr'), 'wait' : datetime.now().hour})
-            self.__lock.release()
+            debug('[%s]: Found link: %s' % (self._name, self._page + data.group('addr')))
+            self._lock.acquire()
+            titlesLinks.append({'name' : self._name, 'url' : self._page + data.group('addr'), 'wait' : datetime.now().hour})
+            self._lock.release()
         else:
-            debug('[%s]: No links found' % self.__name)
+            debug('[%s]: No links found' % self._name)
             pattern = r'<img[\s]+src="./captcha/captcha.php"[\s]+/>'
             if re.search(pattern, iframe):
-                warning('[%s]: You exhausted your free daily limit of downloads - it\'s necessary to re-type captcha code' % self.__name)
+                warning('[%s]: You exhausted your free daily limit of downloads - it\'s necessary to re-type captcha code' % self._name)
             else:
-                info('[%s]: Cannot find data on page' % self.__name)
+                info('[%s]: Cannot find data on page' % self._name)
 
