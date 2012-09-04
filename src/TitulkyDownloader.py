@@ -98,7 +98,7 @@ def main():
             password = getpass('[netusers.cz] Password: ')
             manager.logIn(login=login, password=password)
 
-        manager.getLinks(url.geturl())
+        manager.getSubtitleSourceLinks(url.geturl())
 
         if opt.download:
             manager.downloadFiles(userVIP=opt.vip)

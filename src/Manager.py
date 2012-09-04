@@ -105,7 +105,7 @@ class Manager(object):
         return re.findall(pattern, htmlSource, re.VERBOSE)
 
 
-    def getLinks(self, url='', encoding=''):
+    def getSubtitleSourceLinks(self, url='', encoding=''):
         if not encoding:
             encoding = self._encoding
 
