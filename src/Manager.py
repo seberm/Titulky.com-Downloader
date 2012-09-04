@@ -44,19 +44,16 @@ class Manager:
     }
 
 
-    def __init__(self, encoding='', url=''):
+    def __init__(self, encoding='', page=PAGE):
         self.encoding = self.DEFAULTS['Encoding']
         self.login = ''
         self.password = ''
-        self.url = ''
+        self.page = page
         self.links = []
         self.parsers = []
 
         if encoding:
             self.encoding = encoding
-
-        if url:
-            self.encoding = url
 
         self.opener = request.build_opener(request.HTTPCookieProcessor(CookieJar()))
 
@@ -126,10 +123,10 @@ class Manager:
 
             debug('Links found: %d' % len(links))
             for link in links:
-                iframeURL = PAGE + '/' + link[0]
+                iframeURL = self.page + '/' + link[0]
                 name = link[1]
                 try:
-                    parser = IFrameParser.IFrameParser(self.opener, iframeURL, name, encoding, lock)
+                    parser = IFrameParser.IFrameParser(self.opener, iframeURL, name, encoding, lock, self.page)
                     # Start thread
                     parser.start()
                     #parser.join()
