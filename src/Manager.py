@@ -142,17 +142,17 @@ class Manager(object):
 
 
     def downloadFiles(self, userVIP=False, links=[{}]):
-        debug('Downloading links: %d' % len(self._links))
-
-        if not links:
+        if not links[0]:
             links = self._links
+
+        debug('Downloading links: %d' % len(links))
 
         for l in links:
             if not userVIP:
                 # +2 because we should make sure that we can download
                 waitTime = l['wait'] + 2
 
-                debug('[%s][%d secs] - %s' % (l['name'], waitTime, l['url']))
+                debug('[%s]: [%d secs] - %s' % (l['name'], waitTime, l['url']))
                 debug('[%s]: Waiting for download ...' % l['name'])
 
                 # Waiting for download
