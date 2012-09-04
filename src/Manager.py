@@ -53,7 +53,8 @@ class Manager:
             loginData = urlencode({'Login' : login, 'Password' : password, 'foreverlog' : 1})
             try:
                 debug('Posting login credentials [user: %s]' % login)
-                self.opener.open('http://www.titulky.com/index.php', loginData.encode(self.encoding))
+                with self.opener.open('http://www.titulky.com/index.php', loginData.encode(self.encoding)):
+                    pass
             except urllib.error.URLError as e:
                 error('URL error: %s' % e.reason)
                 error('Login failed')
@@ -66,8 +67,8 @@ class Manager:
 
         htmlSource = ''
         try:
-            fd = self.opener.open(url)
-            htmlSource = str(fd.read().decode(encoding))
+            with self.opener.open(url) as fd:
+                htmlSource = str(fd.read().decode(encoding))
         except urllib.error.HTTPError as e:
             error('HTTP Connection error (%d): %s' % (e.code, e.reason))
             sys.exit(1)
@@ -147,12 +148,9 @@ class Manager:
                 time.sleep(float(waitTime))
             try:
                 debug('[%s]: Downloading from: %s' % (l['name'], l['url']))
-                fd = request.urlopen(l['url'])
-
-                with open(l['name'] + '.srt', mode='wb') as titles:
-                    titles.write(fd.read())
-
-                fd.close()
+                with request.urlopen(l['url']) as fd:
+                    with open(l['name'] + '.srt', mode='wb') as titles:
+                        titles.write(fd.read())
             except urllib.error.URLError as e:
                 error('[%s]: Cannot get subtitles: %s' % (l['name'], e.reason))
                 sys.exit(1)

@@ -29,13 +29,12 @@ class IFrameParser(Thread):
         debug('[%s]: Running new IFrameParser thread (%s)' % (self.__name, self.__url))
          
         try:
-            fd = self.__opener.open(self.__url)
-            iframe = str(fd.read().decode(self.__encoding))
+            with self.__opener.open(self.__url) as fd:
+                iframe = str(fd.read().decode(self.__encoding))
         except urllib.error.URLError as e:
             error('[%s]: URL error: %s' % (self.__name, e.reason))
         except IOError:
             error('[%s]: IO Error - thread exiting' % self.__name)
-            fd.close()
             sys.exit(1)
 
         pattern = r'''
