@@ -42,3 +42,9 @@ $ run.sh --direct-link http://www.titulky.com/idown.php?R=1343462842&titulky=000
 
 For subtitles which are newer than 2 weeks it's necessary to be registered and provide your login and password to netusers.cz
 $ run.sh --login http://www.titulky.com/Cougar-Town-S01E17-202766.htm
+
+
+Development info
+================
+- Optional dependencies for makefile:
+    - nosetests - http://nose.readthedocs.org/
