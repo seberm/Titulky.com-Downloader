@@ -101,7 +101,7 @@ def main():
         manager.getLinks(url.geturl())
 
         if opt.download:
-            manager.downloadFiles(opt.vip)
+            manager.downloadFiles(userVIP=opt.vip)
 
         if opt.withInfo:
             manager.printLinks(True)

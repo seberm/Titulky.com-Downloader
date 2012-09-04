@@ -5,6 +5,7 @@ import logging
 import threading
 import re
 import sys
+import os
 import time
 
 from urllib import request
@@ -133,10 +134,13 @@ class Manager:
             sys.exit(1)
 
 
-    def downloadFiles(self, userVIP=False):
+    def downloadFiles(self, userVIP=False, links=[{}]):
         debug('Downloading links: %d' % len(self.links))
 
-        for l in self.links:
+        if not links:
+            links = self.links
+
+        for l in links:
             if not userVIP:
                 # +2 because we should make sure that we can download
                 waitTime = l['wait'] + 2
@@ -149,6 +153,7 @@ class Manager:
             try:
                 debug('[%s]: Downloading from: %s' % (l['name'], l['url']))
                 with request.urlopen(l['url']) as fd:
+                    debug('[%s]: Saving into: %s' % (l['name'], os.getcwd()))
                     with open(l['name'] + '.srt', mode='wb') as titles:
                         titles.write(fd.read())
             except urllib.error.URLError as e:
