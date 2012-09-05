@@ -68,6 +68,7 @@ class Manager(object):
 
         htmlSource = ''
         try:
+            debug('Opening subtitles page: %s' % url)
             with self._opener.open(url) as fd:
                 htmlSource = str(fd.read().decode(encoding))
         except urllib.error.HTTPError as e:
@@ -101,7 +102,7 @@ class Manager(object):
                 </a>                                         # Tag end
                '''
 
-        debug('Looking for subtitles links on %s' % url)
+        debug('Looking for iframe links ...')
         return re.findall(pattern, htmlSource, re.VERBOSE)
 
 
@@ -119,8 +120,10 @@ class Manager(object):
                 iframeURL = self._page + '/' + link[0]
                 name = link[1]
                 try:
+                    debug('Creating parser for iframe [%s]: %s' % (name, iframeURL))
                     parser = IFrameParser.IFrameParser(self._opener, iframeURL, name, encoding, lock, self._page)
                     # Start thread
+                    debug('[%s] Starting parser ...' % name)
                     parser.start()
                     #parser.join()
                     self._parsers.append(parser)
@@ -135,6 +138,7 @@ class Manager(object):
                 time.sleep(CHECK_TIME)
 
             self._links = IFrameParser.titlesLinks
+            debug('Subtitles links found: %d' % len(self._links))
             return self._links
         else:
             info('Cannot find data on page')
@@ -151,11 +155,10 @@ class Manager(object):
             if not userVIP:
                 # +2 because we should make sure that we can download
                 waitTime = l['wait'] + 2
-
                 debug('[%s]: [%d secs] - %s' % (l['name'], waitTime, l['url']))
-                debug('[%s]: Waiting for download ...' % l['name'])
 
                 # Waiting for download
+                debug('[%s]: Waiting for download ...' % l['name'])
                 time.sleep(float(waitTime))
             try:
                 debug('[%s]: Downloading from: %s' % (l['name'], l['url']))

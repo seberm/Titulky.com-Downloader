@@ -74,6 +74,7 @@ def main():
         level = opt.logLevel
     try:
         logging.basicConfig(format=DEFAULT_LOGGING_FORMAT, level=level.upper())
+        debug('Setting logging mode to: %s' % level.upper())
     except ValueError:
         logging.basicConfig(format=DEFAULT_LOGGING_FORMAT, level=DEFAULT_LOGGING_LEVEL)
         warning('It is not possible to set logging level to %s' % level)
@@ -87,6 +88,7 @@ def main():
         error('You have to provide an URL address!')
         sys.exit(1)
 
+    debug('Page encoding: %s' % PAGE_ENCODING)
     from Manager import Manager
     manager = Manager(encoding=PAGE_ENCODING)
 
