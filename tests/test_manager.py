@@ -71,7 +71,11 @@ class ManagerTests(unittest.TestCase):
         files = [{'name' : 'file1-downloaded', 'url' : url.geturl(), 'wait' : 0}]
 
         self._manager.downloadFiles(links=files)
-        self.assertTrue(os.path.isfile(os.path.join(WORK_DIR) + '/file1-downloaded.srt'))
+        f = os.path.join(WORK_DIR) + '/file1-downloaded.srt'
+        self.assertTrue(os.path.isfile(f))
+
+        # Remove temporary file
+        os.remove(f)
 
 if __name__ == '__main__':
     unittest.main()
