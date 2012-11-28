@@ -17,6 +17,16 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
+# Function which checks if module exists
+def module_exists(name):
+    try:
+        __import__(name)
+    except ImportError:
+        return False
+    else:
+        return True
+
+
 import re
 import sys
 import os
