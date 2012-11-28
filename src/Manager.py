@@ -19,7 +19,9 @@ from TitulkyDownloader import PAGE
 
 # Constants
 CHECK_TIME = 0.05 #s
+LOGIN_PAGE = 'http://www.titulky.com/index.php'
 
+from PyQt4 import QtGui, QtCore
 
 class Manager(object):
 
@@ -29,7 +31,8 @@ class Manager(object):
     }
 
 
-    def __init__(self, encoding='', page=PAGE):
+    def __init__(self, url='', encoding='', page=PAGE):
+        self._url = ''
         self._encoding = self.DEFAULTS['Encoding']
         self._login = ''
         self._password = ''
@@ -39,6 +42,9 @@ class Manager(object):
 
         if encoding:
             self._encoding = encoding
+
+        if url:
+            self._url = url
 
         self._opener = request.build_opener(request.HTTPCookieProcessor(CookieJar()))
 
@@ -54,7 +60,7 @@ class Manager(object):
             loginData = urlencode({'Login' : login, 'Password' : password, 'foreverlog' : 1})
             try:
                 debug('Posting login credentials [user: %s]' % login)
-                with self._opener.open('http://www.titulky.com/index.php', loginData.encode(self._encoding)):
+                with self._opener.open(LOGIN_PAGE, loginData.encode(self._encoding)):
                     pass
             except urllib.error.URLError as e:
                 error('URL error: %s' % e.reason)
@@ -63,6 +69,9 @@ class Manager(object):
 
 
     def getIframeLinks(self, url='', encoding=''):
+        if not url:
+            url = self._url
+
         if not encoding:
             encoding = self._encoding
 
@@ -106,11 +115,20 @@ class Manager(object):
         return re.findall(pattern, htmlSource, re.VERBOSE)
 
 
-    def getSubtitleSourceLinks(self, url='', encoding=''):
+    def getSubtitleSourceLinks(self, url='', encoding='', restLinks=[{}], code=''):
         if not encoding:
             encoding = self._encoding
 
-        links = self.getIframeLinks(url, encoding)
+        if not url:
+            url = self._url
+
+        if encoding:
+            self._encoding = encoding
+
+        if not restLinks[0]:
+            links = self.getIframeLinks(url, encoding)
+        else:
+            links = restLinks
 
         if links:
             lock = Lock()
@@ -121,10 +139,13 @@ class Manager(object):
                 name = link[1]
                 try:
                     debug('Creating parser for iframe [%s]: %s' % (name, iframeURL))
-                    parser = IFrameParser.IFrameParser(self._opener, iframeURL, name, encoding, lock, self._page)
+                    parser = IFrameParser.IFrameParser(self._opener, iframeURL, name, encoding, lock, self._page, code)
+                    QtCore.QObject.connect(parser, QtCore.SIGNAL('readCode(QString, QString)'), self.readCaptchaCode)
+
                     # Start thread
                     debug('[%s] Starting parser ...' % name)
                     parser.start()
+                    parser.wait()
                     #parser.join()
                     self._parsers.append(parser)
                 except RuntimeError as e:
@@ -185,4 +206,11 @@ class Manager(object):
             for l in links:
                 print(l['url'])
 
-
+# todo! ..s.em se to nemuze dostat!!!
+    def readCaptchaCode(self, link, name):
+        #if module_exists('PyQt4'):
+        debug('Got signal to open captcha dialog')
+        from CaptchaDialog import CaptchaDialog 
+        d = CaptchaDialog()
+        d.exec_()
+        self._links.append(getSubtitleSourceLinks(restLinks=[{name : link}], code=d.captchaCode))

@@ -7,14 +7,17 @@ from logging import debug, info, error, warning, exception
 from datetime import datetime
 from threading import Thread, Lock
 
-from TitulkyDownloader import PAGE, PAGE_ENCODING
+from TitulkyDownloader import PAGE, PAGE_ENCODING, module_exists
 
 titlesLinks = []
 
-class IFrameParser(Thread):
+from PyQt4.QtCore import QThread
+from PyQt4 import QtCore
 
-    def __init__(self, opener=None, url='', name='', encoding=PAGE_ENCODING, lock = Lock(), page=PAGE):
 
+class IFrameParser(QThread):
+
+    def __init__(self, opener=None, url='', name='', encoding=PAGE_ENCODING, lock = Lock(), page=PAGE, code=''):
         if not opener:
             opener = urllib.request
 
@@ -24,8 +27,9 @@ class IFrameParser(Thread):
         self._movieName = name
         self._encoding = encoding
         self._lock = lock
+        self._code = code
 
-        Thread.__init__(self)
+        QThread.__init__(self)
 
     
     def getSourceLink(content=''):
@@ -44,9 +48,16 @@ class IFrameParser(Thread):
     def run(self):
         global titlesLinks
         debug('[%s]: Running new IFrameParser thread (%s)' % (self._movieName, self._url))
+
+        data = None
+        if self._code:
+            debug('[%s]: Got captcha code (%s), trying to POST code ...' % (self._movieName, self._code))
+            from urllib.parse import urlencode
+            data = urlencode({'downkod' : self._code, 'titulky': 204927, 'histstamp' : 1352377345})
+            debug('[%s]: POST request is: %s' % (self._movieName, data))
          
         try:
-            with self._opener.open(self._url) as fd:
+            with self._opener.open(self._url, data) as fd:
                 iframe = str(fd.read().decode(self._encoding))
         except urllib.error.URLError as e:
             error('[%s]: URL error: %s' % (self._movieName, e.reason))
@@ -66,6 +77,9 @@ class IFrameParser(Thread):
             pattern = r'<img[\s]+src="./captcha/captcha.php"[\s]+/>'
             if re.search(pattern, iframe):
                 warning('[%s]: You exhausted your free daily limit of downloads - it\'s necessary to re-type captcha code' % self._movieName)
+                debug('[%s]: Trying to read captcha code ...' % self._movieName)
+                self.emit(QtCore.SIGNAL('readCode'), self._url, self._movieName)
+                return
             else:
                 info('[%s]: Cannot find source link on page' % self._movieName)
 

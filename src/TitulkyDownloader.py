@@ -123,6 +123,11 @@ def main():
 
 if __name__ == '__main__':
     try:
+        # Necessary because of Qt4
+        #if module_exists('PyQt4'):
+        from PyQt4 import QtGui, QtCore
+        app = QtGui.QApplication(sys.argv)
+
         main()
     except KeyboardInterrupt: # Catch ^C interrupt
         info('Program interrupted')

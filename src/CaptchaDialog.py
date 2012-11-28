@@ -9,10 +9,8 @@ MAX_CAPTCHA_LEN = 8
 
 class CaptchaDialog(QtGui.QDialog):
 
-
     # Signal is emmited if captcha code is sucessfuly re-typed
     codeRead = QtCore.pyqtSignal()
-
 
     def __init__(self, parent = None, flags = 0):
         super(CaptchaDialog, self).__init__(parent)
@@ -40,7 +38,6 @@ class CaptchaDialog(QtGui.QDialog):
         layout.addWidget(self.btnSend)
 
         self.setLayout(layout)
-        
 
         # Load captcha into label
         self.manager = QtNetwork.QNetworkAccessManager(self)
@@ -51,7 +48,6 @@ class CaptchaDialog(QtGui.QDialog):
 
 
     def managerFinished(self, reply):
-
         if reply.error() != QtNetwork.QNetworkReply.NoError:
             self.lblCaptcha.setText('Error in loading captcha image')
             print(reply.errorString())
@@ -65,7 +61,6 @@ class CaptchaDialog(QtGui.QDialog):
 
 
     def reloadCaptcha(self):
-
         url = QtCore.QUrl(CAPTCHA_URL)
         request = QtNetwork.QNetworkRequest(url)
 
@@ -73,7 +68,6 @@ class CaptchaDialog(QtGui.QDialog):
 
 
     def sendCode(self):
-
         self.leCode.setDisabled(True)
         self.btnSend.setDisabled(True)
         self.btnReload.setDisabled(True)
@@ -81,7 +75,7 @@ class CaptchaDialog(QtGui.QDialog):
 
         # We just emit a signal
         self.codeRead.emit()
-        #self.close()
+        self.close()
 
 
 
