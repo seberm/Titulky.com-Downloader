@@ -114,16 +114,16 @@ def main():
     from Manager import Manager
     manager = Manager(encoding=PAGE_ENCODING)
 
+    if opt.login:
+        login = input('[netusers.cz] Login: ')
+        password = getpass('[netusers.cz] Password: ')
+        manager.logIn(login=login, password=password)
+
+    if opt.vip:
+        manager.userVIP()
+
     for arg in args:
         url = urlparse(arg)
-
-        if opt.login:
-            login = input('[netusers.cz] Login: ')
-            password = getpass('[netusers.cz] Password: ')
-            manager.logIn(login=login, password=password)
-
-        if opt.vip:
-            manager.userVIP()
 
         manager.getSubtitleSourceLinks(url.geturl())
 
