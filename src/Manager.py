@@ -166,6 +166,7 @@ class Manager(object):
                 # Waiting for download
                 debug('[%s]: Waiting for download ...' % l['name'])
                 time.sleep(float(waitTime))
+
             try:
                 debug('[%s]: Downloading from: %s' % (l['name'], l['url']))
                 with self._opener(l['url']) as fd:
