@@ -18,7 +18,8 @@ import IFrameParser
 from TitulkyDownloader import PAGE
 
 # Constants
-CHECK_TIME = 0.05 #s
+CHECK_TIME = 0.05 # secs
+LOGIN_PAGE = 'http://www.titulky.com/index.php'
 
 
 class Manager(object):
@@ -29,11 +30,10 @@ class Manager(object):
     }
 
 
-    def __init__(self, encoding='', page=PAGE):
+    def __init__(self, encoding=''):
         self._encoding = self.DEFAULTS['Encoding']
-        self._login = ''
-        self._password = ''
-        self._page = page
+        self._vip = False
+        self._withInfo = False
         self._links = []
         self._parsers = []
 
@@ -42,19 +42,18 @@ class Manager(object):
 
         self._opener = request.build_opener(request.HTTPCookieProcessor(CookieJar()))
 
+    def useVIP(self):
+        self._vip = True
+
+    def showWithInfo(self):
+        self._withInfo = True
 
     def logIn(self, login='', password=''):
-        if not login:
-            login = self._login
-
-        if not password:
-            password = self._password
-
         if login and password:
             loginData = urlencode({'Login' : login, 'Password' : password, 'foreverlog' : 1})
             try:
-                debug('Posting login credentials [user: %s]' % login)
-                with self._opener.open('http://www.titulky.com/index.php', loginData.encode(self._encoding)):
+                debug('Posting login credentials [user: %s, passowrd: %s]' % (login, len(password) * '*'))
+                with self._opener.open(LOGIN_PAGE, loginData.encode(self._encoding)):
                     pass
             except urllib.error.URLError as e:
                 error('URL error: %s' % e.reason)
@@ -118,11 +117,11 @@ class Manager(object):
 
             debug('Links found: %d' % len(links))
             for link in links:
-                iframeURL = self._page + '/' + link[0]
+                iframeURL = PAGE + '/' + link[0]
                 name = link[1]
                 try:
                     debug('Creating parser for iframe [%s]: %s' % (name, iframeURL))
-                    parser = IFrameParser.IFrameParser(self._opener, iframeURL, name, encoding, lock, self._page)
+                    parser = IFrameParser.IFrameParser(self._opener, iframeURL, name, encoding, lock, PAGE)
                     # Start thread
                     debug('[%s] Starting parser ...' % name)
                     parser.start()
@@ -146,14 +145,14 @@ class Manager(object):
             sys.exit(1)
 
 
-    def downloadFiles(self, userVIP=False, links=[{}]):
+    def downloadFiles(self, links=[{}]):
         if not links[0]:
             links = self._links
 
         debug('Downloading links: %d' % len(links))
 
         for l in links:
-            if not userVIP:
+            if not self._vip:
                 # +2 because we should make sure that we can download
                 waitTime = l['wait'] + 2
                 debug('[%s]: [%d secs] - %s' % (l['name'], waitTime, l['url']))
@@ -175,11 +174,11 @@ class Manager(object):
                 sys.exit(1)
 
 
-    def printLinks(self, withInfo=False, links=[]):
+    def printLinks(self, links=[]):
         if not links:
             links = self._links
 
-        if withInfo:
+        if self._withInfo:
             for l in links:
                 print('[%s][after %d secs]: %s' % (l['name'], l['wait'], l['url']))
         else:

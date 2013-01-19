@@ -83,6 +83,10 @@ def main():
     #options.add_option('--prefix', dest='prefix', action='store_true',
     #                    help='Set prefix to downloaded files')
 
+    # @todo will be possible to download with direct link
+    #options.add_option('--direct-link', dest='directLink', action='store_true',
+    #                    help='Direct link to iframe')
+
     parser.add_option_group(options)
 
     (opt, args) = parser.parse_args()
@@ -118,14 +122,18 @@ def main():
             password = getpass('[netusers.cz] Password: ')
             manager.logIn(login=login, password=password)
 
+        if opt.vip:
+            manager.userVIP()
+
         manager.getSubtitleSourceLinks(url.geturl())
 
         if opt.download:
-            manager.downloadFiles(userVIP=opt.vip)
+            manager.downloadFiles()
 
         if opt.withInfo:
-            manager.printLinks(True)
-        elif not opt.download:
+            manager.showWithInfo()
+
+        if opt.withInfo or not opt.download:
             manager.printLinks()
 
 
