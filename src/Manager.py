@@ -26,7 +26,7 @@ class Manager(object):
 
     # Constants
     DEFAULTS = {
-            'Encoding' : 'cp1250',
+            'Encoding' : 'utf-8',
     }
 
 
@@ -42,13 +42,21 @@ class Manager(object):
 
         self._opener = request.build_opener(request.HTTPCookieProcessor(CookieJar()))
 
+
     def useVIP(self):
         self._vip = True
+
 
     def showWithInfo(self):
         self._withInfo = True
 
+
     def logIn(self, login='', password=''):
+        '''
+        Makes o http POST request to login script (LOGIN_PAGE)
+        and internally remembers a login cookie in self._opener object
+        '''
+
         if login and password:
             loginData = urlencode({'Login' : login, 'Password' : password, 'foreverlog' : 1})
             try:
@@ -61,15 +69,12 @@ class Manager(object):
                 sys.exit(1)
 
 
-    def getIframeLinks(self, url='', encoding=''):
-        if not encoding:
-            encoding = self._encoding
-
+    def getIframeLinks(self, url=''):
         htmlSource = ''
         try:
             debug('Opening subtitles page: %s' % url)
             with self._opener.open(url) as fd:
-                htmlSource = str(fd.read().decode(encoding))
+                htmlSource = str(fd.read())
         except urllib.error.HTTPError as e:
             error('HTTP Connection error (%d): %s' % (e.code, e.reason))
             sys.exit(1)
@@ -81,6 +86,9 @@ class Manager(object):
             sys.exit(1)
         except ValueError:
             error('URL value error: Unknown URL type: %s' % url)
+            sys.exit(1)
+        except LookupError as e:
+            error('Lookup Error: %s' % e.args)
             sys.exit(1)
 
         pattern = r'''
@@ -106,11 +114,8 @@ class Manager(object):
         return re.findall(pattern, htmlSource, re.VERBOSE)
 
 
-    def getSubtitleSourceLinks(self, url='', encoding=''):
-        if not encoding:
-            encoding = self._encoding
-
-        links = self.getIframeLinks(url, encoding)
+    def getSubtitleSourceLinks(self, url):
+        links = self.getIframeLinks(url.geturl())
 
         if links:
             lock = Lock()
@@ -121,7 +126,7 @@ class Manager(object):
                 name = link[1]
                 try:
                     debug('Creating parser for iframe [%s]: %s' % (name, iframeURL))
-                    parser = IFrameParser.IFrameParser(self._opener, iframeURL, name, encoding, lock, PAGE)
+                    parser = IFrameParser.IFrameParser(self._opener, iframeURL, name, lock, PAGE)
                     # Start thread
                     debug('[%s] Starting parser ...' % name)
                     parser.start()
@@ -186,3 +191,9 @@ class Manager(object):
                 print(l['url'])
 
 
+    def clean(self):
+        '''
+        Resets manager object
+        If we call getSubtitleSourceLinks we must clean source links!
+        '''
+        self._links = []

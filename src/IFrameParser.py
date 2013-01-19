@@ -13,7 +13,7 @@ titlesLinks = []
 
 class IFrameParser(Thread):
 
-    def __init__(self, opener=None, url='', name='', encoding=PAGE_ENCODING, lock = Lock(), page=PAGE):
+    def __init__(self, opener=None, url='', name='', lock = Lock(), page=PAGE):
 
         if not opener:
             opener = urllib.request
@@ -22,7 +22,6 @@ class IFrameParser(Thread):
         self._url = url
         self._page = page
         self._movieName = name
-        self._encoding = encoding
         self._lock = lock
 
         Thread.__init__(self)
@@ -47,7 +46,7 @@ class IFrameParser(Thread):
          
         try:
             with self._opener.open(self._url) as fd:
-                iframe = str(fd.read().decode(self._encoding))
+                iframe = str(fd.read())
         except urllib.error.URLError as e:
             error('[%s]: URL error: %s' % (self._movieName, e.reason))
         except IOError:
