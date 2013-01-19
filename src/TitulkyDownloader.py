@@ -61,19 +61,27 @@ def main():
 
     options = OptionGroup(parser, 'Program Options', 'Options specific to titulky_com_downloader.')
     
-    options.add_option('-l', '--link', dest='link', action='store_true', help='Print download link(s) on stdout (default behaviour)')
-    options.add_option('-e', '--page-encoding', dest='pageEncoding', action='store', metavar='<encoding>', default=PAGE_ENCODING, help='Sets webpage encoding - default [cp1250]')
-    options.add_option('-n', '--with-info', dest='withInfo', action='store_true', help='Print download links with movie name and number of secs to link activation')
+    options.add_option('-l', '--link', dest='link', action='store_true',
+                       help='Print download link(s) on stdout (default behaviour)')
+    options.add_option('-e', '--page-encoding', dest='pageEncoding', action='store',
+                       metavar='<encoding>', default=PAGE_ENCODING, help='Sets webpage encoding - default [cp1250]')
+    options.add_option('-n', '--with-info', dest='withInfo', action='store_true',
+                       help='Print download links with movie name and number of secs to link activation')
     options.add_option('-p', '--dir', dest='dir', action='store', help='Change program directory')
-    options.add_option('--login', dest='login', action='store_true', help='Login to netusers.cz (titulky.com)')
-    options.add_option('--log', dest='logLevel', action='store', default=DEFAULT_LOGGING_LEVEL, help='Set logging level (debug, info, warning, error, critical)')
-    options.add_option('-i', '--vip', dest='vip', action='store_true', help='Set up a VIP user download (we don\'t want to wait for download)')
+    options.add_option('--login', dest='login', action='store_true',
+                       help='Login to netusers.cz (titulky.com)')
+    options.add_option('--log', dest='logLevel', action='store',
+                       default=DEFAULT_LOGGING_LEVEL, help='Set logging level (debug, info, warning, error, critical)')
+    options.add_option('-i', '--vip', dest='vip', action='store_true',
+                       help='Set up a VIP user download (we don\'t want to wait for download)')
 
     # @todo Remove warning message in following option
-    options.add_option('-d', '--download', dest='download', action='store_true', help='Download subtitles to current folder (sometimes does not work - use option -l in combination with wget - just take a look to README)')
+    options.add_option('-d', '--download', dest='download',
+                       action='store_true', help='Download subtitles to current folder (sometimes does not work - use option -l in combination with wget - just take a look to README)')
 
     # @todo it will be possible to add prefix to downloaded files
-    #options.add_option('--prefix', dest='prefix', action='store_true', help='Set prefix to downloaded files')
+    #options.add_option('--prefix', dest='prefix', action='store_true',
+    #                    help='Set prefix to downloaded files')
 
     parser.add_option_group(options)
 
@@ -88,7 +96,7 @@ def main():
     except ValueError:
         logging.basicConfig(format=DEFAULT_LOGGING_FORMAT, level=DEFAULT_LOGGING_LEVEL)
         warning('It is not possible to set logging level to %s' % level)
-        warning('Using default setting logging level: INFO')
+        warning('Using default setting logging level: %s' % DEFAULT_LOGGING_LEVEL)
 
     if opt.dir:
         debug('Changing default program directory to %s' % opt.dir)

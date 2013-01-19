@@ -85,7 +85,8 @@ class Manager(object):
             sys.exit(1)
 
         pattern = r'''
-                <td                                         # TD before hyperlink (it's because program downloaded all titles including titles from history box
+                <td                                         # TD before hyperlink (it's because program downloaded all
+                                                            # titles including titles from history box
                 [\s]+
                 class="detailv"
                 [\s]*
