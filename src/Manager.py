@@ -20,6 +20,7 @@ from TitulkyDownloader import PAGE
 # Constants
 CHECK_TIME = 0.05 # secs
 LOGIN_PAGE = 'http://www.titulky.com/index.php'
+DOWN_WAIT_TIME = 10 # secs
 
 
 class Manager(object):
@@ -159,7 +160,7 @@ class Manager(object):
         for l in links:
             if not self._vip:
                 # +2 because we should make sure that we can download
-                waitTime = l['wait'] + 2
+                waitTime = DOWN_WAIT_TIME + 2
                 debug('[%s]: [%d secs] - %s' % (l['name'], waitTime, l['url']))
 
                 # Waiting for download

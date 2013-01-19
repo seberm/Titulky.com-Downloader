@@ -58,8 +58,7 @@ class IFrameParser(Thread):
         if sourceLink:
             debug('[%s]: Found link: %s' % (self._movieName, self._page + sourceLink.group('addr')))
             self._lock.acquire()
-            titlesLinks.append({'name' : self._movieName, 'url' : self._page + sourceLink.group('addr'),
-                                'wait' : datetime.now().hour})
+            titlesLinks.append({'name' : self._movieName, 'url' : self._page + sourceLink.group('addr')})
             self._lock.release()
         else:
             debug('[%s]: No links found' % self._movieName)
