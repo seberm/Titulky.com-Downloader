@@ -168,7 +168,7 @@ class Manager(object):
                 time.sleep(float(waitTime))
             try:
                 debug('[%s]: Downloading from: %s' % (l['name'], l['url']))
-                with request.urlopen(l['url']) as fd:
+                with self._opener(l['url']) as fd:
                     debug('[%s]: Saving into: %s' % (l['name'], os.getcwd()))
                     with open(l['name'] + '.srt', mode='wb') as titles:
                         titles.write(fd.read())
