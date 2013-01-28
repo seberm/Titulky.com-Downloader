@@ -9,12 +9,13 @@ from threading import Thread, Lock
 
 from TitulkyDownloader import PAGE, PAGE_ENCODING
 
+# @todo We should not use a global variable for links!
+# @todo But it works... 'cause we're using thread locking
 titlesLinks = []
 
 class IFrameParser(Thread):
 
     def __init__(self, opener=None, url='', name='', lock = Lock(), page=PAGE):
-
         if not opener:
             opener = urllib.request
 
@@ -61,10 +62,11 @@ class IFrameParser(Thread):
             titlesLinks.append({'name' : self._movieName, 'url' : self._page + sourceLink.group('addr')})
             self._lock.release()
         else:
-            debug('[%s]: No links found' % self._movieName)
+            warning('[%s]: No links found' % self._movieName)
             pattern = r'<img[\s]+src="./captcha/captcha.php"[\s]+/>'
             if re.search(pattern, iframe):
-                warning('[%s]: You exhausted your free daily limit of downloads - it\'s necessary to re-type captcha code' % self._movieName)
+                info('[%s]: You exhausted your free daily limit of downloads - it\'s necessary to re-type captcha code' % self._movieName)
             else:
+                # @todo Check output here... maybe we're just downloading subtitles newer than 2 weeks
                 info('[%s]: Cannot find source link on page' % self._movieName)
 

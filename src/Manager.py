@@ -131,7 +131,6 @@ class Manager(object):
                     # Start thread
                     debug('[%s] Starting parser ...' % name)
                     parser.start()
-                    #parser.join()
                     self._parsers.append(parser)
                 except RuntimeError as e:
                     exception('Thread caused runtime error: %s' % e)
@@ -139,7 +138,6 @@ class Manager(object):
 
             # We're active waiting for end of all threads
             # @todo Some better solution or workaround?
-            # @todo Completely rewrite this
             while threading.active_count() != 1:
                 time.sleep(CHECK_TIME)
 
@@ -163,7 +161,6 @@ class Manager(object):
                 waitTime = DOWN_WAIT_TIME + 2
                 debug('[%s]: [%d secs] - %s' % (l['name'], waitTime, l['url']))
 
-                # Waiting for download
                 debug('[%s]: Waiting for download ...' % l['name'])
                 time.sleep(float(waitTime))
 

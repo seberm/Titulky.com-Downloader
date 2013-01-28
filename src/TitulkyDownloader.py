@@ -46,7 +46,7 @@ VERSION = '1.0.0'
 
 PAGE = 'http://www.titulky.com'
 
-DEFAULT_LOGGING_LEVEL = 'INFO' #logging.INFO
+DEFAULT_LOGGING_LEVEL = 'INFO'
 DEFAULT_LOGGING_FORMAT = '%(levelname)s: %(message)s'
 
 PAGE_ENCODING = 'utf-8'
@@ -75,10 +75,8 @@ def main():
             help='Set logging level (debug, info, warning, error, critical)')
     options.add_option('-i', '--vip', dest='vip', action='store_true',
             help='Set up a VIP user download (we don\'t want to wait for download)')
-
-    # @todo Remove warning message in following option
     options.add_option('-d', '--download', dest='download', action='store_true',
-            help='Download subtitles to current folder (sometimes does not work - use option -l in combination with wget - just take a look to README)')
+            help='Download subtitles to current folder. If -p option is specified subtitles are downloaded into folder specified by this option')
 
     # @todo it will be possible to add prefix to downloaded files
     #options.add_option('--prefix', dest='prefix', action='store_true',
