@@ -1,7 +1,7 @@
 # Maintainer: Sabart Otto - Seberm <seberm[at]gmail[dot].com
 
 pkgname=titulky_com_downloader
-pkgver=20130119
+pkgver=20130129
 pkgrel=1
 pkgdesc="Downloads subtitles from titulky.com"
 url="https://gitorious.org/titulky_com_downloader"
@@ -13,9 +13,8 @@ depends=('python')
 provides=''
 makedepends=('git')
 
-_gitname="$pkgname"
-_gitroot="git://gitorious.org/${_gitname}/${_gitname}.git"
-
+_gitname="Titulky.com-Downloader"
+_gitroot="git://github.com/seberm/${_gitname}.git"
 
 build() {
   cd $srcdir
