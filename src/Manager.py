@@ -62,15 +62,12 @@ class Manager(object):
                 sys.exit(1)
 
 
-    def getIframeLinks(self, url='', encoding=''):
-        if not encoding:
-            encoding = self._encoding
-
+    def getIframeLinks(self, url=''):
         htmlSource = ''
         try:
             debug('Opening subtitles page: %s' % url)
             with self._opener.open(url) as fd:
-                htmlSource = str(fd.read().decode(encoding))
+                htmlSource = str(fd.read())
         except urllib.error.HTTPError as e:
             error('HTTP Connection error (%d): %s' % (e.code, e.reason))
             sys.exit(1)
@@ -110,7 +107,7 @@ class Manager(object):
         if not encoding:
             encoding = self._encoding
 
-        links = self.getIframeLinks(url, encoding)
+        links = self.getIframeLinks(url)
 
         if links:
             lock = Lock()
