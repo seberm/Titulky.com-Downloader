@@ -1,0 +1,1 @@
+- In future will be possible download titles after exhaustion of daily limit - but will be necessary to rewrite captcha code

@@ -49,4 +49,3 @@ def getCaptchaCode():
 
 print("captcha: %s" % getCaptchaCode())
 
-

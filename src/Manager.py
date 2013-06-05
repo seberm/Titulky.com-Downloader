@@ -18,22 +18,23 @@ import IFrameParser
 from TitulkyDownloader import PAGE
 
 # Constants
-CHECK_TIME = 0.05 #s
+CHECK_TIME = 0.05 # secs
+LOGIN_PAGE = 'http://www.titulky.com/index.php'
+DOWN_WAIT_TIME = 10 # secs
 
 
 class Manager(object):
 
     # Constants
     DEFAULTS = {
-            'Encoding' : 'cp1250',
+            'Encoding' : 'utf-8',
     }
 
 
-    def __init__(self, encoding='', page=PAGE):
+    def __init__(self, encoding=''):
         self._encoding = self.DEFAULTS['Encoding']
-        self._login = ''
-        self._password = ''
-        self._page = page
+        self._vip = False
+        self._withInfo = False
         self._links = []
         self._parsers = []
 
@@ -43,18 +44,25 @@ class Manager(object):
         self._opener = request.build_opener(request.HTTPCookieProcessor(CookieJar()))
 
 
-    def logIn(self, login='', password=''):
-        if not login:
-            login = self._login
+    def useVIP(self):
+        self._vip = True
 
-        if not password:
-            password = self._password
+
+    def showWithInfo(self):
+        self._withInfo = True
+
+
+    def logIn(self, login='', password=''):
+        '''
+        Makes o http POST request to login script (LOGIN_PAGE)
+        and internally remembers a login cookie in self._opener object
+        '''
 
         if login and password:
             loginData = urlencode({'Login' : login, 'Password' : password, 'foreverlog' : 1})
             try:
-                debug('Posting login credentials [user: %s]' % login)
-                with self._opener.open('http://www.titulky.com/index.php', loginData.encode(self._encoding)):
+                debug('Posting login credentials [user: %s, passowrd: %s]' % (login, len(password) * '*'))
+                with self._opener.open(LOGIN_PAGE, loginData.encode(self._encoding)):
                     pass
             except urllib.error.URLError as e:
                 error('URL error: %s' % e.reason)
@@ -80,9 +88,13 @@ class Manager(object):
         except ValueError:
             error('URL value error: Unknown URL type: %s' % url)
             sys.exit(1)
+        except LookupError as e:
+            error('Lookup Error: %s' % e.args)
+            sys.exit(1)
 
         pattern = r'''
-                <td                                         # TD before hyperlink (it's because program downloaded all titles including titles from history box
+                <td                                         # TD before hyperlink (it's because program downloaded all
+                                                            # titles including titles from history box
                 [\s]+
                 class="detailv"
                 [\s]*
@@ -103,26 +115,22 @@ class Manager(object):
         return re.findall(pattern, htmlSource, re.VERBOSE)
 
 
-    def getSubtitleSourceLinks(self, url='', encoding=''):
-        if not encoding:
-            encoding = self._encoding
-
-        links = self.getIframeLinks(url)
+    def getSubtitleSourceLinks(self, url):
+        links = self.getIframeLinks(url.geturl())
 
         if links:
             lock = Lock()
 
             debug('Links found: %d' % len(links))
             for link in links:
-                iframeURL = self._page + '/' + link[0]
+                iframeURL = PAGE + '/' + link[0]
                 name = link[1]
                 try:
                     debug('Creating parser for iframe [%s]: %s' % (name, iframeURL))
-                    parser = IFrameParser.IFrameParser(self._opener, iframeURL, name, encoding, lock, self._page)
+                    parser = IFrameParser.IFrameParser(self._opener, iframeURL, name, lock, PAGE)
                     # Start thread
                     debug('[%s] Starting parser ...' % name)
                     parser.start()
-                    #parser.join()
                     self._parsers.append(parser)
                 except RuntimeError as e:
                     exception('Thread caused runtime error: %s' % e)
@@ -130,7 +138,6 @@ class Manager(object):
 
             # We're active waiting for end of all threads
             # @todo Some better solution or workaround?
-            # @todo Completely rewrite this
             while threading.active_count() != 1:
                 time.sleep(CHECK_TIME)
 
@@ -140,24 +147,24 @@ class Manager(object):
             info('Cannot find data on page')
 
 
-    def downloadFiles(self, userVIP=False, links=[{}]):
+    def downloadFiles(self, links=[{}]):
         if not links[0]:
             links = self._links
 
         debug('Downloading links: %d' % len(links))
 
         for l in links:
-            if not userVIP:
+            if not self._vip:
                 # +2 because we should make sure that we can download
-                waitTime = l['wait'] + 2
+                waitTime = DOWN_WAIT_TIME + 2
                 debug('[%s]: [%d secs] - %s' % (l['name'], waitTime, l['url']))
 
-                # Waiting for download
                 debug('[%s]: Waiting for download ...' % l['name'])
                 time.sleep(float(waitTime))
+
             try:
                 debug('[%s]: Downloading from: %s' % (l['name'], l['url']))
-                with request.urlopen(l['url']) as fd:
+                with self._opener.open(l['url']) as fd:
                     debug('[%s]: Saving into: %s' % (l['name'], os.getcwd()))
                     with open(l['name'] + '.srt', mode='wb') as titles:
                         titles.write(fd.read())
@@ -169,11 +176,11 @@ class Manager(object):
                 sys.exit(1)
 
 
-    def printLinks(self, withInfo=False, links=[]):
+    def printLinks(self, links=[]):
         if not links:
             links = self._links
 
-        if withInfo:
+        if self._withInfo:
             for l in links:
                 print('[%s][after %d secs]: %s' % (l['name'], l['wait'], l['url']))
         else:
@@ -181,3 +188,9 @@ class Manager(object):
                 print(l['url'])
 
 
+    def clean(self):
+        '''
+        Resets manager object
+        If we call getSubtitleSourceLinks we must clean source links!
+        '''
+        self._links = []

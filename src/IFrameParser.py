@@ -9,12 +9,13 @@ from threading import Thread, Lock
 
 from TitulkyDownloader import PAGE, PAGE_ENCODING
 
+# @todo We should not use a global variable for links!
+# @todo But it works... 'cause we're using thread locking
 titlesLinks = []
 
 class IFrameParser(Thread):
 
-    def __init__(self, opener=None, url='', name='', encoding=PAGE_ENCODING, lock = Lock(), page=PAGE):
-
+    def __init__(self, opener=None, url='', name='', lock = Lock(), page=PAGE):
         if not opener:
             opener = urllib.request
 
@@ -22,7 +23,6 @@ class IFrameParser(Thread):
         self._url = url
         self._page = page
         self._movieName = name
-        self._encoding = encoding
         self._lock = lock
 
         Thread.__init__(self)
@@ -47,7 +47,7 @@ class IFrameParser(Thread):
          
         try:
             with self._opener.open(self._url) as fd:
-                iframe = str(fd.read().decode(self._encoding))
+                iframe = str(fd.read())
         except urllib.error.URLError as e:
             error('[%s]: URL error: %s' % (self._movieName, e.reason))
         except IOError:
@@ -59,13 +59,14 @@ class IFrameParser(Thread):
         if sourceLink:
             debug('[%s]: Found link: %s' % (self._movieName, self._page + sourceLink.group('addr')))
             self._lock.acquire()
-            titlesLinks.append({'name' : self._movieName, 'url' : self._page + sourceLink.group('addr'), 'wait' : datetime.now().hour})
+            titlesLinks.append({'name' : self._movieName, 'url' : self._page + sourceLink.group('addr')})
             self._lock.release()
         else:
-            debug('[%s]: No links found' % self._movieName)
+            warning('[%s]: No links found' % self._movieName)
             pattern = r'<img[\s]+src="./captcha/captcha.php"[\s]+/>'
             if re.search(pattern, iframe):
-                warning('[%s]: You exhausted your free daily limit of downloads - it\'s necessary to re-type captcha code' % self._movieName)
+                info('[%s]: You exhausted your free daily limit of downloads - it\'s necessary to re-type captcha code' % self._movieName)
             else:
+                # @todo Check output here... maybe we're just downloading subtitles newer than 2 weeks
                 info('[%s]: Cannot find source link on page' % self._movieName)
 

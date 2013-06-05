@@ -17,7 +17,6 @@ class CaptchaDialog(QtGui.QDialog):
     def __init__(self, parent = None, flags = 0):
         super(CaptchaDialog, self).__init__(parent)
 
-        # Dialog settings
         self.setWindowTitle('Re-type captcha')
 
         # Widgets
