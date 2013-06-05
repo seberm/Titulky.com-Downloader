@@ -23,8 +23,6 @@ tmp.flush()
 oimg = Image.open(tmp.name)
 pimg = ImageTk.PhotoImage(oimg)
 
-tmp.close()
-
 lbl = tk.Label(mainframe, image=pimg)
 #lbl = tk.Label(mainframe, text="ahoj")
 
@@ -32,7 +30,6 @@ lbl = tk.Label(mainframe, image=pimg)
 lbl.pack()
 
 root.mainloop()
-
 
 # garbage
 tmp.close()

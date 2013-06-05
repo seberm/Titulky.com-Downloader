@@ -1,91 +1,52 @@
-import sys
-from PyQt4 import QtGui, QtCore, QtNetwork
+import Image
+import ImageTk
+import tkinter as tk
 
-from PyQt4.QtCore import SLOT, SIGNAL
+from tempfile import NamedTemporaryFile
+from urllib import request
 
 CAPTCHA_URL = 'http://www.titulky.com/captcha/captcha.php'
-MAX_CAPTCHA_LEN = 8
+#MAX_CAPTCHA_LEN = 8
+
+root = tk.Tk()
+root.title("Re-type captcha code")
+
+mainframe = tk.Frame(root)
+mainframe.grid(column=0, row=0)
+mainframe.columnconfigure(0, weight=1)
+mainframe.rowconfigure(0, weight=1)
+
+tmp = NamedTemporaryFile(mode='w+b', prefix='captcha_', suffix='.gif')
+
+def end():
+    mainframe.destroy()
+    root.destroy()
 
 
-class CaptchaDialog(QtGui.QDialog):
+def getCaptchaCode():
+    fd = request.urlopen(CAPTCHA_URL)
+
+    tmp.write(fd.read())
+    tmp.flush()
+
+    oimg = Image.open(tmp.name)
+    pimg = ImageTk.PhotoImage(oimg)
+
+    lbl = tk.Label(mainframe, image=pimg)
+    lbl.pack()
+
+    entryCont = tk.StringVar()
+    entry = tk.Entry(mainframe, textvariable=entryCont)
+    entry.pack()
+
+    confirmButton = tk.Button(mainframe, text='Confirm code', command=end)
+    confirmButton.pack()
+
+    root.mainloop()
+
+    return entryCont.get()
 
 
-    # Signal is emmited if captcha code is sucessfuly re-typed
-    codeRead = QtCore.pyqtSignal()
+print("captcha: %s" % getCaptchaCode())
 
-
-    def __init__(self, parent = None, flags = 0):
-        super(CaptchaDialog, self).__init__(parent)
-
-        # Dialog settings
-        self.setWindowTitle('Re-type captcha')
-
-        # Widgets
-        self.lblCaptcha = QtGui.QLabel('Loading captcha image ...', self)
-        self.lblCaptcha.setFixedSize(200, 70)
-
-        self.btnReload = QtGui.QPushButton('Reload', self)
-        self.connect(self.btnReload, SIGNAL("clicked()"), self.reloadCaptcha)
-        self.btnSend = QtGui.QPushButton('Send', self)
-        self.connect(self.btnSend, SIGNAL("clicked()"), self.sendCode)
-
-        self.leCode = QtGui.QLineEdit(self)
-        self.leCode.setFocus()
-        self.leCode.setMaxLength(MAX_CAPTCHA_LEN)
-
-        layout = QtGui.QGridLayout()
-        layout.addWidget(self.lblCaptcha)
-        layout.addWidget(self.btnReload)
-        layout.addWidget(self.leCode)
-        layout.addWidget(self.btnSend)
-
-        self.setLayout(layout)
-        
-
-        # Load captcha into label
-        self.manager = QtNetwork.QNetworkAccessManager(self)
-        self.connect(self.manager, SIGNAL("finished(QNetworkReply*)"), self.managerFinished)
-
-        self.reloadCaptcha()
-
-
-
-    def managerFinished(self, reply):
-
-        if reply.error() != QtNetwork.QNetworkReply.NoError:
-            self.lblCaptcha.setText('Error in loading captcha image')
-            print(reply.errorString())
-            return
-
-        data = reply.readAll()
-        pixmap = QtGui.QPixmap()
-        pixmap.loadFromData(data)
-
-        self.lblCaptcha.setPixmap(pixmap)
-
-
-    def reloadCaptcha(self):
-
-        url = QtCore.QUrl(CAPTCHA_URL)
-        request = QtNetwork.QNetworkRequest(url)
-
-        self.manager.get(request)
-
-
-    def sendCode(self):
-
-        self.leCode.setDisabled(True)
-        self.btnSend.setDisabled(True)
-        self.btnReload.setDisabled(True)
-        self.captchaCode = self.leCode.text()
-
-        # We just emit a signal
-        self.codeRead.emit()
-        #self.close()
-
-
-
-if __name__ == '__main__':
-    app = QtGui.QApplication(sys.argv)
-    sys.exit(CaptchaDialog().exec_())
 
