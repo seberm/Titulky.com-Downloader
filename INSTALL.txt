@@ -5,7 +5,9 @@ INSTALLATION
 Dependencies
 ============
 - Python 3
-- Python Requests >= 0.13.7 (https://github.com/kennethreitz/requests)
+- Python Imaging Library - PIL (https://github.com/sloonz/pil-py3k)
+#- Python Requests >= 0.13.7 (https://github.com/kennethreitz/requests)
+
 
 
 Installation

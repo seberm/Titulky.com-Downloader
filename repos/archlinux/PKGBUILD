@@ -9,7 +9,7 @@ arch=('i686' 'x86_64')
 license=('GPLv3')
 install=
 source=()
-depends=('python')
+depends=('python' 'python3-imaging')
 provides=''
 makedepends=('git')
 
