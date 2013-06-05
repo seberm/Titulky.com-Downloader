@@ -136,10 +136,8 @@ class Manager(object):
 
             self._links = IFrameParser.titlesLinks
             debug('Subtitles links found: %d' % len(self._links))
-            return self._links
         else:
             info('Cannot find data on page')
-            sys.exit(1)
 
 
     def downloadFiles(self, userVIP=False, links=[{}]):
